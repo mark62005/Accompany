@@ -35,11 +35,11 @@ class TabBarViewController: UITabBarController {
     ourBabyVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.ourBaby.rawValue, image: placeholderImage, tag: 1)
     
     let recordsVC = RecordsViewController()
-    recordsVC.title = TabBarVCTitle.ourBaby.rawValue
+    recordsVC.title = TabBarVCTitle.records.rawValue
     recordsVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.records.rawValue, image: placeholderImage, tag: 1)
     
     let servicesVC = ServicesViewController()
-    servicesVC.title = TabBarVCTitle.ourBaby.rawValue
+    servicesVC.title = TabBarVCTitle.services.rawValue
     servicesVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.services.rawValue, image: placeholderImage, tag: 1)
     
     let vcs = [homeVC, ourBabyVC, recordsVC, servicesVC]

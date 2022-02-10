@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E8E0CE2D4818B0742E03E0E /* Pods_Accompany.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */; };
+		4306D26A27B5D27700050369 /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4306D26927B5D27700050369 /* Todo.swift */; };
 		437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DD27ADE4E700EC8A98 /* AppDelegate.swift */; };
 		437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */; };
 		437721E727ADE4E800EC8A98 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 437721E627ADE4E800EC8A98 /* Assets.xcassets */; };
@@ -17,10 +18,10 @@
 		437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */; };
 		4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220027ADE99300EC8A98 /* ServicesViewController.swift */; };
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
-		4377220527ADEB8C00EC8A98 /* TextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220427ADEB8C00EC8A98 /* TextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4306D26927B5D27700050369 /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		437721DA27ADE4E700EC8A98 /* Accompany.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accompany.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		437721DD27ADE4E700EC8A98 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -32,7 +33,6 @@
 		437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4377220027ADE99300EC8A98 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		4377220427ADEB8C00EC8A98 /* TextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextField.swift; sourceTree = "<group>"; };
 		75E30413CDAAE23C012D7201 /* Pods-Accompany.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accompany.debug.xcconfig"; path = "Target Support Files/Pods-Accompany/Pods-Accompany.debug.xcconfig"; sourceTree = "<group>"; };
 		861C18D7DA5EEB1D839BDA62 /* Pods-Accompany.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accompany.release.xcconfig"; path = "Target Support Files/Pods-Accompany/Pods-Accompany.release.xcconfig"; sourceTree = "<group>"; };
 		ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Accompany.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,6 +50,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4306D26827B5D26B00050369 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				4306D26927B5D27700050369 /* Todo.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		437721D127ADE4E700EC8A98 = {
 			isa = PBXGroup;
 			children = (
@@ -72,7 +80,7 @@
 			isa = PBXGroup;
 			children = (
 				437721F127ADE83600EC8A98 /* Supporting Files */,
-				437721F227ADE84200EC8A98 /* Models */,
+				4306D26827B5D26B00050369 /* Models */,
 				437721F327ADE85000EC8A98 /* Views */,
 				437721F427ADE86300EC8A98 /* Controllers */,
 				437721E627ADE4E800EC8A98 /* Assets.xcassets */,
@@ -90,13 +98,6 @@
 			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		437721F227ADE84200EC8A98 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		437721F327ADE85000EC8A98 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,7 +110,6 @@
 			isa = PBXGroup;
 			children = (
 				437721F527ADE90400EC8A98 /* Core */,
-				4377220427ADEB8C00EC8A98 /* TextField.swift */,
 			);
 			path = Controllers;
 			sourceTree = "<group>";
@@ -292,7 +292,7 @@
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
-				4377220527ADEB8C00EC8A98 /* TextField.swift in Sources */,
+				4306D26A27B5D27700050369 /* Todo.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,

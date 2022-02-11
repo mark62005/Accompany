@@ -27,7 +27,7 @@ class TabBarViewController: UITabBarController {
   
   private func configureViewControllers() {
     let homeVC = HomeViewController()
-    homeVC.title = TabBarVCTitle.home.rawValue
+//    homeVC.title = TabBarVCTitle.home.rawValue
     homeVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.home.rawValue, image: placeholderImage, tag: 1)
     
     let ourBabyVC = OurBabyViewController()

@@ -18,7 +18,8 @@
 		437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */; };
 		4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220027ADE99300EC8A98 /* ServicesViewController.swift */; };
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
-		6C21260327B5D6B5005B1D23 /* FirstTrimesterLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C21260227B5D6B5005B1D23 /* FirstTrimesterLabel.swift */; };
+		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
+		6C21260327B5D6B5005B1D23 /* TodoListTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */; };
 		6C99838B27B5FF6800378F03 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C99838A27B5FF6800378F03 /* TodoCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,7 +36,8 @@
 		437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4377220027ADE99300EC8A98 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
-		6C21260227B5D6B5005B1D23 /* FirstTrimesterLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstTrimesterLabel.swift; sourceTree = "<group>"; };
+		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTitleLabel.swift; sourceTree = "<group>"; };
 		6C99838A27B5FF6800378F03 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		75E30413CDAAE23C012D7201 /* Pods-Accompany.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accompany.debug.xcconfig"; path = "Target Support Files/Pods-Accompany/Pods-Accompany.debug.xcconfig"; sourceTree = "<group>"; };
 		861C18D7DA5EEB1D839BDA62 /* Pods-Accompany.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accompany.release.xcconfig"; path = "Target Support Files/Pods-Accompany/Pods-Accompany.release.xcconfig"; sourceTree = "<group>"; };
@@ -106,7 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
-				6C21260227B5D6B5005B1D23 /* FirstTrimesterLabel.swift */,
+				6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */,
 				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
 			);
 			path = Views;
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
+				439FC07127B705660016CD7F /* TodoListViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
+				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
 				6C99838B27B5FF6800378F03 /* TodoCell.swift in Sources */,
@@ -304,7 +308,7 @@
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
-				6C21260327B5D6B5005B1D23 /* FirstTrimesterLabel.swift in Sources */,
+				6C21260327B5D6B5005B1D23 /* TodoListTitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

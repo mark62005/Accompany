@@ -19,6 +19,7 @@
 		4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220027ADE99300EC8A98 /* ServicesViewController.swift */; };
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
 		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
+		642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */; };
 		64EF106B27B717C600167984 /* AddNoteCellTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */; };
 		64EF106C27B717C600167984 /* AddNoteCellOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */; };
 		64EF106D27B717C600167984 /* AddNoteDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */; };
@@ -40,6 +41,7 @@
 		4377220027ADE99300EC8A98 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
+		642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple-Boy.ttf"; sourceTree = "<group>"; };
 		64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCellTwoTableViewCell.swift; sourceTree = "<group>"; };
 		64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCellOneTableViewCell.swift; sourceTree = "<group>"; };
 		64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteDetailsTableViewController.swift; sourceTree = "<group>"; };
@@ -104,6 +106,7 @@
 		437721F127ADE83600EC8A98 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */,
 				437721DD27ADE4E700EC8A98 /* AppDelegate.swift */,
 				437721DF27ADE4E700EC8A98 /* SceneDelegate.swift */,
 			);
@@ -262,6 +265,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				437721EA27ADE4E800EC8A98 /* LaunchScreen.storyboard in Resources */,
+				642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */,
 				437721E727ADE4E800EC8A98 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

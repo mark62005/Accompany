@@ -20,10 +20,8 @@ class AddNoteCellTwoTableViewCell: UITableViewCell {
   
   let addNoteTVC = AddNoteDetailsTableViewController()
   
-  
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    
     addSubview(noteTextView)
     noteTextView.snp.makeConstraints{(make) in
       make.top.bottom.equalTo(0)

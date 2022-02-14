@@ -24,6 +24,7 @@ class AddNoteCellOneTableViewCell: UITableViewCell {
     let textField = UITextField()
     textField.textAlignment = .left
     textField.font = .boldSystemFont(ofSize: 30)
+    textField.placeholder = "Title"
     textField.isUserInteractionEnabled = true
     return textField
   }()
@@ -34,8 +35,6 @@ class AddNoteCellOneTableViewCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     addSubview(isCompleteButton)
     addSubview(toDoTextField)
-    //isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
-    //toDoTextField.addTarget(self, action: #selector(textFieldValueChanged), for: .editingChanged)
     isCompleteButton.snp.makeConstraints{(make) in
       make.top.equalTo(0)
       make.left.equalTo(0).offset(15)

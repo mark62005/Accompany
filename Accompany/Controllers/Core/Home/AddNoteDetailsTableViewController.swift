@@ -57,6 +57,26 @@ class AddNoteDetailsTableViewController: UITableViewController {
     self.navigationController?.popViewController(animated: true)
   }
 
+  func updateSaveButton(){
+    let title = toDoTitleTextField?.text ?? ""
+    saveBarButton.isEnabled = !title.isEmpty
+  }
+  
+  @objc func isCompleteButtonTapped(sender: UIButton){
+    updateSaveButton()
+    sender.isSelected.toggle()
+    toDoTitleTextField?.becomeFirstResponder()
+  }
+  
+  @objc func toDoTitleTextFieldEditingChanged(sender: UITextField){
+    updateSaveButton()
+  }
+  
+  @objc func textViewDidChange(_ notif: NSNotification){
+    guard notif.object is UITextView else { return }
+    updateSaveButton()
+  }
+  
   // MARK: - Table view data source
 
   override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -107,25 +127,5 @@ class AddNoteDetailsTableViewController: UITableViewController {
     default:
       return UITableView.automaticDimension
     }
-  }
-  
-  func updateSaveButton(){
-    let title = toDoTitleTextField?.text ?? ""
-    saveBarButton.isEnabled = !title.isEmpty
-  }
-  
-  @objc func isCompleteButtonTapped(sender: UIButton){
-    updateSaveButton()
-    sender.isSelected.toggle()
-    toDoTitleTextField?.becomeFirstResponder()
-  }
-  
-  @objc func toDoTitleTextFieldEditingChanged(sender: UITextField){
-    updateSaveButton()
-  }
-  
-  @objc func textViewDidChange(_ notif: NSNotification){
-    guard notif.object is UITextView else { return }
-    updateSaveButton()
   }
 }

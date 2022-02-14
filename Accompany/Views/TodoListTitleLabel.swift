@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class TodoListTitleLabel: UILabel {
-    
+  
   // initiate
   
   override init(frame: CGRect) {
@@ -20,8 +20,10 @@ class TodoListTitleLabel: UILabel {
     self.init(frame: .zero)
     self.textColor = .purple
     self.textAlignment = .center
-    self.font = UIFont.boldSystemFont(ofSize: 35)
-  }
+    self.font = UIFont(name: "SimpleBoy", size: 40)
+    }
+    
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")

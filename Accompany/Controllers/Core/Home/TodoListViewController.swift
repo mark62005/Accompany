@@ -15,7 +15,7 @@ class TodoListViewController: UIViewController {
   let tableView: UITableView = {
     let tableView = UITableView()
     tableView.register(TodoCell.self, forCellReuseIdentifier: "ToDoCellIdentifier")
-    tableView.layer.cornerRadius = 20
+    tableView.layer.cornerRadius = 10
     
     return tableView
   }()
@@ -25,7 +25,7 @@ class TodoListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
       
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     view.addSubview(todoListTitleLabel)
     view.addSubview(tableView)
     
@@ -40,11 +40,7 @@ class TodoListViewController: UIViewController {
     
     configureTableView()
         
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add,
-                                                      target: self,
-                                                      action: #selector(didTapAdd))
-//      self.navigationItem.leftBarButtonItem = self.editButtonItem
-
+    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
   }
   
   private func configureTableView() {
@@ -58,11 +54,12 @@ class TodoListViewController: UIViewController {
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    
     tableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.centerY.equalTo(view)
-      make.width.equalTo(345)
-      make.height.equalTo(380)
+      make.width.equalTo(320)
+      make.height.equalTo(350)
     }
   }
   
@@ -76,16 +73,23 @@ extension TodoListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! TodoCell
-    let toDo = todos[indexPath.row]
+    let toDo: Todo?
+    if indexPath.row < todos.count {
+      toDo = todos[indexPath.row]
+    } else {
+      toDo = nil
+    }
     
-    // configure cell
-    cell.update(with: toDo)
-    cell.isCompleteButton.setImage(UIImage(systemName: "circle"), for: .normal)
-    cell.isCompleteButton.addTarget(self, action: #selector(checkMarkButtonClicked(sender:)), for: .touchUpInside)
-    cell.showsReorderControl = true
-    
+    if let toDo = toDo {
+      // configure cell
+      cell.update(with: toDo)
+      cell.isCompleteButton.setImage(UIImage(systemName: "circle"), for: .normal)
+      cell.isCompleteButton.addTarget(self, action: #selector(checkMarkButtonClicked(sender:)), for: .touchUpInside)
+      cell.showsReorderControl = true
+    }
     return cell
   }
+  
   
   @objc func checkMarkButtonClicked( sender: UIButton) {
     if sender.isSelected {
@@ -99,7 +103,7 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 70
+    return 60
   }
   
 }
@@ -121,18 +125,18 @@ extension TodoListViewController: UITableViewDataSource {
     }
   }
   
-  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-  
-  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//    print(#function)
-    let toDoToMove = todos[sourceIndexPath.row]
-    // update model
-    todos.remove(at: sourceIndexPath.row)
-    todos.insert(toDoToMove, at: destinationIndexPath.row)
-    // update view
-    tableView.reloadData()
-  }
+//  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+//    return true
+//  }
+//
+//  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+////    print(#function)
+//    let toDoToMove = todos[sourceIndexPath.row]
+//    // update model
+//    todos.remove(at: sourceIndexPath.row)
+//    todos.insert(toDoToMove, at: destinationIndexPath.row)
+//    // update view
+//    tableView.reloadData()
+//  }
   
 }

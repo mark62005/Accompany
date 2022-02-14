@@ -119,6 +119,8 @@
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
 				6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */,
 				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
+				64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */,
+				64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -146,7 +148,6 @@
 		437721F627ADE90D00EC8A98 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				64EF106E27B717D800167984 /* Cell */,
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
 				64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */,
 				439FC07127B705660016CD7F /* TodoListViewController.swift */,
@@ -176,15 +177,6 @@
 				4377220027ADE99300EC8A98 /* ServicesViewController.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		64EF106E27B717D800167984 /* Cell */ = {
-			isa = PBXGroup;
-			children = (
-				64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */,
-				64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */,
-			);
-			path = Cell;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {

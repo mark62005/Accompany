@@ -18,7 +18,6 @@ class AddNoteCellTwoTableViewCell: UITableViewCell {
     return textView
   }()
   
-  let addNoteTVC = AddNoteDetailsTableViewController()
   
   override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)

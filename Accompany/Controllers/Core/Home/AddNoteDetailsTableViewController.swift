@@ -30,18 +30,31 @@ class AddNoteDetailsTableViewController: UITableViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.navigationItem.rightBarButtonItem = saveBarButton
-    if todo != nil {
-      navigationItem.title = "Edit To Do"
-    } else {
-      navigationItem.title = "Add To Do"
-    }
-    tableView.register(AddNoteCellOneTableViewCell.self, forCellReuseIdentifier: "cell")
-    tableView.register(AddNoteCellTwoTableViewCell.self, forCellReuseIdentifier: "cell2")
+    
+    configureNavigationItem()
+    setupTodoBasicInfoCell()
+    
     tableView.isUserInteractionEnabled = true
+    
     let notificationCenter = NotificationCenter.default
     notificationCenter.addObserver(self, selector: #selector(textViewDidChange), name: UITextView.textDidChangeNotification, object: nil)
-    updateSaveButton()
+    
+    updateSaveButtonState()
+  }
+  
+  private func configureNavigationItem() {
+    navigationItem.rightBarButtonItem = saveBarButton
+    
+    if todo != nil {
+      title = "Edit To Do"
+    } else {
+      title = "Add To Do"
+    }
+  }
+  
+  private func setupTodoBasicInfoCell() {
+    todoBasicInfoCell.isCompleteButton.addTarget(self, action: #selector(isCompleteButtonTapped), for: .touchUpInside)
+    todoBasicInfoCell.toDoTitleTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
   }
   
   @objc func saveButtonTapped(){

@@ -25,7 +25,7 @@ class AddNoteDetailsTableViewController: UITableViewController {
   var isCompleteButton: UIButton?
   var toDoTitleTextField: UITextField?
   var noteTextView: UITextView?
-  let buttonIndexPath = IndexPath(row: 0, section: 0)
+  let basicInfoCellIndexPath = IndexPath(row: 0, section: 0)
   let noteIndexPath = IndexPath(row: 0, section: 1)
   
   override func viewDidLoad() {

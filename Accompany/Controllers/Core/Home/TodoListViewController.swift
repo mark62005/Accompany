@@ -137,7 +137,7 @@ extension TodoListViewController: UITableViewDataSource {
     tableView.reloadData()
   }
   
-  func prepareLabel(label: UILabel, string: String, superScript: String){
+  private func prepareLabel(label: UILabel, string: String, superScript: String) {
     let font = UIFont(name: "SimpleBoy", size: 50)
     let fontSuper = UIFont(name: "SimpleBoy", size: 20)
     let fontExtension = label.text![label.text!.index(label.text!.startIndex,offsetBy: 3)..<label.text!.index(label.text!.endIndex, offsetBy: 0)]

@@ -1,34 +1,34 @@
 //
-//  TrackTitleLabel.swift
+//  BabySonogramTitleLabel.swift
 //  Accompany
 //
-//  Created by Esperanza on 2022-02-13.
+//  Created by Esperanza on 2022-02-14.
 //
 
 import Foundation
 import UIKit
 import SnapKit
 
-class trackTitleLabel: UILabel {
+class BabySonogramTitleLabel: UILabel {
+  
+  // initiate
   
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
   
-  
   convenience init() {
     self.init(frame: .zero)
-    self.text = "Let's track your baby!"
-    self.textColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 1)
+    self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
     self.textAlignment = .center
-    self.font = UIFont.boldSystemFont(ofSize: 20.0)
+    self.font = UIFont(name: "SimpleBoy", size: 40)
+    }
     
-    
-  }
-
+  
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
+    
 }
 

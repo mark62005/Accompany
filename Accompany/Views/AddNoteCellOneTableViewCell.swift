@@ -26,6 +26,7 @@ class AddNoteCellOneTableViewCell: UITableViewCell {
     textField.font = .boldSystemFont(ofSize: 30)
     textField.placeholder = "Title"
     textField.isUserInteractionEnabled = true
+    
     return textField
   }()
   

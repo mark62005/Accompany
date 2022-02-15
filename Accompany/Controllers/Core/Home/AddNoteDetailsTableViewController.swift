@@ -57,7 +57,7 @@ class AddNoteDetailsTableViewController: UITableViewController {
     self.navigationController?.popViewController(animated: true)
   }
 
-  func updateSaveButton(){
+  func updateSaveButtonState() {
     let title = toDoTitleTextField?.text ?? ""
     saveBarButton.isEnabled = !title.isEmpty
   }

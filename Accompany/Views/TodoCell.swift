@@ -55,7 +55,9 @@ class TodoCell: UITableViewCell {
     self.titleLabel.text = toDo.title
   }
   
-  @objc func buttonTapped(sender: UIButton){    sender.isSelected.toggle()
+  @objc func buttonTapped(sender: UIButton) {    
+    sender.isSelected.toggle()
+  }
   }
     
 }

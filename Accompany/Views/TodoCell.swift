@@ -12,7 +12,7 @@ import SnapKit
 
 class TodoCell: UITableViewCell {
     
-  let isCompleteButton : UIButton = {
+  let isCompleteButton: UIButton = {
     let button = UIButton()
     button.setImage(UIImage(systemName: "circle"), for: .normal)
     button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)

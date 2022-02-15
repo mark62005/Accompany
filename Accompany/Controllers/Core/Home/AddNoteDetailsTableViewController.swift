@@ -26,7 +26,7 @@ class AddNoteDetailsTableViewController: UITableViewController {
   var toDoTitleTextField: UITextField?
   var noteTextView: UITextView?
   let basicInfoCellIndexPath = IndexPath(row: 0, section: 0)
-  let noteIndexPath = IndexPath(row: 0, section: 1)
+  let notesCellIndexPath = IndexPath(row: 0, section: 1)
   
   override func viewDidLoad() {
     super.viewDidLoad()

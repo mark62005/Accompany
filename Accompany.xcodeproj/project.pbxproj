@@ -20,9 +20,9 @@
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
 		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
 		642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */; };
-		64EF106B27B717C600167984 /* AddNoteCellTwoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */; };
-		64EF106C27B717C600167984 /* AddNoteCellOneTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */; };
-		64EF106D27B717C600167984 /* AddNoteDetailsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */; };
+		64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106827B717C600167984 /* ToDoNotesCell.swift */; };
+		64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */; };
+		64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */; };
 		6C21260327B5D6B5005B1D23 /* TodoListTitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */; };
 		6C99838B27B5FF6800378F03 /* TodoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C99838A27B5FF6800378F03 /* TodoCell.swift */; };
 /* End PBXBuildFile section */
@@ -42,9 +42,9 @@
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple-Boy.ttf"; sourceTree = "<group>"; };
-		64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCellTwoTableViewCell.swift; sourceTree = "<group>"; };
-		64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteCellOneTableViewCell.swift; sourceTree = "<group>"; };
-		64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddNoteDetailsTableViewController.swift; sourceTree = "<group>"; };
+		64EF106827B717C600167984 /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
+		64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
+		64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoFormTableViewController.swift; sourceTree = "<group>"; };
 		6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListTitleLabel.swift; sourceTree = "<group>"; };
 		6C99838A27B5FF6800378F03 /* TodoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoCell.swift; sourceTree = "<group>"; };
 		75E30413CDAAE23C012D7201 /* Pods-Accompany.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Accompany.debug.xcconfig"; path = "Target Support Files/Pods-Accompany/Pods-Accompany.debug.xcconfig"; sourceTree = "<group>"; };
@@ -119,8 +119,8 @@
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
 				6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */,
 				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
-				64EF106927B717C600167984 /* AddNoteCellOneTableViewCell.swift */,
-				64EF106827B717C600167984 /* AddNoteCellTwoTableViewCell.swift */,
+				64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */,
+				64EF106827B717C600167984 /* ToDoNotesCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -149,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
-				64EF106A27B717C600167984 /* AddNoteDetailsTableViewController.swift */,
+				64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */,
 				439FC07127B705660016CD7F /* TodoListViewController.swift */,
 			);
 			path = Home;
@@ -311,19 +311,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				64EF106D27B717C600167984 /* AddNoteDetailsTableViewController.swift in Sources */,
+				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
 				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
-				64EF106B27B717C600167984 /* AddNoteCellTwoTableViewCell.swift in Sources */,
+				64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */,
 				6C99838B27B5FF6800378F03 /* TodoCell.swift in Sources */,
 				4306D26A27B5D27700050369 /* ToDo.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
-				64EF106C27B717C600167984 /* AddNoteCellOneTableViewCell.swift in Sources */,
+				64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */,
 				6C21260327B5D6B5005B1D23 /* TodoListTitleLabel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

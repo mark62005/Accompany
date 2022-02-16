@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class TodoListViewController: UIViewController, AddNoteDetailsTableViewControllerDelegate {
+class TodoListViewController: UIViewController, ToDoFormTableViewControllerDelegate {
   
   func add(todo: ToDo) {
     todos.append(todo)
@@ -59,7 +59,7 @@ class TodoListViewController: UIViewController, AddNoteDetailsTableViewControlle
   }
     
   @objc func didTapAdd() {
-    let addnoteController = AddNoteDetailsTableViewController()
+    let addnoteController = ToDoFormTableViewController()
     addnoteController.delegate = self
     navigationController?.pushViewController(addnoteController, animated: false)
   }
@@ -99,7 +99,7 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let addNoteTVC = AddNoteDetailsTableViewController()
+    let addNoteTVC = ToDoFormTableViewController()
     addNoteTVC.todo = todos[indexPath.row]
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)

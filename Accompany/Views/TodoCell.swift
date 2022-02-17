@@ -39,7 +39,6 @@ class TodoCell: UITableViewCell {
     
     contentView.addSubview(stackView)
     stackView.snp.makeConstraints { make in
-      make.centerX.equalTo(contentView)
       make.centerY.equalTo(contentView)
       make.left.equalTo(contentView).offset(10)
       make.right.equalTo(contentView).offset(10)
@@ -55,7 +54,8 @@ class TodoCell: UITableViewCell {
     self.titleLabel.text = toDo.title
   }
   
-  @objc func buttonTapped(sender: UIButton){    sender.isSelected.toggle()
+  @objc func buttonTapped(sender: UIButton) {
+    sender.isSelected.toggle()
   }
     
 }

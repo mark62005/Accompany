@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 
 class TodoListTitleLabel: UILabel {
-    
-  // initiate
-  
   override init(frame: CGRect) {
     super.init(frame: frame)
   }
@@ -21,7 +18,6 @@ class TodoListTitleLabel: UILabel {
     self.textColor = #colorLiteral(red: 0.9940978885, green: 0.3898795247, blue: 0.532279253, alpha: 1)
     self.textAlignment = .center
     self.font = UIFont(name: "SimpleBoy", size: 50)
-    //self.font = UIFont.boldSystemFont(ofSize: 35)
   }
   
   required init?(coder: NSCoder) {

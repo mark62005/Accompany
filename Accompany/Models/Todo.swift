@@ -17,10 +17,6 @@ struct ToDo: Codable {
   var isCompleted: Bool = false
   var note: String?
   
-//  init(title: String) {
-//      self.title = title
-//  }
-  
   //retrieves the array of items stored on disk, if there are any, and returns them.
   static func loadToDos() -> [ToDo]? {
     guard let codedToDos = try? Data(contentsOf: archiveURL) else { return nil }

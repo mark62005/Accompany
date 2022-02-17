@@ -15,8 +15,8 @@ class ToDoBasicInfoCell : UITableViewCell {
     let button = UIButton()
     button.setImage(circle, for: .normal)
     button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
-    button.isUserInteractionEnabled = true
     button.isSelected = false
+    button.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
     
     return button
   }()
@@ -26,7 +26,6 @@ class ToDoBasicInfoCell : UITableViewCell {
     textField.textAlignment = .left
     textField.font = .boldSystemFont(ofSize: 30)
     textField.placeholder = "Title"
-    textField.isUserInteractionEnabled = true
     
     return textField
   }()
@@ -44,19 +43,6 @@ class ToDoBasicInfoCell : UITableViewCell {
     
     stackView.snp.makeConstraints { make in
       make.edges.equalTo(self.contentView).inset(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
-    }
-    addSubview(isCompleteButton)
-    addSubview(toDoTextField)
-    isCompleteButton.snp.makeConstraints{ make in
-      make.top.equalTo(0)
-      make.left.equalTo(0).offset(15)
-      make.width.height.equalTo(50)
-    }
-    
-    toDoTextField.snp.makeConstraints{ make in
-      make.top.right.equalTo(0)
-      make.left.equalTo(isCompleteButton.snp.right).offset(15)
-      make.height.equalTo(50)
     }
   }
   

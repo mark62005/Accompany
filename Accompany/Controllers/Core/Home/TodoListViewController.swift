@@ -128,7 +128,6 @@ extension TodoListViewController: UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//    print(#function)
     let toDoToMove = todos[sourceIndexPath.row]
     // update model
     todos.remove(at: sourceIndexPath.row)
@@ -145,6 +144,6 @@ extension TodoListViewController: UITableViewDataSource {
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
     print()
     label.attributedText = attributedString
-
   }
+  
 }

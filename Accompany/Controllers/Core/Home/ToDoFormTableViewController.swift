@@ -105,9 +105,7 @@ class ToDoFormTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      toDoBasicInfoCell.contentView.isUserInteractionEnabled = false
       toDoBasicInfoCell.isCompleteButton.addTarget(self, action: #selector(isCompleteButtonTapped), for: .touchUpInside)
-      //isCompleteButton = cell.isCompleteButton
       toDoBasicInfoCell.isCompleteButton.isSelected = todo?.isCompleted == nil ? false : todo!.isCompleted
       toDoBasicInfoCell.toDoTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
       toDoBasicInfoCell.toDoTextField.text = todo?.title

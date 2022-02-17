@@ -13,6 +13,7 @@ class TabBarViewController: UITabBarController {
     case home = "Home"
     case ourBaby = "Our Baby"
     case records = "Record"
+    case timer = "Timer"
     case services = "Services"
   }
   
@@ -38,11 +39,15 @@ class TabBarViewController: UITabBarController {
     recordsVC.title = TabBarVCTitle.records.rawValue
     recordsVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.records.rawValue, image: placeholderImage, tag: 1)
     
+    let contractionTimerVC = ContractionTimerViewController()
+    contractionTimerVC.title = TabBarVCTitle.timer.rawValue
+    contractionTimerVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.timer.rawValue, image: placeholderImage, tag: 1)
+    
     let servicesVC = ServicesViewController()
     servicesVC.title = TabBarVCTitle.services.rawValue
     servicesVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.services.rawValue, image: placeholderImage, tag: 1)
     
-    let vcs = [homeVC, ourBabyVC, recordsVC, servicesVC]
+    let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, servicesVC]
     
     self.viewControllers = vcs.map { UINavigationController(rootViewController: $0) }
   }

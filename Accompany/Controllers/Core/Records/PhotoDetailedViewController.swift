@@ -11,7 +11,7 @@ class PhotoDetailedViewController: UIViewController {
   
   let detailTitleLabel = TitleLabel(title: "Photo Information")
   
-  let imageView: UIImageView {
+  let imageView: UIImageView = {
     let imageView = UIImageView()
     imageView.image = UIImage(systemName: "photo.on.rectangle")
     imageView.backgroundColor = .clear

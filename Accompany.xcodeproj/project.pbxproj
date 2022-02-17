@@ -151,8 +151,8 @@
 				43FB2B0A27BE381C004A641D /* Buttons */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
-				43FB2AF127BDDBC5004A641D /* Timer */,
-				43FB2AF227BDDBC9004A641D /* Services */,
+				6C1FC57327BEFD80007D625E /* Timer */,
+				6C1FC57427BEFD87007D625E /* Services */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -225,20 +225,6 @@
 			path = TodoList;
 			sourceTree = "<group>";
 		};
-		43FB2AF127BDDBC5004A641D /* Timer */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Timer;
-			sourceTree = "<group>";
-		};
-		43FB2AF227BDDBC9004A641D /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
 		43FB2AF327BDDBD1004A641D /* Album */ = {
 			isa = PBXGroup;
 			children = (
@@ -255,6 +241,20 @@
 				43FB2B0B27BE381C004A641D /* OutlineButton.swift */,
 			);
 			path = Buttons;
+			sourceTree = "<group>";
+		};
+		6C1FC57327BEFD80007D625E /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		6C1FC57427BEFD87007D625E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {

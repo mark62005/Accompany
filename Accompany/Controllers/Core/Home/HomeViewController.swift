@@ -10,7 +10,7 @@ import SnapKit
 
 class HomeViewController: UIViewController {
   
-  let accompanyTitleLabel = AccompantTitleLabel()
+  let accompanyTitleLabel = AccompanyTitleLabel()
   let welcomeTitleLabel = WelcomeTitleLabel()
 
  

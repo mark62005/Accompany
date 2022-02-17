@@ -18,9 +18,10 @@ class TodoListTitleLabel: UILabel {
     self.init(frame: .zero)
     self.textColor = #colorLiteral(red: 0.9940978885, green: 0.3898795247, blue: 0.532279253, alpha: 1)
     self.textAlignment = .center
-    self.font = UIFont(name: "SimpleBoy", size: 50)
-  }
+    self.font = UIFont(name: "SimpleBoy", size: 40)
   
+  }
+
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

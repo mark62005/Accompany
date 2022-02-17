@@ -23,7 +23,8 @@ class TodoListViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
+    
+//    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
     view.addSubview(todoListTitleLabel)
     view.addSubview(tableView)
@@ -35,29 +36,34 @@ class TodoListViewController: UIViewController {
       make.left.equalTo(view.safeAreaLayoutGuide).offset(80)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-80)
     }
+    
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+  
   }
   
   private func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
+  
   }
-    
+  
   @objc func didTapAdd() {
     let addnoteController = ToDoFormTableViewController()
     addnoteController.delegate = self
     navigationController?.pushViewController(addnoteController, animated: false)
+    
   }
   
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
+    
     tableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.centerY.equalTo(view)
-      make.width.equalTo(345)
-      make.height.equalTo(380)
+      make.width.equalTo(320)
+      make.height.equalTo(350)
     }
   }
   
@@ -77,12 +83,13 @@ extension TodoListViewController: UITableViewDelegate {
     cell.update(with: todo)
     cell.isCompleteButton.isSelected = todo.isCompleted
     cell.showsReorderControl = true
-    
     return cell
+    
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 70
+    return 60
+     
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -90,6 +97,7 @@ extension TodoListViewController: UITableViewDelegate {
     addNoteTVC.todo = todos[indexPath.row]
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
+    
   }
   
 }
@@ -111,19 +119,6 @@ extension TodoListViewController: UITableViewDataSource {
     }
   }
   
-  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-    return true
-  }
-  
-  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    let toDoToMove = todos[sourceIndexPath.row]
-    // update model
-    todos.remove(at: sourceIndexPath.row)
-    todos.insert(toDoToMove, at: destinationIndexPath.row)
-    // update view
-    tableView.reloadData()
-  }
-  
   func prepareLabel(label: UILabel, string: String, superScript: String){
     let font = UIFont(name: "SimpleBoy", size: 50)
     let fontSuper = UIFont(name: "SimpleBoy", size: 20)
@@ -132,6 +127,7 @@ extension TodoListViewController: UITableViewDataSource {
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
     print()
     label.attributedText = attributedString
+    
   }
   
 }

@@ -37,13 +37,6 @@ class ServicesViewController: UIViewController {
   
   let titleLabel = TitleLabel()
   
-  let myProfileButton = SecondaryButton(title: Services.myProfile.description)
-  let invitePartnerButton = SecondaryButton(title: Services.invitePartner.description)
-  let accountSettingsButton = PrimaryButton(title: Services.accountSettings.description)
-  let pregnantArticlesButton = PrimaryButton(title: Services.pregnantArticles.description)
-  let aboutAccompanyButton = PrimaryButton(title: Services.aboutAccompany.description)
-  let logOutButton = OutlineButton(title: Services.logOut.description)
-
   override func viewDidLoad() {
     super.viewDidLoad()
 
@@ -77,7 +70,6 @@ class ServicesViewController: UIViewController {
       buttons[i].addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside)
     }
     
-//    let buttons = [myProfileButton, invitePartnerButton, accountSettingsButton, pregnantArticlesButton, aboutAccompanyButton, logOutButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     
     let vStack = VStack(arrangedSubviews: buttons)

@@ -125,18 +125,4 @@ extension TodoListViewController: UITableViewDataSource {
     }
   }
   
-//  func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-//    return true
-//  }
-//
-//  func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-////    print(#function)
-//    let toDoToMove = todos[sourceIndexPath.row]
-//    // update model
-//    todos.remove(at: sourceIndexPath.row)
-//    todos.insert(toDoToMove, at: destinationIndexPath.row)
-//    // update view
-//    tableView.reloadData()
-//  }
-  
 }

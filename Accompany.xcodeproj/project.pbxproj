@@ -21,8 +21,11 @@
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
 		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
 		43FB2AF527BDDC7C004A641D /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AF427BDDC7C004A641D /* TodoList.swift */; };
-		43FB2AF727BDDD51004A641D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AF627BDDD51004A641D /* PrimaryButton.swift */; };
 		43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AFB27BDEB91004A641D /* TitleLabel.swift */; };
+		43FB2B0727BE37F0004A641D /* VStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0627BE37F0004A641D /* VStack.swift */; };
+		43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0B27BE381C004A641D /* OutlineButton.swift */; };
+		43FB2B0F27BE381C004A641D /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0C27BE381C004A641D /* PrimaryButton.swift */; };
+		43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B0D27BE381C004A641D /* SecondaryButton.swift */; };
 		642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */; };
 		64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106827B717C600167984 /* ToDoNotesCell.swift */; };
 		64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */; };
@@ -53,8 +56,11 @@
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		43FB2AF427BDDC7C004A641D /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
-		43FB2AF627BDDD51004A641D /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
 		43FB2AFB27BDEB91004A641D /* TitleLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TitleLabel.swift; sourceTree = "<group>"; };
+		43FB2B0627BE37F0004A641D /* VStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VStack.swift; sourceTree = "<group>"; };
+		43FB2B0B27BE381C004A641D /* OutlineButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OutlineButton.swift; sourceTree = "<group>"; };
+		43FB2B0C27BE381C004A641D /* PrimaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		43FB2B0D27BE381C004A641D /* SecondaryButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondaryButton.swift; sourceTree = "<group>"; };
 		642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple-Boy.ttf"; sourceTree = "<group>"; };
 		64EF106827B717C600167984 /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
 		64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
@@ -155,7 +161,8 @@
 				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
 				6C33A1E927BC22BA0005061B /* PhotoCollectionViewCell.swift */,
 				43FB2AFB27BDEB91004A641D /* TitleLabel.swift */,
-				43FB2AF627BDDD51004A641D /* PrimaryButton.swift */,
+				43FB2B0627BE37F0004A641D /* VStack.swift */,
+				43FB2B0A27BE381C004A641D /* Buttons */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
 				43FB2AF127BDDBC5004A641D /* Timer */,
@@ -251,6 +258,16 @@
 			children = (
 			);
 			path = Album;
+			sourceTree = "<group>";
+		};
+		43FB2B0A27BE381C004A641D /* Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				43FB2B0C27BE381C004A641D /* PrimaryButton.swift */,
+				43FB2B0D27BE381C004A641D /* SecondaryButton.swift */,
+				43FB2B0B27BE381C004A641D /* OutlineButton.swift */,
+			);
+			path = Buttons;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {
@@ -387,6 +404,8 @@
 			files = (
 				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
+				43FB2B0F27BE381C004A641D /* PrimaryButton.swift in Sources */,
+				43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */,
 				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
@@ -397,7 +416,6 @@
 				4306D26A27B5D27700050369 /* Todo.swift in Sources */,
 				64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */,
 				6C99838B27B5FF6800378F03 /* TodoCell.swift in Sources */,
-				43FB2AF727BDDD51004A641D /* PrimaryButton.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
 				6C41CC2927BB164D00EA8C9C /* BabySonogramTitleLabel.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
@@ -407,6 +425,8 @@
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
 				6C41CC1027B9808B00EA8C9C /* WelcomeTitleLabel.swift in Sources */,
 				64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */,
+				43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */,
+				43FB2B0727BE37F0004A641D /* VStack.swift in Sources */,
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
 				6C21260327B5D6B5005B1D23 /* TodoListTitleLabel.swift in Sources */,
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,

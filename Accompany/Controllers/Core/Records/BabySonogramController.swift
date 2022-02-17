@@ -26,7 +26,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
   // MARK: Data
-  var images = [UIImage]()
+//  var images = []()
 
   let sections = [Section.videoSection, Section.photoSection]
 
@@ -174,7 +174,12 @@ extension BabySonogramController: UICollectionViewDelegate {
     
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     
-//    let selectedImage = images[indexPath.item]
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+    
+    let selectedImage = images[indexPath.item]
+    
+    se
+    
 //    selectedImage.addObserver(<#T##observer: NSObject##NSObject#>, forKeyPath: <#T##String#>, options: ., context: <#T##UnsafeMutableRawPointer?#>)
 //
   }

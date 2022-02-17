@@ -29,6 +29,15 @@ class TitleLabel: UILabel {
     self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
   }
   
+  convenience init(smallerTitle: String) {
+    self.init(frame: .zero)
+    self.translatesAutoresizingMaskIntoConstraints = false
+    self.text = smallerTitle
+    self.textAlignment = .center
+    self.font = .boldSystemFont(ofSize: 25)
+    self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
+  }
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }

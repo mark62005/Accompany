@@ -12,7 +12,14 @@ import SnapKit
 
 class TodoCell: UITableViewCell {
     
-  let isCompleteButton = UIButton()
+  let isCompleteButton : UIButton = {
+    let button = UIButton()
+    button.setImage(UIImage(systemName: "circle"), for: .normal)
+    button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
+    button.isUserInteractionEnabled = true
+    button.isSelected = false
+    return button
+  }()
 
   let titleLabel: UILabel = {
     let titleLabel = UILabel()
@@ -37,14 +44,18 @@ class TodoCell: UITableViewCell {
       make.left.equalTo(contentView).offset(10)
       make.right.equalTo(contentView).offset(10)
     }
+    isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
   }
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func update(with toDo: Todo) {
+  func update(with toDo: ToDo) {
     self.titleLabel.text = toDo.title
+  }
+  
+  @objc func buttonTapped(sender: UIButton){    sender.isSelected.toggle()
   }
     
 }

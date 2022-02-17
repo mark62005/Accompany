@@ -14,56 +14,10 @@ class HomeViewController: UIViewController {
   let welcomeTitleLabel = WelcomeTitleLabel()
 
  
-  let button1 : UIButton = {
-    let button1 = UIButton()
-  button1.setTitle("1st Trimester", for: .normal)
-  button1.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-  button1.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
-  button1.layer.cornerRadius = 16
-  button1.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside)
-    
-    return button1
-    
-  }()
-  
-  
- 
-  let button2 : UIButton = {
-    let button2 = UIButton()
-    button2.setTitle("2nd Trimester", for: .normal)
-    button2.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-    button2.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
-    button2.layer.cornerRadius = 16
-    button2.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside)
-    
-    return button2
-    
-  }()
-  
-  
-  let button3 : UIButton = {
-    let button3 = UIButton()
-    button3.setTitle("3rd Trimester", for: .normal)
-    button3.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-    button3.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
-    button3.layer.cornerRadius = 16
-    button3.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside)
-    
-    return button3
-    
-  }()
-  
-  
-  let button4 : UIButton = {
-    let button4 = UIButton()
-    button4.setTitle("After", for: .normal)
-    button4.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-    button4.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.4039215686, blue: 0.968627451, alpha: 1)
-    button4.layer.cornerRadius = 16
-    button4.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside)
-    
-    return button4
-  }()
+  let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
+  let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
+  let thirdTrimesterButton = PrimaryButton(title: Trimester.thirdTrimester.rawValue)
+  let afterButton = PrimaryButton(title: Trimester.after.rawValue)
   
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView()

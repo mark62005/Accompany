@@ -50,8 +50,8 @@ class TodoCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func update(with toDo: ToDo) {
-    self.titleLabel.text = toDo.title
+  func update(with todo: Todo) {
+    self.titleLabel.text = todo.title
   }
   
   @objc func buttonTapped(sender: UIButton) {

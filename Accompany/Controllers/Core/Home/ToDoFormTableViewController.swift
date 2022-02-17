@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 protocol ToDoFormTableViewControllerDelegate {
-  func add(todo: ToDo)
-  func edit(todo: ToDo)
+  func add(todo: Todo)
+  func edit(todo: Todo)
 }
 
 class ToDoFormTableViewController: UITableViewController {
@@ -20,7 +20,7 @@ class ToDoFormTableViewController: UITableViewController {
   
   var saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
   
-  var todo: ToDo?
+  var todo: Todo?
   var delegate: ToDoFormTableViewControllerDelegate?
   let basicInfoCellIndexPath = IndexPath(row: 0, section: 0)
   let notesCellIndexPath = IndexPath(row: 0, section: 1)
@@ -49,14 +49,14 @@ class ToDoFormTableViewController: UITableViewController {
   
   @objc func saveButtonTapped() {
     let isComplete = toDoBasicInfoCell.isCompleteButton.isSelected
-    let toDoTitle = toDoBasicInfoCell.toDoTextField.text!
+    let todoTitle = toDoBasicInfoCell.toDoTextField.text!
     let note = toDoNotesCell.noteTextView.text ?? ""
-    let newToDo = ToDo(title: toDoTitle, isCompleted: isComplete, note: note)
+    let newTodo = Todo(title: todoTitle, isCompleted: isComplete, note: note)
     
     if todo != nil {
-      delegate?.edit(todo: newToDo)
+      delegate?.edit(todo: newTodo)
     } else {
-      delegate?.add(todo: newToDo)
+      delegate?.add(todo: newTodo)
     }
     
     self.navigationController?.popViewController(animated: true)

@@ -10,12 +10,12 @@ import SnapKit
 
 class TodoListViewController: UIViewController, ToDoFormTableViewControllerDelegate {
   
-  func add(todo: ToDo) {
+  func add(todo: Todo) {
     todos.append(todo)
     tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
   }
   
-  func edit(todo: ToDo) {
+  func edit(todo: Todo) {
     if let selectedIndexPath = tableView.indexPathForSelectedRow {
       todos[selectedIndexPath.row] = todo
       tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
@@ -31,7 +31,7 @@ class TodoListViewController: UIViewController, ToDoFormTableViewControllerDeleg
     return tableView
   }()
   
-  var todos = [ToDo]()
+  var todos = [Todo]()
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -41,7 +41,7 @@ class TodoListViewController: UIViewController, ToDoFormTableViewControllerDeleg
     view.addSubview(tableView)
     
     // fetch todos
-    todos = ToDo.loadSampleToDos()
+    todos = Todo.loadSampleToDos()
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(80)
@@ -50,7 +50,6 @@ class TodoListViewController: UIViewController, ToDoFormTableViewControllerDeleg
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-    
   }
   
   private func configureTableView() {
@@ -84,11 +83,11 @@ extension TodoListViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! TodoCell
-    let toDo = todos[indexPath.row]
+    let todo = todos[indexPath.row]
     
     // configure cell
-    cell.update(with: toDo)
-    cell.isCompleteButton.isSelected = toDo.isCompleted
+    cell.update(with: todo)
+    cell.isCompleteButton.isSelected = todo.isCompleted
     cell.showsReorderControl = true
     
     return cell
@@ -116,8 +115,8 @@ extension TodoListViewController: UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
       // 1. update model
-      let toDo = ToDo(title: "")
-      todos.insert(toDo, at: 0)
+      let todo = Todo(title: "")
+      todos.insert(todo, at: 0)
       // 2. update view
       tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }

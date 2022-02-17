@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class RecordsViewController: UIViewController {
   
@@ -38,7 +39,6 @@ class RecordsViewController: UIViewController {
     }
 
   }
-  
   
 }
 

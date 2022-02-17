@@ -44,7 +44,7 @@ class TabBarViewController: UITabBarController {
     contractionTimerVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.timer.rawValue, image: placeholderImage, tag: 1)
     
     let servicesVC = ServicesViewController()
-    servicesVC.title = TabBarVCTitle.services.rawValue
+    servicesVC.titleLabel.text = TabBarVCTitle.services.rawValue
     servicesVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.services.rawValue, image: placeholderImage, tag: 1)
     
     let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, servicesVC]

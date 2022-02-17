@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class AccompantTitleLabel: UILabel {
+class AccompanyTitleLabel: UILabel {
   
   override init(frame: CGRect) {
     super.init(frame: frame)

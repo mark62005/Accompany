@@ -24,7 +24,7 @@ class TodoListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
+//    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
     view.addSubview(todoListTitleLabel)
     view.addSubview(tableView)

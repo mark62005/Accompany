@@ -98,7 +98,10 @@ class HomeViewController: UIViewController {
 }
   
   private func setupNavButtonArray() {
-    let stackView = UIStackView(arrangedSubviews: [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton])
+    let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
+    buttons.forEach { $0.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside) }
+    
+    let stackView = UIStackView(arrangedSubviews: buttons)
     stackView.axis = .vertical
     stackView.alignment = .fill
     stackView.distribution = .fill
@@ -115,6 +118,7 @@ class HomeViewController: UIViewController {
   }
   
   @objc func goToTodoList(_ button: UIButton) {
+    let todoListVC = TodoListViewController()
     
     switch button {
     case firstTrimesterButton:
@@ -130,12 +134,13 @@ class HomeViewController: UIViewController {
     }
         
     // fetch todos
+    
     navigationController?.pushViewController(todoListVC, animated: true)
   
   }
   
   @objc func gotoStopWatch(_ button: UIButton) {
-    
+    print("Stop watch tapped")
   }
   
 }
@@ -145,7 +150,6 @@ extension HomeViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return todos.count
   }
-  
   
 }
 
@@ -181,4 +185,5 @@ extension HomeViewController: UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .fade)
     }
   }
+  
 }

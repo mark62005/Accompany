@@ -20,51 +20,29 @@ class RecordsViewController: UIViewController {
     return button
   }()
   
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
         
-        setupBtnLayout()
-      
-      
-      
-      
-     
-
-        // Do any additional setup after loading the view.
-    }
+    setupBtnLayout()
+    
+  }
   
   @objc func gotoBabyAlbum(_ button: UIButton) {
     let babyVC = BabySonogramController()
     babyVC.babyTitleLabel.text = "Baby's Sonogram"
     
     navigationController?.pushViewController(babyVC, animated: true)
+  
   }
     
-    func setupBtnLayout() {
-      view.addSubview(button)
-      button.snp.makeConstraints { make in
-        make.centerX.equalTo(view)
-        make.centerY.equalTo(view)
-        make.width.equalTo(150)
-        make.height.equalTo(40)
+  func setupBtnLayout() {
+    view.addSubview(button)
+    button.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.centerY.equalTo(view)
+      make.width.equalTo(150)
+      make.height.equalTo(40)
         
-      }
-      
-    }
-    
-    
   }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
-
+  
+}

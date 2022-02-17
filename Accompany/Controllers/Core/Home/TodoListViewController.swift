@@ -9,14 +9,13 @@ import UIKit
 import SnapKit
 
 class TodoListViewController: UIViewController {
-
+  
   let todoListTitleLabel = TodoListTitleLabel()
   
   let tableView: UITableView = {
     let tableView = UITableView()
-    tableView.register(TodoCell.self, forCellReuseIdentifier: "ToDoCellIdentifier")
-    tableView.layer.cornerRadius = 10
-    
+    tableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    tableView.layer.cornerRadius = 20
     return tableView
   }()
   
@@ -24,14 +23,14 @@ class TodoListViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-      
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    
+    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
     view.addSubview(todoListTitleLabel)
     view.addSubview(tableView)
     
     // fetch todos
     todos = Todo.loadSampleToDos()
-    
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(80)
@@ -41,15 +40,20 @@ class TodoListViewController: UIViewController {
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+  
   }
   
   private func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
+  
   }
-    
+  
   @objc func didTapAdd() {
-    // TODO: Do something...
+    let addnoteController = ToDoFormTableViewController()
+    addnoteController.delegate = self
+    navigationController?.pushViewController(addnoteController, animated: false)
+    
   }
   
   override func viewDidLayoutSubviews() {
@@ -72,38 +76,28 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! TodoCell
-    let toDo: Todo?
-    if indexPath.row < todos.count {
-      toDo = todos[indexPath.row]
-    } else {
-      toDo = nil
-    }
+    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
+    let todo = todos[indexPath.row]
     
-    if let toDo = toDo {
-      // configure cell
-      cell.update(with: toDo)
-      cell.isCompleteButton.setImage(UIImage(systemName: "circle"), for: .normal)
-      cell.isCompleteButton.addTarget(self, action: #selector(checkMarkButtonClicked(sender:)), for: .touchUpInside)
-      cell.showsReorderControl = true
-    }
+    // configure cell
+    cell.update(with: todo)
+    cell.isCompleteButton.isSelected = todo.isCompleted
+    cell.showsReorderControl = true
     return cell
-  }
-  
-  
-  @objc func checkMarkButtonClicked( sender: UIButton) {
-    if sender.isSelected {
-      sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-    }
-    else {
-      sender.setImage(UIImage(systemName: "circle"), for: .normal)
-    }
-    // toggle between true and false
-    sender.isSelected.toggle()
+    
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 60
+     
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let addNoteTVC = ToDoFormTableViewController()
+    addNoteTVC.todo = todos[indexPath.row]
+    addNoteTVC.delegate = self
+    navigationController?.pushViewController(addNoteTVC, animated: true)
+    
   }
   
 }
@@ -118,10 +112,37 @@ extension TodoListViewController: UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
       // 1. update model
-      let toDo = Todo(title: "")
-      todos.insert(toDo, at: 0)
+      let todo = Todo(title: "")
+      todos.insert(todo, at: 0)
       // 2. update view
       tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+  }
+  
+  func prepareLabel(label: UILabel, string: String, superScript: String){
+    let font = UIFont(name: "SimpleBoy", size: 50)
+    let fontSuper = UIFont(name: "SimpleBoy", size: 20)
+    let fontExtension = label.text![label.text!.index(label.text!.startIndex,offsetBy: 3)..<label.text!.index(label.text!.endIndex, offsetBy: 0)]
+    let attributedString = NSMutableAttributedString(string: string + superScript + fontExtension, attributes: [NSAttributedString.Key.font:font!])
+    attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
+    print()
+    label.attributedText = attributedString
+    
+  }
+  
+}
+
+extension TodoListViewController: ToDoFormTableViewControllerDelegate {
+  
+  func add(todo: Todo) {
+    todos.append(todo)
+    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
+  }
+  
+  func edit(todo: Todo) {
+    if let selectedIndexPath = tableView.indexPathForSelectedRow {
+      todos[selectedIndexPath.row] = todo
+      tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
   }
   

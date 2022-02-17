@@ -12,14 +12,20 @@ class TitleLabel: UILabel {
   override init(frame: CGRect) {
     super.init(frame: .zero)
   }
+
+  convenience init() {
+    self.init(frame: .zero)
+    self.translatesAutoresizingMaskIntoConstraints = false
+    self.font = UIFont(name: "SimpleBoy", size: 60)
+    self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
+  }
   
   convenience init(title: String) {
     self.init(frame: .zero)
     self.translatesAutoresizingMaskIntoConstraints = false
     self.text = title
-    self.font = UIFont(name: "SimpleBoy", size: 30)
+    self.font = UIFont(name: "SimpleBoy", size: 60)
     self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
-    self.textAlignment = .center
   }
   
   required init?(coder: NSCoder) {

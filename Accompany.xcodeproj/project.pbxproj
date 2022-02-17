@@ -127,10 +127,10 @@
 			isa = PBXGroup;
 			children = (
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
-				6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */,
-				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
-				64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */,
-				64EF106827B717C600167984 /* ToDoNotesCell.swift */,
+				43FB2AEF27BDDB70004A641D /* TodoList */,
+				43FB2AF327BDDBD1004A641D /* Album */,
+				43FB2AF127BDDBC5004A641D /* Timer */,
+				43FB2AF227BDDBC9004A641D /* Services */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -188,6 +188,38 @@
 				4377220027ADE99300EC8A98 /* ServicesViewController.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		43FB2AEF27BDDB70004A641D /* TodoList */ = {
+			isa = PBXGroup;
+			children = (
+				6C21260227B5D6B5005B1D23 /* TodoListTitleLabel.swift */,
+				6C99838A27B5FF6800378F03 /* TodoCell.swift */,
+				64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */,
+				64EF106827B717C600167984 /* ToDoNotesCell.swift */,
+			);
+			path = TodoList;
+			sourceTree = "<group>";
+		};
+		43FB2AF127BDDBC5004A641D /* Timer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Timer;
+			sourceTree = "<group>";
+		};
+		43FB2AF227BDDBC9004A641D /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		43FB2AF327BDDBD1004A641D /* Album */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Album;
 			sourceTree = "<group>";
 		};
 		849BD287FAC13C3F0A2B32A6 /* Pods */ = {

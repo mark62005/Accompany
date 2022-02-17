@@ -5,12 +5,12 @@
 //  Created by Esperanza on 2022-02-10.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-
 class TodoCell: UITableViewCell {
+  
+  static let identifier = "TodoCell"
     
   let isCompleteButton : UIButton = {
     let button = UIButton()

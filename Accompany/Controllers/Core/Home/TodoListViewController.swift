@@ -8,25 +8,13 @@
 import UIKit
 import SnapKit
 
-class TodoListViewController: UIViewController, ToDoFormTableViewControllerDelegate {
+class TodoListViewController: UIViewController {
   
-  func add(todo: Todo) {
-    todos.append(todo)
-    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
-  }
-  
-  func edit(todo: Todo) {
-    if let selectedIndexPath = tableView.indexPathForSelectedRow {
-      todos[selectedIndexPath.row] = todo
-      tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-    }
-  }
-
   let todoListTitleLabel = TodoListTitleLabel()
   
   let tableView: UITableView = {
     let tableView = UITableView()
-    tableView.register(TodoCell.self, forCellReuseIdentifier: "ToDoCellIdentifier")
+    tableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
     tableView.layer.cornerRadius = 20
     return tableView
   }()
@@ -82,7 +70,7 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = tableView.dequeueReusableCell(withIdentifier: "ToDoCellIdentifier", for: indexPath) as! TodoCell
+    let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
     let todo = todos[indexPath.row]
     
     // configure cell
@@ -103,6 +91,7 @@ extension TodoListViewController: UITableViewDelegate {
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
   }
+  
 }
 
 extension TodoListViewController: UITableViewDataSource {
@@ -143,6 +132,22 @@ extension TodoListViewController: UITableViewDataSource {
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
     print()
     label.attributedText = attributedString
+  }
+  
+}
+
+extension TodoListViewController: ToDoFormTableViewControllerDelegate {
+  
+  func add(todo: Todo) {
+    todos.append(todo)
+    tableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
+  }
+  
+  func edit(todo: Todo) {
+    if let selectedIndexPath = tableView.indexPathForSelectedRow {
+      todos[selectedIndexPath.row] = todo
+      tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+    }
   }
   
 }

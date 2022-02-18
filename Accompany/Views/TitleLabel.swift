@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class TitleLabel: UILabel {
   
@@ -20,7 +21,7 @@ class TitleLabel: UILabel {
   override init(frame: CGRect) {
     super.init(frame: .zero)
   }
-  
+
   convenience init(title: String?, size: Size, color: Color = .red) {
     self.init(frame: .zero)
     self.textColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
@@ -56,6 +57,14 @@ class TitleLabel: UILabel {
   
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
+  }
+  
+  func setupLayout(superView: UIView) {
+    self.snp.makeConstraints { make in
+      make.top.equalTo(superView).offset(30)
+      make.centerX.equalTo(superView)
+      make.width.equalTo(superView.snp.width).multipliedBy(0.8)
+    }
   }
 
 }

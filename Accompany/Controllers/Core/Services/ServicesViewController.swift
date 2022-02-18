@@ -8,29 +8,31 @@
 import UIKit
 
 enum Services: CustomStringConvertible, CaseIterable {
-    case myProfile
-    case invitePartner
-    case accountSettings
-    case pregnantArticles
-    case aboutAccompany
-    case logOut
-    
-    var description: String {
-      switch self {
-      case .myProfile:
-        return "My Profile"
-      case .invitePartner:
-        return "Invite Partner"
-      case .accountSettings:
-        return "Account Settings"
-      case .pregnantArticles:
-        return "Pregnant Articles"
-      case .aboutAccompany:
-        return "About Accompany"
-      case .logOut:
-        return "Log Out"
-      }
+  
+  case myProfile
+  case invitePartner
+  case accountSettings
+  case pregnantArticles
+  case aboutAccompany
+  case logOut
+  
+  var description: String {
+    switch self {
+    case .myProfile:
+      return "My Profile"
+    case .invitePartner:
+      return "Invite Partner"
+    case .accountSettings:
+      return "Account Settings"
+    case .pregnantArticles:
+      return "Pregnant Articles"
+    case .aboutAccompany:
+      return "About Accompany"
+    case .logOut:
+      return "Log Out"
     }
+  }
+  
 }
 
 class ServicesViewController: UIViewController {

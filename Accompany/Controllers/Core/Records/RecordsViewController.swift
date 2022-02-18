@@ -10,41 +10,35 @@ import SnapKit
 
 class RecordsViewController: UIViewController {
   
-//  let button: UIButton = {
-//    let button = UIButton()
-//    button.setTitle("Go Baby Album", for: .normal)
-//    button.addTarget(self, action: #selector(gotoBabyAlbum(_:)), for: .touchUpInside)
-//    button.setTitleColor(#colorLiteral(red: 1, green: 1, blue: 1, alpha: 1), for: .normal)
-//    button.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
-//    button.layer.cornerRadius = 10
-//    return button
-//  }()
-  
-  
-  
+  let goToAlbumButton = PrimaryButton(title: "Go to Baby Album")
+
   override func viewDidLoad() {
     super.viewDidLoad()
-        
-//    setupBtnLayout()
+    view.addSubview(goToAlbumButton)
     
+    goToAlbumButton.addTarget(self, action: #selector(gotoBabyAlbum(_:)), for: .touchUpInside)
+    
+    setupBtnLayout()
+
   }
   
   @objc func gotoBabyAlbum(_ button: UIButton) {
-//    let babyVC = BabySonogramController()
-//    babyVC.babyTitleLabel.text = "Baby's Sonogram"
-//    
-//    navigationController?.pushViewController(babyVC, animated: true)
-  
-  }
+    let babyVC = BabySonogramController()
     
-//  func setupBtnLayout() {
-//    view.addSubview(button)
-//    button.snp.makeConstraints { make in
-//      make.centerX.equalTo(view)
-//      make.centerY.equalTo(view)
-//      make.width.equalTo(150)
-//      make.height.equalTo(40)
-//
-//  }
+    navigationController?.pushViewController(babyVC, animated: true)
+
+  }
+  
+  func setupBtnLayout() {
+    
+    goToAlbumButton.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.centerY.equalTo(view)
+      make.width.equalTo(150)
+      make.height.equalTo(40)
+    }
+
+  }
   
 }
+

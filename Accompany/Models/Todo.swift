@@ -21,7 +21,9 @@ struct Todo: Codable {
   static func loadTodos() -> [Todo]? {
     guard let codedTodos = try? Data(contentsOf: archiveURL) else { return nil }
     let propertyListDecoder = PropertyListDecoder()
+    
     return try? propertyListDecoder.decode(Array<Todo>.self, from: codedTodos)
+    
   }
   
   //save it to a disk
@@ -29,6 +31,7 @@ struct Todo: Codable {
     let propertyListEncoder = PropertyListEncoder()
     let codedToDos = try? propertyListEncoder.encode(todos)
     try? codedToDos?.write(to: archiveURL, options: .noFileProtection)
+    
   }
   
   //given a different title property, since the cell will need to display this property.
@@ -37,6 +40,7 @@ struct Todo: Codable {
     let todo2 = Todo(title: "MTHFR Gene Testing", isCompleted: true, note: "test2")
     let todo3 = Todo(title: "Nutrition Counseling & Patient Instructions (D3 Testing)", isCompleted: false, note: "test test")
     let todo4 = Todo(title: "First Ultrasound", isCompleted: true, note: "testestetset")
+    
     return [todo1, todo2, todo3, todo4]
   }
   

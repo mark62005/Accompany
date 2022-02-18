@@ -10,13 +10,13 @@ import SnapKit
 
 class HomeViewController: UIViewController {
   
-  let accompanyTitleLabel = AccompanyTitleLabel()
-  let welcomeTitleLabel = WelcomeTitleLabel()
+  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
+  let welcomeTitleLabel = TitleLabel(title: "Welcome back user!", size: .mini, color: .black)
 
   let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
   let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
   let thirdTrimesterButton = PrimaryButton(title: Trimester.thirdTrimester.rawValue)
-  let afterButton = PrimaryButton(title: Trimester.after.rawValue)
+  let afterButton = SecondaryButton(title: Trimester.after.rawValue)
   
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView()
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
-    // fetch todos
+    // TODO: fetch todos
     todos = Todo.loadSampleToDos()
     
     configureTableView()
@@ -132,8 +132,6 @@ class HomeViewController: UIViewController {
     default:
       return
     }
-        
-    // fetch todos
     
     navigationController?.pushViewController(todoListVC, animated: true)
   

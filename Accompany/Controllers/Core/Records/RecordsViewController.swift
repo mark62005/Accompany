@@ -10,35 +10,57 @@ import SnapKit
 
 class RecordsViewController: UIViewController {
   
-  let goToAlbumButton = PrimaryButton(title: "Go to Baby Album")
+  let recordLabel = TitleLabel(title: "Record While Pregnancy", size: .medium, color: .red)
+  
+  let goToAlbumButton = PrimaryButton(title: "Photo Album")
+  let goToTimerButton = PrimaryButton(title: "Contraction Timer")
+  let goToQAButton = PrimaryButton(title: "Q&A To Obstetrician")
 
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.addSubview(goToAlbumButton)
     
-    goToAlbumButton.addTarget(self, action: #selector(gotoBabyAlbum(_:)), for: .touchUpInside)
+    setupTitle()
+    setupButtons()
     
-    setupBtnLayout()
+  }
+  
+  private func setupTitle() {
+    
+    view.addSubview(recordLabel)
+    
+    recordLabel.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
+    }
+  }
+  
+  private func setupButtons() {
+    
+    let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
+    buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
+    
+    let vStack = VStack(arrangedSubviews: buttons)
+    view.addSubview(vStack)
+    
+    vStack.spacing = 45
+  
+    
+    vStack.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.width.equalTo(view.snp.width).multipliedBy(0.55)
+      make.top.equalTo(recordLabel.snp.bottom).offset(80)
+    }
 
   }
   
-  @objc func gotoBabyAlbum(_ button: UIButton) {
+  @objc func goTo(_ button: UIButton) {
     let babyVC = BabySonogramController()
     
     navigationController?.pushViewController(babyVC, animated: true)
 
   }
   
-  func setupBtnLayout() {
-    
-    goToAlbumButton.snp.makeConstraints { make in
-      make.centerX.equalTo(view)
-      make.centerY.equalTo(view)
-      make.width.equalTo(150)
-      make.height.equalTo(40)
-    }
-
-  }
   
 }
 

@@ -9,8 +9,8 @@ import UIKit
 
 class PhotoDetailedViewController: UIViewController {
   
-  let detailTitleLabel = TitleLabel(title: "Photo Information")
-  let infoTitleLabel = TitleLabel(smallerTitle: "Date")
+  let detailTitleLabel = TitleLabel(title: "Photo Information", size: .medium)
+  let infoTitleLabel = TitleLabel(title: "Date", size: .small)
   
   let imageView: UIImageView = {
     let imageView = UIImageView()
@@ -20,13 +20,11 @@ class PhotoDetailedViewController: UIViewController {
     return imageView
   }()
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      
-        setupLayout()
-
-        // Do any additional setup after loading the view.
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  
+    setupLayout()
+  }
   
   func setupLayout() {
     

@@ -32,11 +32,11 @@ class TabBarViewController: UITabBarController {
     homeVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.home.rawValue, image: placeholderImage, tag: 1)
     
     let ourBabyVC = OurBabyViewController()
-    ourBabyVC.title = TabBarVCTitle.ourBaby.rawValue
+//    ourBabyVC.title = TabBarVCTitle.ourBaby.rawValue
     ourBabyVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.ourBaby.rawValue, image: placeholderImage, tag: 1)
     
     let recordsVC = RecordsViewController()
-    recordsVC.title = TabBarVCTitle.records.rawValue
+//    recordsVC.title = TabBarVCTitle.records.rawValue
     recordsVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.records.rawValue, image: placeholderImage, tag: 1)
     
     let contractionTimerVC = ContractionTimerViewController()

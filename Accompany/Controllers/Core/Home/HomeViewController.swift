@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
-  
+
   let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
   let welcomeTitleLabel = TitleLabel(title: "Welcome back user!", size: .mini, color: .black)
 

@@ -10,8 +10,8 @@ import SnapKit
 
 class HomeViewController: UIViewController {
   
-  let accompanyTitleLabel = AccompanyTitleLabel()
-  let welcomeTitleLabel = WelcomeTitleLabel()
+//  let accompanyTitleLabel = TitleLabel(title: <#T##String?#>, size: <#T##TitleLabel.Size#>, color: <#T##TitleLabel.Color#>)
+//  let welcomeTitleLabel = WelcomeTitleLabel()
 
   let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
   let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
     view.addSubview(notifyTableView)
     
     notifyTableView.snp.makeConstraints { (make) -> Void in
-      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
+//      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
       make.height.equalTo(200)
@@ -72,21 +72,21 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-    view.addSubview(accompanyTitleLabel)
-    view.addSubview(welcomeTitleLabel)
+//    view.addSubview(accompanyTitleLabel)
+//    view.addSubview(welcomeTitleLabel)
     view.addSubview(stopWatchButton)
     
-    accompanyTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view).offset(60)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
-    }
-    
-    welcomeTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
-    }
+//    accompanyTitleLabel.snp.makeConstraints { make in
+//      make.top.equalTo(view).offset(60)
+//      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
+//      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
+//    }
+//    
+//    welcomeTitleLabel.snp.makeConstraints { make in
+//      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
+//      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
+//      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
+//    }
     
     stopWatchButton.snp.makeConstraints { make in
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-30)

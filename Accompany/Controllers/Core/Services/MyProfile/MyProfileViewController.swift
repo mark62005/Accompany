@@ -48,8 +48,11 @@ class MyProfileViewController: UIViewController {
   }
   
   private func setupLayout() {
-    let nameAndEmailVStack = VStack(arrangedSubviews: [nameLabel, emailLabel])
-    let vStack = VStack(arrangedSubviews: [titleLabel, userImageView, nameAndEmailVStack, bioLabel])
+    let nameAndEmailView = UIView()
+    nameAndEmailView.addSubview(nameLabel)
+    nameAndEmailView.addSubview(emailLabel)
+    
+    let vStack = VStack(arrangedSubviews: [titleLabel, userImageView, nameAndEmailView, bioLabel])
     
     view.addSubview(vStack)
     vStack.snp.makeConstraints { make in

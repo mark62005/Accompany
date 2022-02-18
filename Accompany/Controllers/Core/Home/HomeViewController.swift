@@ -9,14 +9,14 @@ import UIKit
 import SnapKit
 
 class HomeViewController: UIViewController {
-  
-//  let accompanyTitleLabel = TitleLabel(title: <#T##String?#>, size: <#T##TitleLabel.Size#>, color: <#T##TitleLabel.Color#>)
-//  let welcomeTitleLabel = WelcomeTitleLabel()
+
+  let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
+  let welcomeTitleLabel = TitleLabel(title: "Welcome back user!", size: .mini, color: .black)
 
   let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
   let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
   let thirdTrimesterButton = PrimaryButton(title: Trimester.thirdTrimester.rawValue)
-  let afterButton = PrimaryButton(title: Trimester.after.rawValue)
+  let afterButton = SecondaryButton(title: Trimester.after.rawValue)
   
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView()
@@ -43,7 +43,7 @@ class HomeViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
-    // fetch todos
+    // TODO: fetch todos
     todos = Todo.loadSampleToDos()
     
     configureTableView()
@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
     view.addSubview(notifyTableView)
     
     notifyTableView.snp.makeConstraints { (make) -> Void in
-//      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
+      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
       make.height.equalTo(200)
@@ -72,21 +72,21 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-//    view.addSubview(accompanyTitleLabel)
-//    view.addSubview(welcomeTitleLabel)
+    view.addSubview(accompanyTitleLabel)
+    view.addSubview(welcomeTitleLabel)
     view.addSubview(stopWatchButton)
     
-//    accompanyTitleLabel.snp.makeConstraints { make in
-//      make.top.equalTo(view).offset(60)
-//      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
-//      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
-//    }
-//    
-//    welcomeTitleLabel.snp.makeConstraints { make in
-//      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
-//      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
-//      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
-//    }
+    accompanyTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(view).offset(60)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
+    }
+    
+    welcomeTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
+    }
     
     stopWatchButton.snp.makeConstraints { make in
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-30)
@@ -132,8 +132,6 @@ class HomeViewController: UIViewController {
     default:
       return
     }
-        
-    // fetch todos
     
     navigationController?.pushViewController(todoListVC, animated: true)
   

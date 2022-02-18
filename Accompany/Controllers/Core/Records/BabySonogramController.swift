@@ -21,12 +21,12 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
   let appName = "Accompany"
   
-  let babyTitleLabel = TitleLabel(title: "Baby's Sonogram", size: .large)
+  let babyTitleLabel = TitleLabel(title: "Baby's Sonogram", size: .medium)
   
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
   // MARK: Data
-//  var images = []()
+  var images = [URL]()
 
   let sections = [Section.videoSection, Section.photoSection]
 

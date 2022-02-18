@@ -10,7 +10,7 @@ import SnapKit
 
 class TodoListViewController: UIViewController {
   
-  let todoListTitleLabel = TodoListTitleLabel()
+  let todoListTitleLabel = TitleLabel(title: nil, size: .medium, color: .red)
   
   let tableView: UITableView = {
     let tableView = UITableView()
@@ -25,7 +25,7 @@ class TodoListViewController: UIViewController {
     super.viewDidLoad()
     
 //    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     view.addSubview(todoListTitleLabel)
     view.addSubview(tableView)
     
@@ -33,8 +33,8 @@ class TodoListViewController: UIViewController {
     todos = Todo.loadSampleToDos()
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(80)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-80)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
     }
     
     configureTableView()

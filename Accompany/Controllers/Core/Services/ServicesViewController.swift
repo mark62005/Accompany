@@ -35,7 +35,7 @@ enum Services: CustomStringConvertible, CaseIterable {
 
 class ServicesViewController: UIViewController {
   
-  let titleLabel = TitleLabel()
+  let titleLabel = TitleLabel(title: nil, size: .large, color: .red)
   
   override func viewDidLoad() {
     super.viewDidLoad()

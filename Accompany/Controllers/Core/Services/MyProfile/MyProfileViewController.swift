@@ -48,6 +48,7 @@ class MyProfileViewController: UIViewController {
   }
   
   private func setupLayout() {
+    // stack view?
     let nameAndEmailView = UIView()
     nameAndEmailView.addSubview(nameLabel)
     nameAndEmailView.addSubview(emailLabel)

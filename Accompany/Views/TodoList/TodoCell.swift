@@ -5,12 +5,12 @@
 //  Created by Esperanza on 2022-02-10.
 //
 
-import Foundation
 import UIKit
 import SnapKit
 
-
 class TodoCell: UITableViewCell {
+  
+  static let identifier = "TodoCell"
     
   let isCompleteButton : UIButton = {
     let button = UIButton()
@@ -39,7 +39,6 @@ class TodoCell: UITableViewCell {
     
     contentView.addSubview(stackView)
     stackView.snp.makeConstraints { make in
-      make.centerX.equalTo(contentView)
       make.centerY.equalTo(contentView)
       make.left.equalTo(contentView).offset(10)
       make.right.equalTo(contentView).offset(10)
@@ -51,11 +50,12 @@ class TodoCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func update(with toDo: ToDo) {
-    self.titleLabel.text = toDo.title
+  func update(with todo: Todo) {
+    self.titleLabel.text = todo.title
   }
   
-  @objc func buttonTapped(sender: UIButton){    sender.isSelected.toggle()
+  @objc func buttonTapped(sender: UIButton) {
+    sender.isSelected.toggle()
   }
     
 }

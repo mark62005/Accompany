@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 protocol ToDoFormTableViewControllerDelegate {
-  func add(todo: ToDo)
-  func edit(todo: ToDo)
+  func add(todo: Todo)
+  func edit(todo: Todo)
 }
 
 class ToDoFormTableViewController: UITableViewController {
@@ -20,13 +20,15 @@ class ToDoFormTableViewController: UITableViewController {
   
   var saveBarButton = UIBarButtonItem(barButtonSystemItem: .save, target: self, action: #selector(saveButtonTapped))
   
-  var todo: ToDo?
+  var todo: Todo?
   var delegate: ToDoFormTableViewControllerDelegate?
   let basicInfoCellIndexPath = IndexPath(row: 0, section: 0)
   let notesCellIndexPath = IndexPath(row: 0, section: 1)
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     configurateNavigationItem()
     
@@ -49,14 +51,14 @@ class ToDoFormTableViewController: UITableViewController {
   
   @objc func saveButtonTapped() {
     let isComplete = toDoBasicInfoCell.isCompleteButton.isSelected
-    let toDoTitle = toDoBasicInfoCell.toDoTextField.text!
+    let todoTitle = toDoBasicInfoCell.toDoTextField.text!
     let note = toDoNotesCell.noteTextView.text ?? ""
-    let newToDo = ToDo(title: toDoTitle, isCompleted: isComplete, note: note)
+    let newTodo = Todo(title: todoTitle, isCompleted: isComplete, note: note)
     
     if todo != nil {
-      delegate?.edit(todo: newToDo)
+      delegate?.edit(todo: newTodo)
     } else {
-      delegate?.add(todo: newToDo)
+      delegate?.add(todo: newTodo)
     }
     
     self.navigationController?.popViewController(animated: true)
@@ -105,9 +107,7 @@ class ToDoFormTableViewController: UITableViewController {
   
   override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if indexPath.section == 0 {
-      toDoBasicInfoCell.contentView.isUserInteractionEnabled = false
       toDoBasicInfoCell.isCompleteButton.addTarget(self, action: #selector(isCompleteButtonTapped), for: .touchUpInside)
-      //isCompleteButton = cell.isCompleteButton
       toDoBasicInfoCell.isCompleteButton.isSelected = todo?.isCompleted == nil ? false : todo!.isCompleted
       toDoBasicInfoCell.toDoTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
       toDoBasicInfoCell.toDoTextField.text = todo?.title
@@ -130,4 +130,5 @@ class ToDoFormTableViewController: UITableViewController {
       return UITableView.automaticDimension
     }
   }
+  
 }

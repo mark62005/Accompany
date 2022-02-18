@@ -355,7 +355,6 @@ class ContractionTimerViewController: UIViewController {
   }
 }
 
-
 extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSource {
   
   func numberOfSections(in tableView: UITableView) -> Int {

@@ -32,6 +32,7 @@
 		64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */; };
 		64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */; };
 		6C1FC56A27BEF301007D625E /* PhotoDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */; };
+		6C1FC57627BF2454007D625E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57527BF2454007D625E /* ImageView.swift */; };
 		6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* BabySonogramController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -63,6 +64,7 @@
 		64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
 		64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoFormTableViewController.swift; sourceTree = "<group>"; };
 		6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailedViewController.swift; sourceTree = "<group>"; };
+		6C1FC57527BF2454007D625E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
 		6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple Boy ttf.ttf"; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* BabySonogramController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabySonogramController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -127,6 +129,7 @@
 				437721F427ADE86300EC8A98 /* Controllers */,
 				437721E627ADE4E800EC8A98 /* Assets.xcassets */,
 				437721EB27ADE4E800EC8A98 /* Info.plist */,
+				6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */,
 			);
 			path = Accompany;
 			sourceTree = "<group>";
@@ -147,6 +150,7 @@
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
 				43FB2AFB27BDEB91004A641D /* TitleLabel.swift */,
 				43FB2B0627BE37F0004A641D /* VStack.swift */,
+				6C1FC57527BF2454007D625E /* ImageView.swift */,
 				43FB2B0A27BE381C004A641D /* Buttons */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
@@ -208,7 +212,6 @@
 		437721F927ADE92900EC8A98 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */,
 				4377220027ADE99300EC8A98 /* ServicesViewController.swift */,
 			);
 			path = Services;
@@ -388,6 +391,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C1FC57627BF2454007D625E /* ImageView.swift in Sources */,
 				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
 				43FB2B0F27BE381C004A641D /* PrimaryButton.swift in Sources */,

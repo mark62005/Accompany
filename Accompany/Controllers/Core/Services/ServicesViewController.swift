@@ -32,7 +32,7 @@ enum Services: CustomStringConvertible, CaseIterable {
       return "Log Out"
     }
   }
-  
+
 }
 
 class ServicesViewController: UIViewController {

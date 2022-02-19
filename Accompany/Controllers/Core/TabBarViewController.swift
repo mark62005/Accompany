@@ -29,23 +29,23 @@ class TabBarViewController: UITabBarController {
   private func configureViewControllers() {
     let homeVC = HomeViewController()
 //    homeVC.title = TabBarVCTitle.home.rawValue
-    homeVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.home.rawValue, image: placeholderImage, tag: 1)
-    
+    homeVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home-menu-icon-active"), tag: 1)
+
     let ourBabyVC = OurBabyViewController()
 //    ourBabyVC.title = TabBarVCTitle.ourBaby.rawValue
-    ourBabyVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.ourBaby.rawValue, image: placeholderImage, tag: 1)
+    ourBabyVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "baby-menu-icon"), tag: 1)
     
     let recordsVC = RecordsViewController()
 //    recordsVC.title = TabBarVCTitle.records.rawValue
-    recordsVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.records.rawValue, image: placeholderImage, tag: 1)
+    recordsVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "record-menu-icon-active"), tag: 1)
     
     let contractionTimerVC = ContractionTimerViewController()
-    contractionTimerVC.title = TabBarVCTitle.timer.rawValue
-    contractionTimerVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.timer.rawValue, image: placeholderImage, tag: 1)
+//    contractionTimerVC.title = TabBarVCTitle.timer.rawValue
+    contractionTimerVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "stopwatch-menu-active"), tag: 1)
     
     let servicesVC = ServicesViewController()
     servicesVC.titleLabel.text = TabBarVCTitle.services.rawValue
-    servicesVC.tabBarItem = UITabBarItem(title: TabBarVCTitle.services.rawValue, image: placeholderImage, tag: 1)
+    servicesVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "service-menu-icon-active"), tag: 1)
     
     let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, servicesVC]
     

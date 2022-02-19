@@ -10,6 +10,8 @@ import SnapKit
 
 class ContractionTimerViewController: UIViewController {
   
+  let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium)
+ 
   var userConstractionRecords : [contractions]?
   var newRecord: contractions?
   
@@ -70,8 +72,6 @@ class ContractionTimerViewController: UIViewController {
     
     return buttonsStackView
   }()
-
-  let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium)
   
   var timerLabel : UILabel = {
     let timerLabel = UILabel()
@@ -81,7 +81,6 @@ class ContractionTimerViewController: UIViewController {
     
     return timerLabel
   }()
-
   
   var startButton = PrimaryButton(title: "Save")
   var stopButton = OutlineButton(title: "Stop & Save")
@@ -381,4 +380,5 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
       tableView.reloadData()
     }
   }
+  
 }

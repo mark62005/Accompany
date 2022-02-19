@@ -40,6 +40,7 @@ class TodoListViewController: UIViewController {
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
+    
   
   }
   
@@ -59,11 +60,13 @@ class TodoListViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
+    tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+    
     tableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.centerY.equalTo(view)
-      make.width.equalTo(320)
-      make.height.equalTo(350)
+      make.width.equalTo(view.snp.width).multipliedBy(0.87)
+      make.height.equalTo(view.snp.width).multipliedBy(0.9)
     }
   }
   
@@ -82,7 +85,7 @@ extension TodoListViewController: UITableViewDelegate {
     // configure cell
     cell.update(with: todo)
     cell.isCompleteButton.isSelected = todo.isCompleted
-    cell.showsReorderControl = true
+    cell.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     return cell
     
   }

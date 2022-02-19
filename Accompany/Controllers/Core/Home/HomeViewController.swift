@@ -26,17 +26,6 @@ class HomeViewController: UIViewController {
     return notifyTableView
   }()
   
-  let stopWatchButton: UIButton = {
-    let button = UIButton()
-    button.setImage(UIImage(named: "stopwatch-icon.png"), for: .normal)
-    button.backgroundColor = .white
-    button.layer.cornerRadius = 15
-    button.translatesAutoresizingMaskIntoConstraints = false
-    button.addTarget(self, action: #selector(gotoStopWatch(_:)), for: .touchUpInside)
-    
-    return button
-  }()
-  
   var todos = [Todo]()
   
   override func viewDidLoad() {
@@ -62,19 +51,23 @@ class HomeViewController: UIViewController {
     super.viewDidLayoutSubviews()
     view.addSubview(notifyTableView)
     
+    notifyTableView.backgroundColor = .white
+    
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
-      make.height.equalTo(200)
+      make.centerX.equalTo(view)
+      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.height.equalTo(view.snp.width).multipliedBy(0.55)
     }
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Home Page", style: .plain, target: nil, action: nil)
   
   }
   
   private func setupLayout() {
     view.addSubview(accompanyTitleLabel)
     view.addSubview(welcomeTitleLabel)
-    view.addSubview(stopWatchButton)
     
     accompanyTitleLabel.snp.makeConstraints { make in
       make.top.equalTo(view).offset(60)
@@ -86,13 +79,6 @@ class HomeViewController: UIViewController {
       make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
-    }
-    
-    stopWatchButton.snp.makeConstraints { make in
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-30)
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-20)
-      make.width.equalTo(30)
-      make.height.equalTo(35)
     }
 
 }
@@ -110,7 +96,7 @@ class HomeViewController: UIViewController {
     view.addSubview(stackView)
       
     stackView.snp.makeConstraints { make in
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-60)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(90)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-90)
     }
@@ -137,19 +123,19 @@ class HomeViewController: UIViewController {
   
   }
   
-  @objc func gotoStopWatch(_ button: UIButton) {
-    print("Stop watch tapped")
-  }
-  
 }
-
 extension HomeViewController: UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return todos.count
   }
   
-}
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return 50
+  }
+  }
+  
+
 
 extension HomeViewController: UITableViewDataSource {
   
@@ -159,6 +145,7 @@ extension HomeViewController: UITableViewDataSource {
     cell.update(with: toDo)
     cell.isCompleteButton.setImage(UIImage(systemName: "circle"), for: .normal)
     cell.isCompleteButton.addTarget(self, action: #selector(checkMarkButtonClicked(sender:)), for: .touchUpInside)
+    cell.backgroundColor = .white
     
     return cell
     
@@ -181,7 +168,8 @@ extension HomeViewController: UITableViewDataSource {
       todos.remove(at: indexPath.row)
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
-    }
+      }
   }
   
 }
+

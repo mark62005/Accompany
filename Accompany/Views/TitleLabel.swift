@@ -15,7 +15,7 @@ class TitleLabel: UILabel {
   }
   
   enum Color {
-    case red, purple, black
+    case red, purple, black, grey
   }
 
   override init(frame: CGRect) {
@@ -51,6 +51,8 @@ class TitleLabel: UILabel {
       self.textColor = #colorLiteral(red: 0.5490196078, green: 0.4588235294, blue: 0.968627451, alpha: 1)
     case .black:
       self.textColor = #colorLiteral(red: 0.2078431373, green: 0.2039215686, blue: 0.2235294118, alpha: 1)
+    case.grey:
+      self.textColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 1)
     }
   
   }

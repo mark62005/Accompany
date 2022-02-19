@@ -78,6 +78,7 @@ class OurBabyViewController: UIViewController {
       stackView.distribution = .fill
       stackView.alignment = .fill
       stackView.axis = .vertical
+      stackView.spacing = 21
       stackView.translatesAutoresizingMaskIntoConstraints = false
       
       return stackView
@@ -145,18 +146,23 @@ class OurBabyViewController: UIViewController {
    
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
-//
-//    let selectedDate: String = dateFormatter.string(from: sender.date)
-//
-//    let currentDateTime = Date()
-//
-//    let formatter = DateFormatter()
-//    formatter.timeStyle = .none
-//    formatter.dateStyle = .long
-//    formatter.dateFormat = "dd/MM/yyyy"
-//    let todayDate: String = formatter.string(from: currentDateTime)
-//
-//    let interval = DateInterval(start: <#T##Date#>, end: <#T##Date#>)
+
+    let selectedDate: String = dateFormatter.string(from: sender.date)
+
+    let currentDateTime = Date()
+
+    let formatter = DateFormatter()
+    formatter.timeStyle = .none
+    formatter.dateStyle = .long
+    formatter.dateFormat = "dd/MM/yyyy"
+    let todayDate: String = formatter.string(from: currentDateTime)
+
+    let dueDate = formatter.date(from: selectedDate)
+    let currentDate = formatter.date(from: todayDate)
+    let difference = (dueDate! - currentDate!)
+    print(difference.asDays(), "days")
+
+    leftNumberTitle.text = "\(difference.asDays()) days"
     
   }
   
@@ -165,16 +171,12 @@ class OurBabyViewController: UIViewController {
   }
   
 }
+
 extension Date {
-
-    static func -(recent: Date, previous: Date) -> (month: Int?, day: Int?, hour: Int?, minute: Int?, second: Int?) {
-        let day = Calendar.current.dateComponents([.day], from: previous, to: recent).day
-        let month = Calendar.current.dateComponents([.month], from: previous, to: recent).month
-        let hour = Calendar.current.dateComponents([.hour], from: previous, to: recent).hour
-        let minute = Calendar.current.dateComponents([.minute], from: previous, to: recent).minute
-        let second = Calendar.current.dateComponents([.second], from: previous, to: recent).second
-
-        return (month: month, day: day, hour: hour, minute: minute, second: second)
+    static func - (lhs: Date, rhs: Date) -> TimeInterval {
+        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
     }
-
+}
+extension TimeInterval {
+  func asDays()    -> Int { return Int(self / (60 * 60 * 24)) }
 }

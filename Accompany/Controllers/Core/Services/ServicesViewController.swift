@@ -8,6 +8,7 @@
 import UIKit
 
 enum Services: CustomStringConvertible, CaseIterable {
+  
   case myProfile
   case invitePartner
   case accountSettings
@@ -31,6 +32,7 @@ enum Services: CustomStringConvertible, CaseIterable {
       return "Log Out"
     }
   }
+
 }
 
 class ServicesViewController: UIViewController {

@@ -40,7 +40,7 @@ class RecordsViewController: UIViewController {
   }
   
   private func setupButtons() {
-    
+
     let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     

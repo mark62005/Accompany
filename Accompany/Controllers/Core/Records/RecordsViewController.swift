@@ -36,7 +36,7 @@ class RecordsViewController: UIViewController {
   }
   
   private func setupButtons() {
-    
+
     let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     
@@ -54,10 +54,22 @@ class RecordsViewController: UIViewController {
 
   }
   
+  // TODO: NOT DONE
   @objc func goTo(_ button: UIButton) {
-    let babyVC = BabySonogramController()
+    let controller : UIViewController?
+    switch button.currentTitle {
+    case "Photo Album":
+      controller = BabySonogramController()
+    case "Contraction Timer":
+      controller = ContractionTimerViewController()
+    case "Q&A To Obstetrician":
+      controller = DoctorNoteViewController()
+    default:
+      return
+    }
+    //let babyVC = BabySonogramController()
     
-    navigationController?.pushViewController(babyVC, animated: true)
+    navigationController?.pushViewController(controller!, animated: true)
 
   }
   

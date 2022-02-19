@@ -127,9 +127,7 @@ extension TodoListViewController: UITableViewDataSource {
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
     print()
     label.attributedText = attributedString
-    
   }
-  
 }
 
 extension TodoListViewController: ToDoFormTableViewControllerDelegate {

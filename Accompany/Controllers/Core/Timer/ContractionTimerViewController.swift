@@ -50,27 +50,6 @@ class ContractionTimerViewController: UIViewController {
   var timerTabButton = PrimaryButton(title: "Contraction")
   
   var recordTabButton = SecondaryButton(title: "Records")
-//  var timerTabButton : UIButton = {
-//    let button = UIButton()
-//    button.setTitle("Contraction", for: .normal)
-//    button.layer.cornerRadius = 20
-//    button.setTitleColor(.black, for: .normal)
-//    button.backgroundColor = #colorLiteral(red: 0.9459111094, green: 0.9379461408, blue: 0.9782511592, alpha: 1)
-//    button.addTarget(self, action: #selector(timerTabButtonTapped), for: .touchUpInside)
-//
-//    return button
-//  }()
-//
-//  var recordTabButton : UIButton = {
-//    let button = UIButton()
-//    button.setTitle("Records", for: .normal)
-//    button.layer.cornerRadius = 20
-//    button.setTitleColor(.black, for: .normal)
-//    button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//    button.addTarget(self, action: #selector(recordTabButtonTapped), for: .touchUpInside)
-//
-//    return button
-//  }()
   
   var timerAndRecordNavBarStackView : UIStackView = {
     let stackview = UIStackView()
@@ -163,7 +142,6 @@ class ContractionTimerViewController: UIViewController {
     timerAndRecordNavBarStackView.addArrangedSubview(recordTabButton)
     buttonsStackView.addArrangedSubview(startButton)
     buttonsStackView.addArrangedSubview(stopButton)
-    //timerAndButtonStackView.addArrangedSubview(titleLabel)
     timerAndButtonStackView.addArrangedSubview(timerLabel)
     timerAndButtonStackView.addArrangedSubview(buttonsStackView)
     
@@ -309,7 +287,6 @@ class ContractionTimerViewController: UIViewController {
     titleLabel.snp.makeConstraints{(make) -> Void in
       make.width.equalTo(view.frame.width)
       make.top.equalTo(timerAndRecordNavBarStackView.snp.bottom)
-      //make.left.right.equalTo(0)
       make.height.equalTo(200)
     }
     

@@ -12,25 +12,27 @@ class DoctorNoteViewController: UIViewController {
 
   var noteContent : String?
   
-  let titleLabel : UILabel = {
-    let label = UILabel()
-    label.text = """
-                  Q&A To
-                  Obstetrician
-                """
-    label.font = UIFont(name: "SimpleBoy", size: 50)
-    label.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
-    label.numberOfLines = 2
-    label.textAlignment = .center
-    label.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
-    
-    return label
-  }()
+//  let titleLabel : UILabel = {
+//    let label = UILabel()
+//    label.text = """
+//                  Q&A To Obstetrician
+//                """
+//    label.font = UIFont(name: "SimpleBoy", size: 50)
+//    label.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
+//    label.numberOfLines = 2
+//    label.textAlignment = .center
+//    label.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
+//
+//    return label
+//  }()
+  
+  let titleLabel = TitleLabel(title: "Q&A To Obstetrician", size: .medium)
   
   let rightBarButton : UIButton = {
     let button = UIButton()
     button.setTitle("Edit", for: .normal)
     button.setTitleColor(.blue, for: .normal)
+    
     return button
   }()
   
@@ -38,6 +40,7 @@ class DoctorNoteViewController: UIViewController {
     let textView = UITextView()
     textView.isUserInteractionEnabled = false
     textView.font = .boldSystemFont(ofSize: 20)
+    
     return textView
   }()
   
@@ -46,15 +49,6 @@ class DoctorNoteViewController: UIViewController {
     view.backgroundColor = .white
     
     return view
-  }()
-  
-  let titleAndNoteStackView : UIStackView = {
-    let stackView = UIStackView()
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    //stackView.spacing = 20
-    stackView.alignment = .center
-    return stackView
   }()
   
   var isEditingTextView : Bool = false {
@@ -76,26 +70,29 @@ class DoctorNoteViewController: UIViewController {
       addSubview()
       
       DrNoteTextView.text = noteContent
+      
       self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
       rightBarButton.addTarget(self, action: #selector(rightBarButtonTapped), for: .touchUpInside)
     }
     
   private func addSubview() {
     noteViewContainer.addSubview(DrNoteTextView)
-    titleAndNoteStackView.addArrangedSubview(titleLabel)
-    titleAndNoteStackView.addArrangedSubview(noteViewContainer)
-    view.addSubview(titleAndNoteStackView)
+    view.addSubview(titleLabel)
+    view.addSubview(noteViewContainer)
+    
     addConstraints()
   }
   
   private func addConstraints() {
-    titleAndNoteStackView.snp.makeConstraints { make in
-      make.edges.equalTo(UIEdgeInsets(top: 100, left: 30, bottom: 100, right: 30))
+    titleLabel.snp.makeConstraints { make in
+      make.left.right.equalTo(0)
+      make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
     }
     
     noteViewContainer.snp.makeConstraints{ make in
-      make.left.right.bottom.equalTo(0)
+      make.left.right.equalTo(0).inset(30)
       make.top.equalTo(titleLabel.snp.bottom)
+      make.bottom.equalTo(-100)
     }
     
     DrNoteTextView.snp.makeConstraints{ make in
@@ -104,11 +101,6 @@ class DoctorNoteViewController: UIViewController {
     
     rightBarButton.snp.makeConstraints{ make in
       make.width.equalTo(40)
-    }
-    
-    titleLabel.snp.makeConstraints { make in
-      make.top.left.right.equalTo(0)
-      make.height.equalTo(175)
     }
   }
   

@@ -9,8 +9,8 @@ import UIKit
 import SnapKit
 
 class MyProfileViewController: UIViewController {
-  
-  let titleLabel = TitleLabel(title: Services.myProfile.description, size: .medium)
+    let titleLabel = TitleLabel(title: Services.myProfile.description, size: .medium)
+ 
   let userImageView = UIImageView(image: UIImage(systemName: "photo.on.rectangle"))
   
   let nameLabel: UILabel = {

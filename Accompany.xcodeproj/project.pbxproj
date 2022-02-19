@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0E8E0CE2D4818B0742E03E0E /* Pods_Accompany.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */; };
+		430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */; };
+		430F6D8E27BF67E40095DB8D /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */; };
+		430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */; };
 		4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */; };
 		4354219727BDD88C002160DA /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354219627BDD88C002160DA /* Todo.swift */; };
 		437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DD27ADE4E700EC8A98 /* AppDelegate.swift */; };
@@ -33,9 +36,13 @@
 		43FB2B2027BE4A71004A641D /* PregnantArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */; };
 		43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */; };
 		43FB2B2427BE4A99004A641D /* LogOutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B2327BE4A99004A641D /* LogOutViewController.swift */; };
+		6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */; };
+		6413589B27C0623B0086BB39 /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413589927C0623B0086BB39 /* ToDoNotesCell.swift */; };
+		641452EC27BF0B0D0058800B /* Contraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452EB27BF0B0D0058800B /* Contraction.swift */; };
+		641452EE27BF51F90058800B /* DoctorNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452ED27BF51F90058800B /* DoctorNoteViewController.swift */; };
+		641452F227BF885A0058800B /* CurvedUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452F127BF885A0058800B /* CurvedUIView.swift */; };
+		641452F427BF9E3F0058800B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452F327BF9E3E0058800B /* Extensions.swift */; };
 		642E8A3327B8EE7E00C9C2E5 /* Simple-Boy.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */; };
-		64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106827B717C600167984 /* ToDoNotesCell.swift */; };
-		64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */; };
 		64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */; };
 		6C1FC56A27BEF301007D625E /* PhotoDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */; };
 		6C1FC57627BF2454007D625E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57527BF2454007D625E /* ImageView.swift */; };
@@ -45,6 +52,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
+		430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
+		430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
 		4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerViewController.swift; sourceTree = "<group>"; };
 		4354219627BDD88C002160DA /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		437721DA27ADE4E700EC8A98 /* Accompany.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accompany.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,9 +82,13 @@
 		43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PregnantArticlesTableViewController.swift; sourceTree = "<group>"; };
 		43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutAccompanyViewController.swift; sourceTree = "<group>"; };
 		43FB2B2327BE4A99004A641D /* LogOutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogOutViewController.swift; sourceTree = "<group>"; };
+		6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
+		6413589927C0623B0086BB39 /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
+		641452EB27BF0B0D0058800B /* Contraction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Contraction.swift; sourceTree = "<group>"; };
+		641452ED27BF51F90058800B /* DoctorNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = DoctorNoteViewController.swift; path = Accompany/Views/DoctorNoteViewController.swift; sourceTree = SOURCE_ROOT; };
+		641452F127BF885A0058800B /* CurvedUIView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CurvedUIView.swift; sourceTree = "<group>"; };
+		641452F327BF9E3E0058800B /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		642E8A3227B8EC7200C9C2E5 /* Simple-Boy.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple-Boy.ttf"; sourceTree = "<group>"; };
-		64EF106827B717C600167984 /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
-		64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoBasicInfoCell.swift; sourceTree = "<group>"; };
 		64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoFormTableViewController.swift; sourceTree = "<group>"; };
 		6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailedViewController.swift; sourceTree = "<group>"; };
 		6C1FC57527BF2454007D625E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
@@ -102,6 +116,7 @@
 		4306D26827B5D26B00050369 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				641452EB27BF0B0D0058800B /* Contraction.swift */,
 				43FB2AF427BDDC7C004A641D /* TodoList.swift */,
 				4354219627BDD88C002160DA /* Todo.swift */,
 			);
@@ -162,14 +177,16 @@
 			isa = PBXGroup;
 			children = (
 				437721E827ADE4E800EC8A98 /* LaunchScreen.storyboard */,
+				641452ED27BF51F90058800B /* DoctorNoteViewController.swift */,
+				641452F127BF885A0058800B /* CurvedUIView.swift */,
 				43FB2AFB27BDEB91004A641D /* TitleLabel.swift */,
 				43FB2B0627BE37F0004A641D /* VStack.swift */,
 				6C1FC57527BF2454007D625E /* ImageView.swift */,
 				43FB2B0A27BE381C004A641D /* Buttons */,
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
-				6C1FC57327BEFD80007D625E /* Timer */,
-				6C1FC57427BEFD87007D625E /* Services */,
+				6413589C27C0625F0086BB39 /* Timer */,
+				6413589D27C0626A0086BB39 /* Services */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -200,8 +217,9 @@
 			isa = PBXGroup;
 			children = (
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
-				439FC07127B705660016CD7F /* TodoListViewController.swift */,
+				641452F327BF9E3E0058800B /* Extensions.swift */,
 				64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */,
+				439FC07127B705660016CD7F /* TodoListViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -241,9 +259,9 @@
 		43FB2AEF27BDDB70004A641D /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */,
+				6413589927C0623B0086BB39 /* ToDoNotesCell.swift */,
 				43FB2B1227BE415A004A641D /* TodoCell.swift */,
-				64EF106927B717C600167984 /* ToDoBasicInfoCell.swift */,
-				64EF106827B717C600167984 /* ToDoNotesCell.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -286,6 +304,9 @@
 			isa = PBXGroup;
 			children = (
 				43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */,
+				430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */,
+				430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */,
+				430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */,
 			);
 			path = AccountSettings;
 			sourceTree = "<group>";
@@ -298,14 +319,14 @@
 			path = PregnantArticles;
 			sourceTree = "<group>";
 		};
-		6C1FC57327BEFD80007D625E /* Timer */ = {
+		6413589C27C0625F0086BB39 /* Timer */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = Timer;
 			sourceTree = "<group>";
 		};
-		6C1FC57427BEFD87007D625E /* Services */ = {
+		6413589D27C0626A0086BB39 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 			);
@@ -445,6 +466,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C1FC57627BF2454007D625E /* ImageView.swift in Sources */,
+				430F6D8E27BF67E40095DB8D /* TermsOfUseViewController.swift in Sources */,
 				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,
 				43FB2B0F27BE381C004A641D /* PrimaryButton.swift in Sources */,
@@ -453,17 +475,21 @@
 				43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */,
 				43FB2B1627BE49BD004A641D /* MyProfileViewController.swift in Sources */,
 				6C1FC57827BFEC09007D625E /* LoadingViewController.swift in Sources */,
+				64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */,
 				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,
-				64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */,
+				641452F427BF9E3F0058800B /* Extensions.swift in Sources */,
+				641452EE27BF51F90058800B /* DoctorNoteViewController.swift in Sources */,
+				641452F227BF885A0058800B /* CurvedUIView.swift in Sources */,
+				641452EC27BF0B0D0058800B /* Contraction.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
 				43FB2B2427BE4A99004A641D /* LogOutViewController.swift in Sources */,
 				43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */,
 				43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */,
-				64EF106B27B717C600167984 /* ToDoNotesCell.swift in Sources */,
 				6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */,
 				437721E027ADE4E700EC8A98 /* SceneDelegate.swift in Sources */,
+				430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
 				4354219727BDD88C002160DA /* Todo.swift in Sources */,
@@ -471,8 +497,9 @@
 				437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */,
 				6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */,
 				43FB2B1427BE415A004A641D /* TodoCell.swift in Sources */,
-				64EF106C27B717C600167984 /* ToDoBasicInfoCell.swift in Sources */,
 				43FB2B0E27BE381C004A641D /* OutlineButton.swift in Sources */,
+				6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */,
+				430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */,
 				43FB2B0727BE37F0004A641D /* VStack.swift in Sources */,
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
 				43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */,

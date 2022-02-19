@@ -18,6 +18,7 @@ class TodoCell: UITableViewCell {
     button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
     button.isUserInteractionEnabled = true
     button.isSelected = false
+    button.translatesAutoresizingMaskIntoConstraints = false
     return button
   }()
 
@@ -41,7 +42,7 @@ class TodoCell: UITableViewCell {
     stackView.snp.makeConstraints { make in
       make.centerY.equalTo(contentView)
       make.left.equalTo(contentView).offset(10)
-      make.right.equalTo(contentView).offset(10)
+      make.right.equalTo(contentView).offset(-10)
     }
     isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
   }
@@ -52,6 +53,7 @@ class TodoCell: UITableViewCell {
   
   func update(with todo: Todo) {
     self.titleLabel.text = todo.title
+    self.titleLabel.textColor = .black
   }
   
   @objc func buttonTapped(sender: UIButton) {

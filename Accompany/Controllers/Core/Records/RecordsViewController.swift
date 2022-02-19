@@ -12,7 +12,7 @@ class RecordsViewController: UIViewController {
   
   let recordLabel = TitleLabel(title: "Record While Pregnancy", size: .medium, color: .red)
   
-  let goToAlbumButton = PrimaryButton(title: "Photo Album")
+  let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
   let goToQAButton = PrimaryButton(title: "Q&A To Obstetrician")
 
@@ -33,6 +33,10 @@ class RecordsViewController: UIViewController {
       make.centerX.equalTo(view.safeAreaLayoutGuide)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
     }
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Record", style: .plain, target: nil, action: nil)
+  
   }
   
   private func setupButtons() {
@@ -55,12 +59,24 @@ class RecordsViewController: UIViewController {
   }
   
   @objc func goTo(_ button: UIButton) {
-    let babyVC = BabySonogramController()
     
-    navigationController?.pushViewController(babyVC, animated: true)
+    switch button {
+    case goToAlbumButton:
+      let babyVC = BabySonogramController()
+      navigationController?.pushViewController(babyVC, animated: true)
+    case goToTimerButton:
+      let timerVC = ContractionTimerViewController()
+      navigationController?.pushViewController(timerVC, animated: true)
+    case goToQAButton:
+      // MARK: Need to be adjusted
+      let qaVC = BabySonogramController()
+      navigationController?.pushViewController(qaVC, animated: true)
+      
+    default:
+      return
+    }
 
   }
-  
   
 }
 

@@ -14,16 +14,21 @@ class ContractionTimerViewController: UIViewController {
   var newRecord: contractions?
   
   var todaysRecord = [[String]]()
-  var timerCounting: Bool = false
+  var timerCounting: Bool = false {
+    didSet {
+      stopButton.isEnabled = timerCounting
+    }
+  }
   var isContracting: Bool = false {
     didSet {
       if timerCounting {
-      currentRecordingTitle = startButton.currentTitle
+        currentRecordingTitle = startButton.currentTitle
       if isContracting {
-      startButton.setTitle("Rest", for: .normal)
-      startButton.backgroundColor = #colorLiteral(red: 0.3890488148, green: 0.8415637016, blue: 0.7544795871, alpha: 1)
-      } else { startButton.setTitle("Start", for: .normal)
-      startButton.backgroundColor = #colorLiteral(red: 0.9845016599, green: 0.3794513941, blue: 0.5343101621, alpha: 1)
+        startButton.setTitle("Rest", for: .normal)
+        startButton.backgroundColor = #colorLiteral(red: 0.3890488148, green: 0.8415637016, blue: 0.7544795871, alpha: 1)
+      } else {
+        startButton.setTitle("Start", for: .normal)
+        startButton.backgroundColor = #colorLiteral(red: 0.9845016599, green: 0.3794513941, blue: 0.5343101621, alpha: 1)
       }
       }
     }
@@ -42,27 +47,30 @@ class ContractionTimerViewController: UIViewController {
   var COUNTING_KEY = "countingKey"
   var scheduledTimer: Timer!
   
-  var timerTabButton : UIButton = {
-    let button = UIButton()
-    button.setTitle("Contraction", for: .normal)
-    button.layer.cornerRadius = 20
-    button.setTitleColor(.black, for: .normal)
-    button.backgroundColor = #colorLiteral(red: 0.9459111094, green: 0.9379461408, blue: 0.9782511592, alpha: 1)
-    button.addTarget(self, action: #selector(timerTabButtonTapped), for: .touchUpInside)
-    
-    return button
-  }()
+  var timerTabButton = PrimaryButton(title: "Contraction")
   
-  var recordTabButton : UIButton = {
-    let button = UIButton()
-    button.setTitle("Records", for: .normal)
-    button.layer.cornerRadius = 20
-    button.setTitleColor(.black, for: .normal)
-    button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-    button.addTarget(self, action: #selector(recordTabButtonTapped), for: .touchUpInside)
-    
-    return button
-  }()
+  var recordTabButton = SecondaryButton(title: "Records")
+//  var timerTabButton : UIButton = {
+//    let button = UIButton()
+//    button.setTitle("Contraction", for: .normal)
+//    button.layer.cornerRadius = 20
+//    button.setTitleColor(.black, for: .normal)
+//    button.backgroundColor = #colorLiteral(red: 0.9459111094, green: 0.9379461408, blue: 0.9782511592, alpha: 1)
+//    button.addTarget(self, action: #selector(timerTabButtonTapped), for: .touchUpInside)
+//
+//    return button
+//  }()
+//
+//  var recordTabButton : UIButton = {
+//    let button = UIButton()
+//    button.setTitle("Records", for: .normal)
+//    button.layer.cornerRadius = 20
+//    button.setTitleColor(.black, for: .normal)
+//    button.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+//    button.addTarget(self, action: #selector(recordTabButtonTapped), for: .touchUpInside)
+//
+//    return button
+//  }()
   
   var timerAndRecordNavBarStackView : UIStackView = {
     let stackview = UIStackView()
@@ -80,22 +88,11 @@ class ContractionTimerViewController: UIViewController {
     buttonsStackView.distribution = .fillEqually
     buttonsStackView.alignment = .center
     buttonsStackView.spacing = 10
+    
     return buttonsStackView
   }()
 
-  var titleLabel : UILabel = {
-    let titleLabel = UILabel()
-    titleLabel.text = """
-          Contraction
-          Timer
-          """
-    titleLabel.font = UIFont(name: "SimpleBoy", size: 50)
-    titleLabel.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
-    titleLabel.numberOfLines = 2
-    titleLabel.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
-    
-    return titleLabel
-  }()
+  let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium)
   
   var timerLabel : UILabel = {
     let timerLabel = UILabel()
@@ -105,32 +102,16 @@ class ContractionTimerViewController: UIViewController {
     
     return timerLabel
   }()
-  
-  var startButton : UIButton = {
-    let startButton = UIButton()
-    startButton.setTitle("Start", for: .normal)
-    startButton.backgroundColor = #colorLiteral(red: 0.9845016599, green: 0.3794513941, blue: 0.5343101621, alpha: 1)
-    startButton.layer.cornerRadius = 20
-      
-    return startButton
-  }()
 
-  var stopButton : UIButton = {
-    let stopButton = UIButton()
-    stopButton.setTitle("Stop", for: .normal)
-    stopButton.backgroundColor = #colorLiteral(red: 0.9882352948, green: 0.9882352948, blue: 0.9882352948, alpha: 1)
-    stopButton.setTitleColor(.black, for: .normal)
-    stopButton.layer.cornerRadius = 20
-    
-    return stopButton
-  }()
+  
+  var startButton = PrimaryButton(title: "Save")
+  var stopButton = OutlineButton(title: "Stop & Save")
   
   var timerAndButtonStackView : UIStackView = {
     let timerAndButtonStackView = UIStackView()
     timerAndButtonStackView.axis = .vertical
     timerAndButtonStackView.distribution = .fillEqually
     timerAndButtonStackView.alignment = .center
-    //timerAndButtonStackView.backgroundColor = #colorLiteral(red: 0.9976026416, green: 0.9432250857, blue: 0.9571509957, alpha: 1)
     
     return timerAndButtonStackView
   }()
@@ -156,9 +137,12 @@ class ContractionTimerViewController: UIViewController {
     stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
     timerCounting = userDefaults.bool(forKey: COUNTING_KEY)
     
-    startButton.addTarget(self, action: #selector(startRestTimer), for: .touchUpInside)
+    stopButton.isEnabled = timerCounting
     
+    startButton.addTarget(self, action: #selector(startRestTimer), for: .touchUpInside)
     stopButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
+    timerTabButton.addTarget(self, action: #selector(timerTabButtonTapped), for: .touchUpInside)
+    recordTabButton.addTarget(self, action: #selector(recordTabButtonTapped), for: .touchUpInside)
     
     if timerCounting {
       startTimer()
@@ -179,10 +163,12 @@ class ContractionTimerViewController: UIViewController {
     timerAndRecordNavBarStackView.addArrangedSubview(recordTabButton)
     buttonsStackView.addArrangedSubview(startButton)
     buttonsStackView.addArrangedSubview(stopButton)
-    timerAndButtonStackView.addArrangedSubview(titleLabel)
+    //timerAndButtonStackView.addArrangedSubview(titleLabel)
     timerAndButtonStackView.addArrangedSubview(timerLabel)
     timerAndButtonStackView.addArrangedSubview(buttonsStackView)
+    
     view.addSubview(timerAndRecordNavBarStackView)
+    view.addSubview(titleLabel)
     view.addSubview(recordList)
     view.addSubview(timerAndButtonStackView)
   }
@@ -314,13 +300,17 @@ class ContractionTimerViewController: UIViewController {
   
   private func snpConstraints() {
     timerAndButtonStackView.snp.makeConstraints{ (make) -> Void in
-      make.top.equalTo(timerAndRecordNavBarStackView.snp.bottom)
+      make.top.equalTo(titleLabel.snp.bottom)
       make.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
-      make.bottom.equalTo(0).offset(-50)
+      //make.bottom.equalTo(0).offset(-50)
+      make.height.equalTo(view.frame.width / 2)
     }
     
     titleLabel.snp.makeConstraints{(make) -> Void in
-      make.width.equalTo(timerAndButtonStackView.snp.width)
+      make.width.equalTo(view.frame.width)
+      make.top.equalTo(timerAndRecordNavBarStackView.snp.bottom)
+      //make.left.right.equalTo(0)
+      make.height.equalTo(200)
     }
     
     timerLabel.snp.makeConstraints{(make) -> Void in
@@ -343,7 +333,7 @@ class ContractionTimerViewController: UIViewController {
     }
     
     timerTabButton.snp.makeConstraints { make in
-    make.height.equalTo(60)
+    make.height.equalTo(30)
     }
     
     timerAndRecordNavBarStackView.snp.makeConstraints { make in
@@ -399,10 +389,10 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     print(userConstractionRecords!)
-    let currentCell = tableView.cellForRow(at: indexPath)
-//    if currentCell!.isSelected {
-//      currentCell?.isSelected = false
-//      }
+//    let currentCell = tableView.cellForRow(at: indexPath)
+////    if currentCell!.isSelected {
+////      currentCell?.isSelected = false
+////      }
       tableView.beginUpdates()
       tableView.endUpdates()
   }

@@ -46,7 +46,6 @@
 		64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */; };
 		6C1FC56A27BEF301007D625E /* PhotoDetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */; };
 		6C1FC57627BF2454007D625E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57527BF2454007D625E /* ImageView.swift */; };
-		6C1FC57827BFEC09007D625E /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57727BFEC08007D625E /* LoadingViewController.swift */; };
 		6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* BabySonogramController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
@@ -92,7 +91,6 @@
 		64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoFormTableViewController.swift; sourceTree = "<group>"; };
 		6C1FC56927BEF301007D625E /* PhotoDetailedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDetailedViewController.swift; sourceTree = "<group>"; };
 		6C1FC57527BF2454007D625E /* ImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageView.swift; sourceTree = "<group>"; };
-		6C1FC57727BFEC08007D625E /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple Boy ttf.ttf"; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* BabySonogramController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabySonogramController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -202,7 +200,6 @@
 		437721F527ADE90400EC8A98 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				6C1FC57727BFEC08007D625E /* LoadingViewController.swift */,
 				4377220227ADE9A800EC8A98 /* TabBarViewController.swift */,
 				437721F627ADE90D00EC8A98 /* Home */,
 				437721F727ADE91400EC8A98 /* OurBaby */,
@@ -475,7 +472,6 @@
 				43FB2B1027BE381C004A641D /* SecondaryButton.swift in Sources */,
 				43A8C58227C0790F00FD647F /* ToDoNotesCell.swift in Sources */,
 				43FB2B1627BE49BD004A641D /* MyProfileViewController.swift in Sources */,
-				6C1FC57827BFEC09007D625E /* LoadingViewController.swift in Sources */,
 				439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */,
 				437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */,
 				437721FD27ADE98500EC8A98 /* OurBabyViewController.swift in Sources */,

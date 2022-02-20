@@ -45,6 +45,7 @@ class TodoCell: UITableViewCell {
       make.right.equalTo(contentView).offset(-10)
     }
     isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
   }
   
   required init?(coder: NSCoder) {

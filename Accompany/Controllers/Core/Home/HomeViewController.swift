@@ -21,6 +21,7 @@ class HomeViewController: UIViewController {
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView()
     notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
     notifyTableView.separatorStyle = .none
     
@@ -34,7 +35,7 @@ class HomeViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
+ 
     bgCircleView.image = UIImage(named: "grey-bg")
     
     // TODO: fetch todos
@@ -42,6 +43,11 @@ class HomeViewController: UIViewController {
     
     configureTableView()
     setupLayout()
+    
+    UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
+           .textColor = UIColor.black
+    UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
+      .font = UIFont.systemFont(ofSize: 18)
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
@@ -76,7 +82,7 @@ class HomeViewController: UIViewController {
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.width).multipliedBy(0.45)
     }
-
+    
     view.addSubview(bgCircleView)
 
     bgCircleView.snp.makeConstraints { make in
@@ -99,7 +105,7 @@ class HomeViewController: UIViewController {
     
     stackView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(bgCircleView.snp.top).offset(35)
+      make.top.equalTo(bgCircleView.snp.top).offset(45)
       make.width.equalTo(view.snp.width).multipliedBy(0.45)
     }
 
@@ -129,12 +135,24 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: UITableViewDelegate {
   
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return "🔺Weekly Tasks:"
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 28
+  }
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return todos.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 43
+    return 40
   }
   
 }

@@ -39,9 +39,10 @@ class TitleLabel: UILabel {
     case .small:
       self.font = UIFont(name: "SimpleBoy", size: 25)
     case .medium:
-      self.font = UIFont(name: "SimpleBoy", size: 45)
+      self.font = UIFont(name: "SimpleBoy", size: 40)
     case .large:
-      self.font = UIFont(name: "SimpleBoy", size: 60)
+      self.font = UIFont(name: "SimpleBoy", size: 55)
+      
     }
     
     switch color {

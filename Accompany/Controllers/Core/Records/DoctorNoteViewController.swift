@@ -12,20 +12,22 @@ class DoctorNoteViewController: UIViewController {
 
   var noteContent : String?
   
-  let titleLabel : UILabel = {
-    let label = UILabel()
-    label.text = """
-                  Q&A To
-                  Obstetrician
-                """
-    label.font = UIFont(name: "SimpleBoy", size: 50)
-    label.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
-    label.numberOfLines = 2
-    label.textAlignment = .center
-    label.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
-    
-    return label
-  }()
+  let titleLabel = TitleLabel(title: "Q&A To\nObstetrician", size: .medium, color: .red)
+  
+//  let titleLabel : UILabel = {
+//    let label = UILabel()
+//    label.text = """
+//                  Q&A To
+//                  Obstetrician
+//                """
+//    label.font = UIFont(name: "SimpleBoy", size: 50)
+//    label.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
+//    label.numberOfLines =
+//    label.textAlignment = .center
+//    label.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
+//
+//    return label
+//  }()
   
   let rightBarButton : UIButton = {
     let button = UIButton()
@@ -75,6 +77,8 @@ class DoctorNoteViewController: UIViewController {
       
       addSubview()
       
+      titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+      
       DrNoteTextView.text = noteContent
       self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
       rightBarButton.addTarget(self, action: #selector(rightBarButtonTapped), for: .touchUpInside)
@@ -86,6 +90,7 @@ class DoctorNoteViewController: UIViewController {
     titleAndNoteStackView.addArrangedSubview(noteViewContainer)
     view.addSubview(titleAndNoteStackView)
     addConstraints()
+    
   }
   
   private func addConstraints() {
@@ -107,8 +112,9 @@ class DoctorNoteViewController: UIViewController {
     }
     
     titleLabel.snp.makeConstraints { make in
-      make.top.left.right.equalTo(0)
-      make.height.equalTo(175)
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
   }
   

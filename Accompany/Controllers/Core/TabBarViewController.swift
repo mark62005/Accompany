@@ -24,28 +24,29 @@ class TabBarViewController: UITabBarController {
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
 
     configureViewControllers()
+    self.tabBar.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
   }
   
   private func configureViewControllers() {
     let homeVC = HomeViewController()
 //    homeVC.title = TabBarVCTitle.home.rawValue
-    homeVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "home-menu-icon-active"), tag: 1)
+    homeVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.home.rawValue)", image: UIImage(named: "homeIcon"), tag: 1)
 
     let ourBabyVC = OurBabyViewController()
 //    ourBabyVC.title = TabBarVCTitle.ourBaby.rawValue
-    ourBabyVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "baby-menu-icon"), tag: 1)
+    ourBabyVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.ourBaby.rawValue)", image: UIImage(named: "babyIcon"), tag: 1)
     
     let recordsVC = RecordsViewController()
 //    recordsVC.title = TabBarVCTitle.records.rawValue
-    recordsVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "record-menu-icon-active"), tag: 1)
+    recordsVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.records.rawValue)", image: UIImage(named: "recordIcon"), tag: 1)
     
     let contractionTimerVC = ContractionTimerViewController()
 //    contractionTimerVC.title = TabBarVCTitle.timer.rawValue
-    contractionTimerVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "stopwatch-menu-active"), tag: 1)
+    contractionTimerVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.timer.rawValue)", image: UIImage(named: "timerIcon"), tag: 1)
     
     let servicesVC = ServicesViewController()
     servicesVC.titleLabel.text = TabBarVCTitle.services.rawValue
-    servicesVC.tabBarItem = UITabBarItem(title: "", image: UIImage(named: "service-menu-icon-active"), tag: 1)
+    servicesVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.services.rawValue)", image: UIImage(named: "serviceIcon"), tag: 1)
     
     let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, servicesVC]
     

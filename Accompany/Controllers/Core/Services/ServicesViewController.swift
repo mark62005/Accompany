@@ -37,7 +37,7 @@ enum Services: CustomStringConvertible, CaseIterable {
 
 class ServicesViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: nil, size: .large, color: .red)
+  let titleLabel = TitleLabel(title: nil, size: .medium, color: .red)
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -50,8 +50,9 @@ class ServicesViewController: UIViewController {
     view.addSubview(titleLabel)
     
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
   }
   

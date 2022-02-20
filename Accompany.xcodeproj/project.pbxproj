@@ -217,8 +217,8 @@
 			isa = PBXGroup;
 			children = (
 				437721FA27ADE97B00EC8A98 /* HomeViewController.swift */,
-				64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */,
 				439FC07127B705660016CD7F /* TodoListViewController.swift */,
+				64EF106A27B717C600167984 /* ToDoFormTableViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";

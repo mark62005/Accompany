@@ -45,7 +45,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     collectionView.snp.makeConstraints { make in
       make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
-      make.top.equalTo(babyTitleLabel.snp.bottom).offset(5)
+      make.top.equalTo(babyTitleLabel.snp.bottom)
       make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
 

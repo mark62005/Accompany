@@ -10,7 +10,7 @@ import SnapKit
 
 class RecordsViewController: UIViewController {
   
-  let recordLabel = TitleLabel(title: "Record While Pregnancy", size: .medium, color: .red)
+  let recordLabel = TitleLabel(title: "Record While\nPregnancy", size: .medium, color: .red)
   
   let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
@@ -27,11 +27,12 @@ class RecordsViewController: UIViewController {
   private func setupTitle() {
     
     view.addSubview(recordLabel)
-    
+    recordLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+
     recordLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
@@ -53,7 +54,7 @@ class RecordsViewController: UIViewController {
     vStack.snp.makeConstraints { make in
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
-      make.top.equalTo(recordLabel.snp.bottom).offset(80)
+      make.top.equalTo(recordLabel.snp.bottom).offset(50)
     }
 
   }
@@ -69,7 +70,7 @@ class RecordsViewController: UIViewController {
       navigationController?.pushViewController(timerVC, animated: true)
     case goToQAButton:
       // MARK: Need to be adjusted
-      let qaVC = BabySonogramController()
+      let qaVC = DoctorNoteViewController()
       navigationController?.pushViewController(qaVC, animated: true)
       
     default:

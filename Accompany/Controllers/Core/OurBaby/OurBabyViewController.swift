@@ -11,12 +11,12 @@ import SnapKit
 class OurBabyViewController: UIViewController {
   
   let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
-  
+
   let nameTitle = TitleLabel(title: "Baby's name", size: .mini, color: .black)
   
   let leftNumberTitle = TitleLabel(title: "", size: .mini, color: .black)
   let leftTitle = TitleLabel(title: "Days left", size: .mini, color: .grey)
-  let dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
+  var dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
 
   let contentView: UIView = {
     let contentView = UIView()
@@ -39,8 +39,13 @@ class OurBabyViewController: UIViewController {
     
     return contentLabel
   }()
+
+  let babyIconTextField = UITextField()
   
-  let imageView = ImageView()
+  let icons = ["👶🏻", "👶🏼", "👶", "👶🏽", "👶🏿"]
+  
+  var pickerView = UIPickerView()
+  
   let babyImageView = ImageView()
   
   let datePicker: UIDatePicker = {
@@ -55,13 +60,25 @@ class OurBabyViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    imageView.image = UIImage(systemName: "photo.on.rectangle")
+    configPicker()
+    
+    babyIconTextField.inputView = pickerView
+    babyIconTextField.backgroundColor = .white
+    babyIconTextField.layer.cornerRadius = 70
+    babyIconTextField.textAlignment = .center
+    babyIconTextField.text = "👶🏻"
+  
     babyImageView.image = UIImage(named: "baby-image")
     
     datePicker.datePickerMode = .date
    
     setupLayout()
-
+    
+  }
+  
+  func configPicker() {
+    pickerView.delegate = self
+    pickerView.dataSource = self
   }
   
   private func setupLayout() {
@@ -73,14 +90,13 @@ class OurBabyViewController: UIViewController {
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
     
-    view.addSubview(imageView)
-    
-    imageView.snp.makeConstraints { make in
+    view.addSubview(babyIconTextField)
+
+    babyIconTextField.snp.makeConstraints { make in
       make.top.equalTo(babyTitle.snp.bottom)
       make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.1)
-      make.height.equalTo(imageView.snp.width).multipliedBy(0.8)
-   
+      make.width.equalTo(view.snp.width).multipliedBy(0.19)
+      make.height.equalTo(babyIconTextField.snp.width).multipliedBy(0.8)
     }
     
     let stackView: UIStackView = {
@@ -97,7 +113,7 @@ class OurBabyViewController: UIViewController {
     view.addSubview(stackView)
 
     stackView.snp.makeConstraints { make in
-      make.top.equalTo(imageView.snp.bottom).offset(20)
+      make.top.equalTo(babyIconTextField.snp.bottom).offset(20)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.9)
     }
@@ -151,10 +167,10 @@ class OurBabyViewController: UIViewController {
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.height).multipliedBy(0.3)
     }
+    
   }
    
   @objc func datePickerValueChanged(_ sender: UIDatePicker) {
-
 
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
@@ -165,16 +181,41 @@ class OurBabyViewController: UIViewController {
 
     let formatter = DateFormatter()
     formatter.timeStyle = .none
-    formatter.dateStyle = .long
+    formatter.dateStyle = .medium
     formatter.dateFormat = "dd/MM/yyyy"
     let todayDate: String = formatter.string(from: currentDateTime)
 
     let dueDate = formatter.date(from: selectedDate)
     let currentDate = formatter.date(from: todayDate)
     let difference = (dueDate! - currentDate!)
-    print(difference.asDays(), "days")
+    let differenceDays = difference.asDays()
 
-    leftNumberTitle.text = "\(difference.asDays()) days"
+    if differenceDays == 0 {
+      datePicker.isHidden = true
+      dueDateTitle.text = ""
+      leftTitle.text = ""
+      leftNumberTitle.text = ""
+      
+      let button = OutlineButton(title: "One message")
+      button.addTarget(self, action: #selector(btnTapped(_:)), for: .touchUpInside)
+      view.addSubview(button)
+      
+      button.snp.makeConstraints { make in
+        make.centerX.equalTo(contentView)
+        make.bottom.equalTo(contentView.snp.bottom)
+        make.width.equalTo(view.snp.width).multipliedBy(0.33)
+      }
+      
+    } else {
+      leftNumberTitle.text = "\(differenceDays) days"
+    }
+    
+  }
+  
+  @objc func btnTapped(_ sender: UIButton) {
+    let alert = UIAlertController(title: "🎉Congratulations", message: "Your baby is coming today!", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "I'm ready!", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
 
   }
 
@@ -184,11 +225,38 @@ class OurBabyViewController: UIViewController {
 
 }
 
-extension Date {
-    static func - (lhs: Date, rhs: Date) -> TimeInterval {
-        return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-    }
+extension OurBabyViewController: UIPickerViewDelegate, UIPickerViewDataSource {
+  func numberOfComponents(in pickerView: UIPickerView) -> Int {
+    return 1
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    return icons.count
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    return icons[row]
+  }
+  
+  func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    babyIconTextField.text = icons[row]
+    babyIconTextField.resignFirstResponder()
+  }
+  
 }
+
+extension Date {
+  static func - (lhs: Date, rhs: Date) -> TimeInterval {
+    return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
+    
+  }
+  
+}
+
 extension TimeInterval {
-  func asDays()    -> Int { return Int(self / (60 * 60 * 24)) }
+  func asDays() -> Int {
+    return Int(self / (60 * 60 * 24))
+    
+  }
+  
 }

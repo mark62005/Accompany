@@ -14,7 +14,7 @@ class TabBarViewController: UITabBarController {
     case ourBaby = "Our Baby"
     case records = "Record"
     case timer = "Timer"
-    case services = "Services"
+    case services = "Service"
   }
   
   let placeholderImage = UIImage(systemName: "photo.on.rectangle")

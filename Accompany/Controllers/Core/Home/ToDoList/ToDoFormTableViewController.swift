@@ -118,7 +118,7 @@ class ToDoFormTableViewController: UITableViewController {
       
       return toDoNotesCell
     }
-    toDoNotesCell.backgroundColor = .white
+  
   }
   
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

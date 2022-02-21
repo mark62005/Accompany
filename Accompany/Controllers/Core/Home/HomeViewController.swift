@@ -23,7 +23,6 @@ class HomeViewController: UIViewController {
     notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
-    notifyTableView.separatorStyle = .none
     
     return notifyTableView
   }()
@@ -64,6 +63,7 @@ class HomeViewController: UIViewController {
     titleArrayStack.alignment = .fill
     titleArrayStack.distribution = .fill
     titleArrayStack.spacing = 1
+    titleArrayStack.translatesAutoresizingMaskIntoConstraints = false
     
     view.addSubview(titleArrayStack)
     
@@ -80,7 +80,7 @@ class HomeViewController: UIViewController {
       make.centerX.equalTo(view)
       make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
-      make.height.equalTo(view.snp.width).multipliedBy(0.45)
+      make.height.equalTo(view.snp.width).multipliedBy(0.5)
     }
     
     view.addSubview(bgCircleView)
@@ -140,11 +140,13 @@ extension HomeViewController: UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    notifyTableView.contentInset = UIEdgeInsets(top: -22, left: 0, bottom: 0, right: 0)
+    
     return "🔺Weekly Tasks:"
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 28
+    return 30
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -152,7 +154,7 @@ extension HomeViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 40
+    return 42
   }
   
 }

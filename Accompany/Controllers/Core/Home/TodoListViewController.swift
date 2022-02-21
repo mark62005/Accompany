@@ -32,9 +32,8 @@ class TodoListViewController: UIViewController {
     // fetch todos
     todos = Todo.loadSampleToDos()
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
+      make.bottom.equalTo(tableView.snp.top).offset(-20)
+      make.centerX.equalTo(view)
     }
     
     configureTableView()
@@ -65,8 +64,8 @@ class TodoListViewController: UIViewController {
     tableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.centerY.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.87)
-      make.height.equalTo(view.snp.width).multipliedBy(0.9)
+      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.height.equalTo(view.snp.width).multipliedBy(0.85)
     }
   }
   

@@ -60,18 +60,23 @@ class OurBabyViewController: UIViewController {
     
     datePicker.datePickerMode = .date
    
-   setupLayout()
+    setupLayout()
 
   }
   
   private func setupLayout() {
     view.addSubview(babyTitle)
-    view.addSubview(imageView)
-    view.addSubview(nameTitle)
-    view.addSubview(contentView)
+
     contentView.addSubview(contentLabel)
     contentView.addSubview(dueDateTitle)
     contentView.addSubview(datePicker)
+    
+    let titleAndImageStack = UIStackView(arrangedSubviews: [imageView, nameTitle, contentView])
+    titleAndImageStack.axis = .vertical
+    titleAndImageStack.alignment = .fill
+    titleAndImageStack.distribution = .fill
+    titleAndImageStack.spacing = 5
+    titleAndImageStack.translatesAutoresizingMaskIntoConstraints = false
     
     let stackView: UIStackView = {
       let stackView = UIStackView(arrangedSubviews: [leftNumberTitle, leftTitle])

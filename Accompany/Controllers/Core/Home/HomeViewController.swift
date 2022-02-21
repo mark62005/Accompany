@@ -140,7 +140,7 @@ extension HomeViewController: UITableViewDelegate {
   }
 
   func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    notifyTableView.contentInset = UIEdgeInsets(top: -22, left: 0, bottom: 0, right: 0)
+    notifyTableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
     
     return "🔺Weekly Tasks:"
   }

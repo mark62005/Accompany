@@ -14,7 +14,7 @@ class OurBabyViewController: UIViewController {
   
   let nameTitle = TitleLabel(title: "Baby's name", size: .mini, color: .black)
   
-  let leftNumberTitle = TitleLabel(title: nil, size: .mini, color: .black)
+  let leftNumberTitle = TitleLabel(title: "", size: .mini, color: .black)
   let leftTitle = TitleLabel(title: "Days left", size: .mini, color: .grey)
   let dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
 
@@ -32,7 +32,7 @@ class OurBabyViewController: UIViewController {
     contentLabel.text = "Hello🖐🏻 I'm your little baby.\n So excited to see this world!\n Can't wait to see everyone❤️"
     contentLabel.textColor = .gray
     contentLabel.textAlignment = .center
-    contentLabel.font = UIFont.boldSystemFont(ofSize: 18)
+    contentLabel.font = UIFont.systemFont(ofSize: 18)
     contentLabel.numberOfLines = 0
     contentLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
     contentLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,7 +48,7 @@ class OurBabyViewController: UIViewController {
     datePicker.timeZone = NSTimeZone.local
     datePicker.backgroundColor = .white
     datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-    
+
     return datePicker
   }()
   
@@ -66,31 +66,6 @@ class OurBabyViewController: UIViewController {
   
   private func setupLayout() {
     view.addSubview(babyTitle)
-
-    contentView.addSubview(contentLabel)
-    contentView.addSubview(dueDateTitle)
-    contentView.addSubview(datePicker)
-    
-    let titleAndImageStack = UIStackView(arrangedSubviews: [imageView, nameTitle, contentView])
-    titleAndImageStack.axis = .vertical
-    titleAndImageStack.alignment = .fill
-    titleAndImageStack.distribution = .fill
-    titleAndImageStack.spacing = 5
-    titleAndImageStack.translatesAutoresizingMaskIntoConstraints = false
-    
-    let stackView: UIStackView = {
-      let stackView = UIStackView(arrangedSubviews: [leftNumberTitle, leftTitle])
-      stackView.distribution = .fill
-      stackView.alignment = .fill
-      stackView.axis = .vertical
-      stackView.spacing = 21
-      stackView.translatesAutoresizingMaskIntoConstraints = false
-      
-      return stackView
-    }()
-    
-    contentView.addSubview(stackView)
-    view.addSubview(babyImageView)
     
     babyTitle.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -98,57 +73,89 @@ class OurBabyViewController: UIViewController {
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
     
+    view.addSubview(imageView)
+    
     imageView.snp.makeConstraints { make in
-      make.top.equalTo(babyTitle.snp.bottom).offset(5)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
-    }
-    
-    nameTitle.snp.makeConstraints { make in
-      make.top.equalTo(imageView.snp.bottom).offset(5)
+      make.top.equalTo(babyTitle.snp.bottom)
       make.centerX.equalTo(view)
+      make.width.equalTo(view.snp.width).multipliedBy(0.1)
+      make.height.equalTo(imageView.snp.width).multipliedBy(0.8)
+   
     }
     
-    contentView.snp.makeConstraints { make in
-      make.top.equalTo(nameTitle.snp.bottom).offset(15)
-      make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
-      make.height.equalTo(contentView.snp.width).multipliedBy(0.6)
-    }
-    
-    contentLabel.snp.makeConstraints { make in
-      make.top.equalTo(contentView.snp.top).offset(15)
-      make.left.equalTo(contentView.snp.left).offset(5)
-      make.right.equalTo(contentView.snp.right).offset(-5)
-    }
-    
-    babyImageView.snp.makeConstraints { make in
-      make.top.equalTo(contentView.snp.bottom).offset(12)
+    let stackView: UIStackView = {
+      let stackView = UIStackView(arrangedSubviews: [nameTitle, contentView])
+      stackView.axis = .vertical
+      stackView.distribution = .fill
+      stackView.alignment = .fill
+      stackView.spacing = 10
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+
+      return stackView
+    }()
+
+    view.addSubview(stackView)
+
+    stackView.snp.makeConstraints { make in
+      make.top.equalTo(imageView.snp.bottom).offset(20)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.9)
-      make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-3)
     }
     
-    stackView.snp.makeConstraints { make in
-      make.bottom.equalTo(contentView.snp.bottom).offset(-20)
-      make.left.equalTo(contentView.snp.left).offset(65)
-    }
+    let titleAndDueStack: UIStackView = {
+      let stackView = UIStackView(arrangedSubviews: [leftNumberTitle, datePicker])
+      stackView.axis = .horizontal
+      stackView.distribution = .fill
+      stackView.alignment = .center
+      stackView.spacing = 5
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+      
+      return stackView
+    }()
     
-    dueDateTitle.snp.makeConstraints { make in
-      make.bottom.equalTo(contentView.snp.bottom).offset(-20)
-      make.right.equalTo(contentView.snp.right).offset(-65)
-    }
-    
-    datePicker.snp.makeConstraints { make in
-      make.bottom.equalTo(dueDateTitle.snp.top).offset(-15)
-      make.right.equalTo(contentView.snp.right).offset(-65)
-      make.left.equalTo(leftNumberTitle.snp.right).offset(10)
-    }
+    let titlesStack: UIStackView = {
+      let stackView = UIStackView(arrangedSubviews: [leftTitle, dueDateTitle])
+      stackView.axis = .horizontal
+      stackView.distribution = .fill
+      stackView.alignment = .fill
+      stackView.spacing = 15
+      stackView.translatesAutoresizingMaskIntoConstraints = false
 
-  }
-  
-  @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+      return stackView
+    }()
+
+    let showTitleDateStack: UIStackView = {
+      let stackView = UIStackView(arrangedSubviews: [contentLabel,titleAndDueStack, titlesStack])
+      stackView.axis = .vertical
+      stackView.distribution = .fill
+      stackView.alignment = .fill
+      stackView.spacing = 15
+      stackView.translatesAutoresizingMaskIntoConstraints = false
+
+      return stackView
+    }()
+
+    contentView.addSubview(showTitleDateStack)
+
+    showTitleDateStack.snp.makeConstraints { make in
+      make.top.equalTo(contentView.snp.top).offset(10)
+      make.centerX.equalTo(contentView)
+      make.bottom.equalTo(contentView.snp.bottom).offset(-15)
+    }
     
+    view.addSubview(babyImageView)
+ 
+    babyImageView.snp.makeConstraints { make in
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+      make.centerX.equalTo(view)
+      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.height.equalTo(view.snp.height).multipliedBy(0.3)
+    }
+  }
    
+  @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+
+
     let dateFormatter: DateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
 
@@ -168,13 +175,13 @@ class OurBabyViewController: UIViewController {
     print(difference.asDays(), "days")
 
     leftNumberTitle.text = "\(difference.asDays()) days"
-    
+
   }
-  
+
   override func didReceiveMemoryWarning() {
     super.didReceiveMemoryWarning()
   }
-  
+
 }
 
 extension Date {

@@ -68,8 +68,9 @@ class AccountSettingsViewController: UIViewController {
   private func setupTitle() {
     view.addSubview(titleLabel)
     titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide).offset(30)
-      make.centerX.equalTo(view)
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
   }
   

@@ -10,7 +10,7 @@ import SnapKit
 
 class MyProfileViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: Services.myProfile.description, size: .medium)
+  let titleLabel = TitleLabel(title: Services.myProfile.description, size: .medium, color: .red)
   let userImageView = UIImageView(image: UIImage(systemName: "photo.on.rectangle"))
   
   let nameLabel: UILabel = {
@@ -43,7 +43,6 @@ class MyProfileViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = Services.myProfile.description
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     navigationItem.rightBarButtonItem = editButtonItem
@@ -61,13 +60,18 @@ class MyProfileViewController: UIViewController {
   private func setupLayout() {
     setupImage()
     
+    view.addSubview(titleLabel)
+    
+    titleLabel.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
+    }
     // stack view?
     let nameAndEmailStack = VStack(arrangedSubviews: [nameLabel, emailLabel])
     nameAndEmailStack.spacing = 5
-//    nameAndEmailStack.addSubview(nameLabel)
-//    nameAndEmailStack.addSubview(emailLabel)
     
-    let vStack = VStack(arrangedSubviews: [titleLabel, userImageView, nameAndEmailStack, bioLabel])
+    let vStack = VStack(arrangedSubviews: [userImageView, nameAndEmailStack, bioLabel])
     vStack.alignment = .center
     
     view.addSubview(vStack)
@@ -79,15 +83,10 @@ class MyProfileViewController: UIViewController {
   }
   
   private func setupImage() {
-//    userImageView.snp.makeConstraints { make in
-//      make.height.equalTo(view.snp.height).multipliedBy(0.2)
-//    }
     userImageView.snp.makeConstraints { make in
       make.height.equalTo(150)
       make.width.equalTo(self.userImageView.snp.height)
     }
-//    userImageView.heightAnchor.constraint(equalTo: userImageView.widthAnchor).isActive = true
-//    userImageView.setContentHuggingPriority(UILayoutPriority(0), for: .vertical)
   }
   
 }

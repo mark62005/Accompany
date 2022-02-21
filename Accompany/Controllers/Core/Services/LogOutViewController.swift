@@ -8,12 +8,27 @@
 import UIKit
 
 class LogOutViewController: UIViewController {
+  
+  let logOutTitle = TitleLabel(title: Services.logOut.description, size: .medium, color: .red)
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    title = Services.logOut.description
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    
+    setupLayout()
   }
+  
+  private func setupLayout() {
+    view.addSubview(logOutTitle)
+    
+    logOutTitle.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
+    }
+  }
+  
+ //Mark: call function to push back log in Page
 
 }

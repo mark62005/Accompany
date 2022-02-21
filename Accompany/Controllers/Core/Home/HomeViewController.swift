@@ -21,69 +21,77 @@ class HomeViewController: UIViewController {
   let notifyTableView: UITableView = {
     let notifyTableView = UITableView()
     notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
     
     return notifyTableView
   }()
+  
+  let bgCircleView = ImageView()
   
   var todos = [Todo]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+ 
+    bgCircleView.image = UIImage(named: "grey-bg")
     
     // TODO: fetch todos
     todos = Todo.loadSampleToDos()
     
     configureTableView()
-    setupNavButtonArray()
     setupLayout()
-   
+    
+    UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
+           .textColor = UIColor.black
+    UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
+      .font = UIFont.systemFont(ofSize: 18)
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Home Page", style: .plain, target: nil, action: nil)
   }
   
   private func configureTableView() {
     notifyTableView.delegate = self
     notifyTableView.dataSource = self
- 
-  }
-  
-  override func viewDidLayoutSubviews() {
-    super.viewDidLayoutSubviews()
-    view.addSubview(notifyTableView)
-    
-    notifyTableView.backgroundColor = .white
-    
-    notifyTableView.snp.makeConstraints { (make) -> Void in
-      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(30)
-      make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
-      make.height.equalTo(view.snp.width).multipliedBy(0.55)
-    }
-    
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Home Page", style: .plain, target: nil, action: nil)
-  
   }
   
   private func setupLayout() {
-    view.addSubview(accompanyTitleLabel)
-    view.addSubview(welcomeTitleLabel)
+    let titleArrayStack = UIStackView(arrangedSubviews: [accompanyTitleLabel, welcomeTitleLabel])
+    titleArrayStack.axis = .vertical
+    titleArrayStack.alignment = .fill
+    titleArrayStack.distribution = .fill
+    titleArrayStack.spacing = 1
+    titleArrayStack.translatesAutoresizingMaskIntoConstraints = false
     
-    accompanyTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view).offset(60)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(40)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-40)
+    view.addSubview(titleArrayStack)
+    
+    titleArrayStack.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.centerX.equalTo(view.safeAreaLayoutGuide)
     }
     
-    welcomeTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(0)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(50)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-50)
+    view.addSubview(notifyTableView)
+       
+    notifyTableView.backgroundColor = .white
+     
+    notifyTableView.snp.makeConstraints { (make) -> Void in
+      make.centerX.equalTo(view)
+      make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
+      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.height.equalTo(view.snp.width).multipliedBy(0.5)
     }
+    
+    view.addSubview(bgCircleView)
 
-}
-  
-  private func setupNavButtonArray() {
+    bgCircleView.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.top.equalTo(notifyTableView.snp.bottom).offset(30)
+      make.left.equalTo(view.safeAreaLayoutGuide)
+      make.right.equalTo(view.safeAreaLayoutGuide)
+    }
+    
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goToTodoList(_:)), for: .touchUpInside) }
     
@@ -91,18 +99,18 @@ class HomeViewController: UIViewController {
     stackView.axis = .vertical
     stackView.alignment = .fill
     stackView.distribution = .fill
-    stackView.spacing = 25
+    stackView.spacing = 15
           
     view.addSubview(stackView)
-      
-    stackView.snp.makeConstraints { make in
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-40)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(90)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-90)
-    }
     
+    stackView.snp.makeConstraints { make in
+      make.centerX.equalTo(view)
+      make.top.equalTo(bgCircleView.snp.top).offset(45)
+      make.width.equalTo(view.snp.width).multipliedBy(0.45)
+    }
+
   }
-  
+   
   @objc func goToTodoList(_ button: UIButton) {
     let todoListVC = TodoListViewController()
     
@@ -124,19 +132,33 @@ class HomeViewController: UIViewController {
   }
   
 }
+
 extension HomeViewController: UITableViewDelegate {
+  
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return 1
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    notifyTableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
+    
+    return "🔺Weekly Tasks:"
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 30
+  }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return todos.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 50
-  }
+    return 42
   }
   
-
-
+}
+  
 extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -151,7 +173,7 @@ extension HomeViewController: UITableViewDataSource {
     
   }
   
-  @objc func checkMarkButtonClicked( sender: UIButton) {
+  @objc func checkMarkButtonClicked(sender: UIButton) {
     if sender.isSelected {
       sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
     }
@@ -160,6 +182,15 @@ extension HomeViewController: UITableViewDataSource {
     }
     // toggle between true and false
     sender.isSelected.toggle()
+    
+  }
+  
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    let addNoteTVC = ToDoFormTableViewController()
+    addNoteTVC.todo = todos[indexPath.row]
+    addNoteTVC.delegate = self
+    navigationController?.pushViewController(addNoteTVC, animated: true)
+    
   }
   
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
@@ -168,8 +199,32 @@ extension HomeViewController: UITableViewDataSource {
       todos.remove(at: indexPath.row)
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
-      }
+    } else if editingStyle == .insert {
+      // 1. update model
+      let todo = Todo(title: "")
+      todos.insert(todo, at: 0)
+      // 2. update view
+      notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+    }
+    
   }
   
 }
 
+extension HomeViewController: ToDoFormTableViewControllerDelegate {
+  
+  func add(todo: Todo) {
+    todos.append(todo)
+    notifyTableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
+    
+  }
+  
+  func edit(todo: Todo) {
+    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
+      todos[selectedIndexPath.row] = todo
+      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+    }
+    
+  }
+  
+}

@@ -10,7 +10,7 @@ import SnapKit
 
 class ContractionTimerViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium)
+  let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium, color: .red)
  
   var userConstractionRecords : [contractions]?
   var newRecord: contractions?
@@ -102,7 +102,7 @@ class ContractionTimerViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     addSubview()
     snpConstraints()

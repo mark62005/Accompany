@@ -12,7 +12,13 @@ class OurBabyViewController: UIViewController {
   
   let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
 
-  let nameTitle = TitleLabel(title: "Baby's name", size: .mini, color: .black)
+  let nameTitle = TitleLabel(title: "Baby's name", size: .small, color: .black)
+  
+  let babyIconTextField = UITextField()
+  
+  let icons = ["👶🏻", "👶🏼", "👶", "👶🏽", "👶🏿"]
+  
+  var pickerView = UIPickerView()
   
   let leftNumberTitle = TitleLabel(title: "", size: .mini, color: .black)
   let leftTitle = TitleLabel(title: "Days left", size: .mini, color: .grey)
@@ -21,7 +27,7 @@ class OurBabyViewController: UIViewController {
   let contentView: UIView = {
     let contentView = UIView()
     contentView.backgroundColor = .white
-    contentView.layer.cornerRadius = 13
+    contentView.layer.cornerRadius = 15
     contentView.translatesAutoresizingMaskIntoConstraints = false
     
     return contentView
@@ -39,13 +45,19 @@ class OurBabyViewController: UIViewController {
     
     return contentLabel
   }()
+  
+  let lineSeperator: UIView = {
+    let line = UIView()
+    line.translatesAutoresizingMaskIntoConstraints = false
+    line.backgroundColor = #colorLiteral(red: 0.7442027926, green: 0.6809862256, blue: 0.9618487954, alpha: 1)
+    
+    line.snp.makeConstraints { make in
+      make.height.equalTo(2)
+    }
+    
+    return line
+  }()
 
-  let babyIconTextField = UITextField()
-  
-  let icons = ["👶🏻", "👶🏼", "👶", "👶🏽", "👶🏿"]
-  
-  var pickerView = UIPickerView()
-  
   let babyImageView = ImageView()
   
   let datePicker: UIDatePicker = {
@@ -95,7 +107,7 @@ class OurBabyViewController: UIViewController {
     babyIconTextField.snp.makeConstraints { make in
       make.top.equalTo(babyTitle.snp.bottom)
       make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.19)
+      make.width.equalTo(view.snp.width).multipliedBy(0.18)
       make.height.equalTo(babyIconTextField.snp.width).multipliedBy(0.8)
     }
     
@@ -113,7 +125,7 @@ class OurBabyViewController: UIViewController {
     view.addSubview(stackView)
 
     stackView.snp.makeConstraints { make in
-      make.top.equalTo(babyIconTextField.snp.bottom).offset(20)
+      make.top.equalTo(babyIconTextField.snp.bottom).offset(15)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.9)
     }
@@ -141,7 +153,7 @@ class OurBabyViewController: UIViewController {
     }()
 
     let showTitleDateStack: UIStackView = {
-      let stackView = UIStackView(arrangedSubviews: [contentLabel,titleAndDueStack, titlesStack])
+      let stackView = UIStackView(arrangedSubviews: [contentLabel, lineSeperator, titleAndDueStack, titlesStack])
       stackView.axis = .vertical
       stackView.distribution = .fill
       stackView.alignment = .fill
@@ -207,7 +219,7 @@ class OurBabyViewController: UIViewController {
       }
       
     } else {
-      leftNumberTitle.text = "\(differenceDays) days"
+      leftNumberTitle.text = "\(differenceDays) Days"
     }
     
   }

@@ -15,16 +15,21 @@ class RecordsViewController: UIViewController {
   let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
   let goToQAButton = PrimaryButton(title: "Q&A To Obstetrician")
+  
+  let bgCircleView = ImageView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupTitle()
-    setupButtons()
+    bgCircleView.image = UIImage(named: "grey-bg")
+    
+    setupLayout()
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
     
   }
   
-  private func setupTitle() {
+  private func setupLayout() {
     
     view.addSubview(recordLabel)
     recordLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
@@ -35,13 +40,15 @@ class RecordsViewController: UIViewController {
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
     
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Record", style: .plain, target: nil, action: nil)
-  
-  }
-  
-  private func setupButtons() {
-
+    view.addSubview(bgCircleView)
+    
+    bgCircleView.snp.makeConstraints { make in
+      make.top.equalTo(recordLabel.snp.bottom).offset(40)
+      make.centerX.equalTo(view)
+      make.left.equalTo(view.safeAreaLayoutGuide)
+      make.right.equalTo(view.safeAreaLayoutGuide)
+    }
+    
     let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     
@@ -50,13 +57,12 @@ class RecordsViewController: UIViewController {
     
     vStack.spacing = 45
   
-    
     vStack.snp.makeConstraints { make in
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
-      make.top.equalTo(recordLabel.snp.bottom).offset(50)
+      make.top.equalTo(bgCircleView.snp.top).offset(70)
     }
-
+ 
   }
   
   @objc func goTo(_ button: UIButton) {

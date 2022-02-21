@@ -37,16 +37,24 @@ enum Services: CustomStringConvertible, CaseIterable {
 
 class ServicesViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: nil, size: .medium, color: .red)
+  let titleLabel = TitleLabel(title: "Service", size: .medium, color: .red)
+  
+  let bgImage = ImageView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    bgImage.image = UIImage(named: "grey-bg")
 
-    setupTitleLabel()
+    setupLayout()
     setupButtons()
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Service", style: .plain, target: nil, action: nil)
+        
   }
   
-  private func setupTitleLabel() {
+  private func setupLayout() {
     view.addSubview(titleLabel)
     
     titleLabel.snp.makeConstraints { make in
@@ -54,6 +62,16 @@ class ServicesViewController: UIViewController {
       make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
+    
+    view.addSubview(bgImage)
+    
+    bgImage.snp.makeConstraints { make in
+      make.top.equalTo(titleLabel.snp.bottom).offset(40)
+      make.centerX.equalTo(view)
+      make.left.equalTo(view.safeAreaLayoutGuide)
+      make.right.equalTo(view.safeAreaLayoutGuide)
+    }
+    
   }
   
   private func setupButtons() {
@@ -79,7 +97,7 @@ class ServicesViewController: UIViewController {
     view.addSubview(vStack)
     
     vStack.snp.makeConstraints { make in
-      make.top.equalTo(titleLabel.snp.bottom).offset(50)
+      make.top.equalTo(bgImage.snp.top).offset(60)
       make.centerX.equalTo(view.safeAreaLayoutGuide)
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
     }
@@ -120,6 +138,7 @@ class ServicesViewController: UIViewController {
     default:
       return
     }
+    
   }
     
 }

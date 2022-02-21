@@ -11,6 +11,7 @@
 		430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */; };
 		430F6D8E27BF67E40095DB8D /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */; };
 		430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */; };
+		4325CD4A27C4506D0065A206 /* TodoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4325CD4927C4506D0065A206 /* TodoHeaderView.swift */; };
 		4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */; };
 		4354219727BDD88C002160DA /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4354219627BDD88C002160DA /* Todo.swift */; };
 		437721DE27ADE4E700EC8A98 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721DD27ADE4E700EC8A98 /* AppDelegate.swift */; };
@@ -55,6 +56,7 @@
 		430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
 		430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsOfUseViewController.swift; sourceTree = "<group>"; };
 		430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedbackViewController.swift; sourceTree = "<group>"; };
+		4325CD4927C4506D0065A206 /* TodoHeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoHeaderView.swift; sourceTree = "<group>"; };
 		4354218C27BC66B2002160DA /* ContractionTimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContractionTimerViewController.swift; sourceTree = "<group>"; };
 		4354219627BDD88C002160DA /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
 		437721DA27ADE4E700EC8A98 /* Accompany.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Accompany.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -256,6 +258,7 @@
 		43FB2AEF27BDDB70004A641D /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
+				4325CD4927C4506D0065A206 /* TodoHeaderView.swift */,
 				6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */,
 				43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */,
 				43FB2B1227BE415A004A641D /* TodoCell.swift */,
@@ -490,6 +493,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6C1FC57627BF2454007D625E /* ImageView.swift in Sources */,
+				4325CD4A27C4506D0065A206 /* TodoHeaderView.swift in Sources */,
 				430F6D8E27BF67E40095DB8D /* TermsOfUseViewController.swift in Sources */,
 				64EF106D27B717C600167984 /* ToDoFormTableViewController.swift in Sources */,
 				4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */,

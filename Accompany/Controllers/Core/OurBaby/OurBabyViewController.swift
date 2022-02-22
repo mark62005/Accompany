@@ -38,7 +38,7 @@ class OurBabyViewController: UIViewController {
     contentLabel.text = "Hello🖐🏻 I'm your little baby.\n So excited to see this world!\n Can't wait to see everyone❤️"
     contentLabel.textColor = .gray
     contentLabel.textAlignment = .center
-    contentLabel.font = UIFont.systemFont(ofSize: 18)
+    contentLabel.font = UIFont.systemFont(ofSize: 17)
     contentLabel.numberOfLines = 0
     contentLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
     contentLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -214,7 +214,7 @@ class OurBabyViewController: UIViewController {
       
       button.snp.makeConstraints { make in
         make.centerX.equalTo(contentView)
-        make.bottom.equalTo(contentView.snp.bottom)
+        make.bottom.equalTo(contentView.snp.bottom).offset(-5)
         make.width.equalTo(view.snp.width).multipliedBy(0.33)
       }
       

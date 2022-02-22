@@ -41,7 +41,6 @@ class TodoListViewController: UIViewController {
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))
-    
   
   }
   

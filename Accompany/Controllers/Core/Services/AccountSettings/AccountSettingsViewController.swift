@@ -61,9 +61,19 @@ class AccountSettingsViewController: UIViewController {
 
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
+    deleteAccountButton.addTarget(self, action: #selector(deleteAlert(_:)), for: .touchUpInside)
+    
     setupTitle()
     setupVStack()
   }
+  
+  @objc func deleteAlert(_ sender: UIButton) {
+    let alert = UIAlertController(title: "Delete this account?", message: "Deleting this account will also delete its data.", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: nil))
+    alert.addAction(UIAlertAction(title: "Delete", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
+  }
+  
   
   private func setupTitle() {
     view.addSubview(titleLabel)

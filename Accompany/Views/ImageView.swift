@@ -15,7 +15,6 @@ class ImageView: UIImageView {
   
   convenience init() {
     self.init(frame: .zero)
-//    self.backgroundColor = .white
     self.translatesAutoresizingMaskIntoConstraints = false
 
   }

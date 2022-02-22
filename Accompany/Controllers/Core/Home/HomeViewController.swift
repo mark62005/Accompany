@@ -19,8 +19,9 @@ class HomeViewController: UIViewController {
   let afterButton = SecondaryButton(title: Trimester.after.rawValue)
   
   let notifyTableView: UITableView = {
-    let notifyTableView = UITableView()
+    let notifyTableView = UITableView(frame: .zero, style: .plain)
     notifyTableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
+    notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
     
@@ -138,13 +139,11 @@ extension HomeViewController: UITableViewDelegate {
   func numberOfSections(in tableView: UITableView) -> Int {
     return 1
   }
-
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    notifyTableView.contentInset = UIEdgeInsets(top: -20, left: 0, bottom: 0, right: 0)
-    
-    return "🔺Weekly Tasks:"
-  }
   
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    return tableView.dequeueReusableHeaderFooterView(withIdentifier: TodoHeaderView.identifier) as? TodoHeaderView
+  }
+    
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 30
   }
@@ -164,24 +163,11 @@ extension HomeViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
     let toDo = todos[indexPath.row]
+    cell.delegate = self
     cell.update(with: toDo)
-    cell.isCompleteButton.setImage(UIImage(systemName: "circle"), for: .normal)
-    cell.isCompleteButton.addTarget(self, action: #selector(checkMarkButtonClicked(sender:)), for: .touchUpInside)
     cell.backgroundColor = .white
     
     return cell
-    
-  }
-  
-  @objc func checkMarkButtonClicked(sender: UIButton) {
-    if sender.isSelected {
-      sender.setImage(UIImage(systemName: "checkmark.circle"), for: .normal)
-    }
-    else {
-      sender.setImage(UIImage(systemName: "circle"), for: .normal)
-    }
-    // toggle between true and false
-    sender.isSelected.toggle()
     
   }
   
@@ -207,6 +193,24 @@ extension HomeViewController: UITableViewDataSource {
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
     
+  }
+  
+}
+
+extension HomeViewController: TodoCellDelegate {
+  
+  func isCompleteButtonTapped(sender: TodoCell) {
+    if let indexPath = notifyTableView.indexPath(for: sender) {
+      var todo = todos[indexPath.row]
+      todo.isCompleted.toggle()
+      
+      // update model
+      todos[indexPath.row] = todo
+      
+      notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      
+      // TODO: save changes to database
+    }
   }
   
 }

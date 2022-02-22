@@ -37,9 +37,9 @@ struct Todo: Codable {
   //given a different title property, since the cell will need to display this property.
   static func loadSampleToDos() -> [Todo] {
     let todo1 = Todo(title: "Ask Medical History", isCompleted: false, note: "test1")
-    let todo2 = Todo(title: "MTHFR Gene Testing", isCompleted: true, note: "test2")
+    let todo2 = Todo(title: "MTHFR Gene Testing", isCompleted: false, note: "test2")
     let todo3 = Todo(title: "Nutrition Counseling & Patient Instructions (D3 Testing)", isCompleted: false, note: "test test")
-    let todo4 = Todo(title: "First Ultrasound", isCompleted: true, note: "testestetset")
+    let todo4 = Todo(title: "First Ultrasound", isCompleted: false, note: "testestetset")
     
     return [todo1, todo2, todo3, todo4]
   }

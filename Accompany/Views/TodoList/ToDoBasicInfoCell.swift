@@ -44,6 +44,12 @@ class ToDoBasicInfoCell : UITableViewCell {
     stackView.snp.makeConstraints { make in
       make.edges.equalTo(self.contentView).inset(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
     }
+    
+    for subview in toDoTextField.subviews {
+      if let toDoTextFieldLabel = subview as? UILabel {
+        toDoTextFieldLabel.numberOfLines = 0
+      }
+    }
   }
   
   required init?(coder: NSCoder) {

@@ -15,6 +15,8 @@ class TermsOfUseViewController: UIViewController {
     super.viewDidLoad()
 
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+  
+    setupLayout()
   }
   
   private func setupLayout() {

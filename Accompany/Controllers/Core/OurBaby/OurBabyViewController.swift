@@ -214,7 +214,7 @@ class OurBabyViewController: UIViewController {
       
       button.snp.makeConstraints { make in
         make.centerX.equalTo(contentView)
-        make.bottom.equalTo(contentView.snp.bottom)
+        make.bottom.equalTo(contentView.snp.bottom).offset(-5)
         make.width.equalTo(view.snp.width).multipliedBy(0.33)
       }
       

@@ -10,37 +10,45 @@ import SnapKit
 
 class RecordsViewController: UIViewController {
   
-  let recordLabel = TitleLabel(title: "Record While Pregnancy", size: .medium, color: .red)
+  let recordLabel = TitleLabel(title: "Record While\nPregnancy", size: .medium, color: .red)
   
   let goToAlbumButton = SecondaryButton(title: "Photo Album")
   let goToTimerButton = PrimaryButton(title: "Contraction Timer")
   let goToQAButton = PrimaryButton(title: "Q&A To Obstetrician")
+  
+  let bgCircleView = ImageView()
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupTitle()
-    setupButtons()
+    bgCircleView.image = UIImage(named: "grey-bg")
+    
+    setupLayout()
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "Record", style: .plain, target: nil, action: nil)
     
   }
   
-  private func setupTitle() {
+  private func setupLayout() {
     
     view.addSubview(recordLabel)
-    
+    recordLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+
     recordLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
     }
     
-    self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Record", style: .plain, target: nil, action: nil)
-  
-  }
-  
-  private func setupButtons() {
-
+    view.addSubview(bgCircleView)
+    
+    bgCircleView.snp.makeConstraints { make in
+      make.top.equalTo(recordLabel.snp.bottom).offset(40)
+      make.centerX.equalTo(view)
+      make.left.equalTo(view.safeAreaLayoutGuide)
+      make.right.equalTo(view.safeAreaLayoutGuide)
+    }
+    
     let buttons = [goToAlbumButton, goToTimerButton, goToQAButton]
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
     
@@ -49,13 +57,12 @@ class RecordsViewController: UIViewController {
     
     vStack.spacing = 45
   
-    
     vStack.snp.makeConstraints { make in
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
-      make.top.equalTo(recordLabel.snp.bottom).offset(80)
+      make.top.equalTo(bgCircleView.snp.top).offset(70)
     }
-
+ 
   }
   
   @objc func goTo(_ button: UIButton) {

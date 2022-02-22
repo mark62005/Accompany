@@ -8,9 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol TodoCellDelegate {
+  func isCompleteButtonTapped(sender: TodoCell)
+}
+
 class TodoCell: UITableViewCell {
   
   static let identifier = "TodoCell"
+  
+  var delegate: TodoCellDelegate?
     
   let isCompleteButton : UIButton = {
     let button = UIButton()
@@ -19,6 +25,7 @@ class TodoCell: UITableViewCell {
     button.isUserInteractionEnabled = true
     button.isSelected = false
     button.translatesAutoresizingMaskIntoConstraints = false
+    
     return button
   }()
 
@@ -45,6 +52,7 @@ class TodoCell: UITableViewCell {
       make.right.equalTo(contentView).offset(-10)
     }
     isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
+
   }
   
   required init?(coder: NSCoder) {
@@ -52,12 +60,14 @@ class TodoCell: UITableViewCell {
   }
   
   func update(with todo: Todo) {
+    self.isCompleteButton.isSelected = todo.isCompleted
     self.titleLabel.text = todo.title
     self.titleLabel.textColor = .black
   }
   
   @objc func buttonTapped(sender: UIButton) {
     sender.isSelected.toggle()
+    delegate?.isCompleteButtonTapped(sender: self)
   }
     
 }

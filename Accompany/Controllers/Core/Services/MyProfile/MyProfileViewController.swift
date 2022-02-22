@@ -7,11 +7,9 @@
 
 import UIKit
 import SnapKit
-import QuartzCore
 
-class MyProfileViewController: UIViewController {
+class MyProfileViewController: CustomTextViewController {
   
-  let titleLabel = TitleLabel(title: Services.myProfile.description, size: .medium, color: .red)
   let userImageView = UIImageView(image: UIImage(systemName: "photo.on.rectangle"))
   
   let nameLabel: UILabel = {
@@ -31,14 +29,14 @@ class MyProfileViewController: UIViewController {
     
     return label
   }()
-  
-  let bioTextField = TextField(text: "Introduce yourself")
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
+    titleLabel.text = Services.myProfile.description
+
     userImageView.layer.cornerRadius = 10
     
     navigationItem.rightBarButtonItem = editButtonItem
@@ -46,18 +44,17 @@ class MyProfileViewController: UIViewController {
     setupLayout()
     
     setPlaceholderText()
+    
+//    self.dismissKeyboard()
   }
-  
   
   private func setPlaceholderText() {
     nameLabel.text = "Username"
     emailLabel.text = "example@email.com"
-//    bioLabel.text = "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
+    textView.text = "Introduce Yourself"
   }
   
-  private func setupLayout() {
-    
-    view.addSubview(titleLabel)
+  func setupLayout() {
     
     titleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
@@ -78,9 +75,6 @@ class MyProfileViewController: UIViewController {
     let nameAndEmailStack = VStack(arrangedSubviews: [nameLabel, emailLabel])
     nameAndEmailStack.spacing = 5
     
-//    let vStack = VStack(arrangedSubviews: [userImageView, nameAndEmailStack])
-//    vStack.alignment = .center
-    
     view.addSubview(nameAndEmailStack)
     
     nameAndEmailStack.snp.makeConstraints { make in
@@ -89,28 +83,18 @@ class MyProfileViewController: UIViewController {
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
     }
     
-    view.addSubview(bioTextField)
+    view.addSubview(textView)
     
-    bioTextField.snp.makeConstraints { make in
+    textView.snp.makeConstraints { make in
       make.top.equalTo(nameAndEmailStack.snp.bottom).offset(20)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.9)
-      make.height.equalTo(bioTextField.snp.width).multipliedBy(0.9)
-      make.left.equalTo(bioTextField.snp.left).offset(5)
+      make.height.equalTo(textView.snp.width).multipliedBy(0.9)
+      make.left.equalTo(textView.snp.left).offset(5)
     }
     
   }
   
-  
-//  private func setupImage() {
-//    view.addSubview(userImageView)
-//
-//    userImageView.snp.makeConstraints { make in
-//      make.top.equalTo(titleLabel.snp.bottom).offset(6)
-//      make.centerX.equalTo(view)
-//      make.width.equalTo(view.snp.width).multipliedBy(0.4)
-//      make.height.equalTo(userImageView.snp.width).multipliedBy(1)
-//    }
-//  }
-  
 }
+
+

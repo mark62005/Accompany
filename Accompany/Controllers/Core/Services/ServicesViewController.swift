@@ -66,11 +66,11 @@ class ServicesViewController: UIViewController {
     view.addSubview(bgImage)
     
     bgImage.snp.makeConstraints { make in
-      make.top.equalTo(titleLabel.snp.bottom).offset(20)
+      make.top.equalTo(titleLabel.snp.bottom).offset(15)
       make.centerX.equalTo(view)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
-      make.bottom.equalTo(view.safeAreaLayoutGuide)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(2)
     }
     
   }

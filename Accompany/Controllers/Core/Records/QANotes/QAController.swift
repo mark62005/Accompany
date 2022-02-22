@@ -13,22 +13,7 @@ class DoctorNoteViewController: UIViewController {
   var noteContent : String?
   
   let titleLabel = TitleLabel(title: "Q&A To\nObstetrician", size: .medium, color: .red)
-  
-//  let titleLabel : UILabel = {
-//    let label = UILabel()
-//    label.text = """
-//                  Q&A To
-//                  Obstetrician
-//                """
-//    label.font = UIFont(name: "SimpleBoy", size: 50)
-//    label.textColor = #colorLiteral(red: 0.9926157594, green: 0.3876789808, blue: 0.5335384011, alpha: 1)
-//    label.numberOfLines =
-//    label.textAlignment = .center
-//    label.setLineSpacing(lineSpacing: 1, lineHeightMultiple: 0.5)
-//
-//    return label
-//  }()
-  
+
   let rightBarButton : UIButton = {
     let button = UIButton()
     button.setTitle("Edit", for: .normal)

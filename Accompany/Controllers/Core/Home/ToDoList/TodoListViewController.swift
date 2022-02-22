@@ -30,7 +30,9 @@ class TodoListViewController: UIViewController {
     view.addSubview(tableView)
     
     // fetch todos
-    todos = Todo.loadSampleToDos()
+    if todos.isEmpty {
+      todos = Todo.loadSampleToDos()
+    }
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.bottom.equalTo(tableView.snp.top).offset(-20)
       make.centerX.equalTo(view)
@@ -129,9 +131,7 @@ extension TodoListViewController: UITableViewDataSource {
     attributedString.setAttributes([NSAttributedString.Key.font:fontSuper!, NSAttributedString.Key.baselineOffset:10], range: NSRange(location: string.count, length: superScript.count))
     print()
     label.attributedText = attributedString
-    
   }
-  
 }
 
 extension TodoListViewController: ToDoFormTableViewControllerDelegate {

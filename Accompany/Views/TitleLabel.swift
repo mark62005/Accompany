@@ -63,7 +63,7 @@ class TitleLabel: UILabel {
   
   func setupLayout(superView: UIView) {
     self.snp.makeConstraints { make in
-      make.top.equalTo(superView).offset(30)
+      make.top.equalTo(superView.safeAreaLayoutGuide).offset(30)
       make.centerX.equalTo(superView)
       make.width.equalTo(superView.snp.width).multipliedBy(0.8)
     }

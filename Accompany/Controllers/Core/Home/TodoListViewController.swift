@@ -30,7 +30,9 @@ class TodoListViewController: UIViewController {
     view.addSubview(tableView)
     
     // fetch todos
-    todos = Todo.loadSampleToDos()
+    if todos.isEmpty {
+      todos = Todo.loadSampleToDos()
+    }
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.top.equalTo(view.safeAreaLayoutGuide).offset(60)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(50)

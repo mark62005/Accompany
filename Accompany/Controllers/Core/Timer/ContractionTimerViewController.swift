@@ -14,13 +14,37 @@ class ContractionTimerViewController: UIViewController {
  
   var userConstractionRecords : [contractions]?
   var newRecord: contractions?
-  
+  var timerValue : String?
   var todaysRecord = [[String]]()
+  
+  var currentRecordingTitle: String?
+  var currentRecordingTime: String?
+  
+  var startTime: Date?
+  var stopTime: Date?
+  
+  let userDefaults = UserDefaults.standard
+  
+  var START_TIME_KEY = "startTime"
+  var STOP_TIME_KEY = "stopTime"
+  var COUNTING_KEY = "countingKey"
+  var scheduledTimer: Timer!
+  
+  
+  var inRecordsTab: Bool = false {
+    didSet {
+      recordList.isHidden = !inRecordsTab
+      contractionAndRecordTab.setTitle(inRecordsTab ? "Contraction" : "Records", for: .normal)
+      titleLabel.text = inRecordsTab ? "Records" : "Contraction Timer"
+    }
+  }
+  
   var timerCounting: Bool = false {
     didSet {
       stopButton.isEnabled = timerCounting
     }
   }
+  
   var isContracting: Bool = false {
     didSet {
       if timerCounting {
@@ -36,31 +60,14 @@ class ContractionTimerViewController: UIViewController {
     }
   }
   
-  var currentRecordingTitle: String?
-  var currentRecordingTime: String?
-  
-  var startTime: Date?
-  var stopTime: Date?
-  
-  let userDefaults = UserDefaults.standard
-  
-  var START_TIME_KEY = "startTime"
-  var STOP_TIME_KEY = "stopTime"
-  var COUNTING_KEY = "countingKey"
-  var scheduledTimer: Timer!
-  
-  var timerTabButton = PrimaryButton(title: "Contraction")
-  
-  var recordTabButton = SecondaryButton(title: "Records")
-  
-  var timerAndRecordNavBarStackView : UIStackView = {
-    let stackview = UIStackView()
-    stackview.axis = .horizontal
-    stackview.distribution = .fillEqually
-    stackview.alignment = .center
-    stackview.spacing = 10
+  var contractionAndRecordTab : UIButton = {
+    let button = UIButton()
+    button.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
+    button.setTitle("Records", for: .normal)
+    button.setTitleColor(.white, for: .normal)
+    button.addTarget(self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
     
-    return stackview
+    return button
   }()
   
   var buttonsStackView : UIStackView = {
@@ -73,43 +80,73 @@ class ContractionTimerViewController: UIViewController {
     return buttonsStackView
   }()
   
-  var timerLabel : UILabel = {
-    let timerLabel = UILabel()
-    timerLabel.text = "00:00"
-    timerLabel.textAlignment = .center
-    timerLabel.font = .boldSystemFont(ofSize: 50)
+  let timerLabelStackView : UIStackView = {
+    let stackView = UIStackView()
+    stackView.distribution = .equalSpacing
+    stackView.axis = .horizontal
+    stackView.alignment = .top
     
-    return timerLabel
+    return stackView
   }()
   
-  var startButton = PrimaryButton(title: "Save")
-  var stopButton = OutlineButton(title: "Stop & Save")
+  var minutesLabel : UILabel = {
+    let label = UILabel()
+    label.text = "00"
+    label.font = UIFont(name: "Didot", size: 60)
+
+    return label
+  }()
+  
+  var minutesSignLabel : UILabel = {
+    let label = UILabel()
+    label.text = "M"
+    label.font = UIFont(name: "Didot", size: 20)
+    
+    return label
+  }()
+  
+  var secondsLabel : UILabel = {
+    let label = UILabel()
+    label.text = "00"
+    label.font = UIFont(name: "Didot", size: 60)
+    
+    return label
+  }()
+  
+  var secondsSignLabel : UILabel = {
+    let label = UILabel()
+    label.text = "S"
+    label.font = UIFont(name: "Didot", size: 20)
+    
+    return label
+  }()
+  
+  var startButton = PrimaryButton(title: "Start")
+  var stopButton = OutlineButton(title: "Save record")
   
   var timerAndButtonStackView : UIStackView = {
     let timerAndButtonStackView = UIStackView()
     timerAndButtonStackView.axis = .vertical
-    timerAndButtonStackView.distribution = .fillEqually
+    timerAndButtonStackView.distribution = .equalSpacing
     timerAndButtonStackView.alignment = .center
+    timerAndButtonStackView.spacing = 30
     
     return timerAndButtonStackView
   }()
   
-  var recordList : UITableView = {
-    let recordList = UITableView()
-    recordList.isHidden = true
-    return recordList
+  var currentRecordList : UITableView = {
+    let tableView = UITableView()
+    return tableView
   }()
+  
+  var recordList = UITableView()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    self.view.backgroundColor = #colorLiteral(red: 1, green: 0.9019607843, blue: 0.8832569771, alpha: 1)
     
     addSubview()
     snpConstraints()
-    
-    recordList.delegate = self
-    recordList.dataSource = self
-    recordList.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
+    tableViewsSetup()
     
     startTime = userDefaults.object(forKey: START_TIME_KEY) as? Date
     stopTime = userDefaults.object(forKey: STOP_TIME_KEY) as? Date
@@ -118,9 +155,7 @@ class ContractionTimerViewController: UIViewController {
     stopButton.isEnabled = timerCounting
     
     startButton.addTarget(self, action: #selector(startRestTimer), for: .touchUpInside)
-    stopButton.addTarget(self, action: #selector(resetTimer), for: .touchUpInside)
-    timerTabButton.addTarget(self, action: #selector(timerTabButtonTapped), for: .touchUpInside)
-    recordTabButton.addTarget(self, action: #selector(recordTabButtonTapped), for: .touchUpInside)
+    stopButton.addTarget(self, action: #selector(stopTimer), for: .touchUpInside)
     
     if timerCounting {
       startTimer()
@@ -134,22 +169,82 @@ class ContractionTimerViewController: UIViewController {
         }
       }
     }
+    
+    userConstractionRecords = [
+      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:04"),details(state: "Rest", length: "00:04")]),
+      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:06"),details(state: "Rest", length: "00:02")])]
+    newRecord =
+      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:04"),details(state: "Rest", length: "00:07")])
+    
   }
   
   func addSubview(){
-    timerAndRecordNavBarStackView.addArrangedSubview(timerTabButton)
-    timerAndRecordNavBarStackView.addArrangedSubview(recordTabButton)
     buttonsStackView.addArrangedSubview(startButton)
     buttonsStackView.addArrangedSubview(stopButton)
-    timerAndButtonStackView.addArrangedSubview(timerLabel)
+ 
+    timerLabelStackView.addArrangedSubview(minutesLabel)
+    timerLabelStackView.addArrangedSubview(minutesSignLabel)
+    timerLabelStackView.addArrangedSubview(secondsLabel)
+    timerLabelStackView.addArrangedSubview(secondsSignLabel)
+ 
+    timerAndButtonStackView.addArrangedSubview(timerLabelStackView)
     timerAndButtonStackView.addArrangedSubview(buttonsStackView)
     
-    view.addSubview(timerAndRecordNavBarStackView)
     view.addSubview(titleLabel)
-    view.addSubview(recordList)
     view.addSubview(timerAndButtonStackView)
+    view.addSubview(currentRecordList)
+    view.addSubview(recordList)
+    view.addSubview(contractionAndRecordTab)
   }
   
+  private func snpConstraints() {
+    
+    titleLabel.snp.makeConstraints { make in
+      make.width.equalTo(view.snp.width)
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+    }
+    
+    timerAndButtonStackView.snp.makeConstraints { make in
+      make.top.equalTo(titleLabel.snp.bottom)
+      make.width.equalTo(view.snp.width)
+    }
+    
+    buttonsStackView.snp.makeConstraints { make in
+      make.left.equalTo(timerAndButtonStackView.snp.left).offset(50)
+      make.right.equalTo(timerAndButtonStackView.snp.right).offset(-50)
+    }
+    
+    currentRecordList.snp.makeConstraints { make in
+      make.top.equalTo(timerAndButtonStackView.snp.bottom).offset(15)
+      make.width.equalTo(view.snp.width)
+      make.bottom.equalTo(contractionAndRecordTab.snp.top)
+    }
+    
+    recordList.snp.makeConstraints { make in
+      make.top.equalTo(titleLabel.snp.bottom)
+      make.left.equalTo(view.snp.left)
+      make.right.equalTo(view.snp.right)
+      make.bottom.equalTo(contractionAndRecordTab.snp.top)
+    }
+    
+    contractionAndRecordTab.snp.makeConstraints { make in
+      make.centerX.equalTo(view.snp.centerX)
+      make.width.equalTo(view.snp.width)
+      make.height.equalTo(50)
+      make.bottom.equalTo(-15 + -(self.tabBarController!.tabBar.frame.size.height))
+    }
+  }
+  
+  func tableViewsSetup() {
+    recordList.delegate = self
+    recordList.dataSource = self
+    recordList.register(UITableViewCell.self, forCellReuseIdentifier: "savedRecordCell")
+    currentRecordList.register(UITableViewCell.self, forCellReuseIdentifier: "currentRecordCell")
+    currentRecordList.delegate = self
+    currentRecordList.dataSource = self
+    recordList.isHidden = true
+  }
+
   func setStartTime(date: Date?){
     startTime = date
     userDefaults.set(startTime, forKey: START_TIME_KEY)
@@ -189,6 +284,7 @@ class ContractionTimerViewController: UIViewController {
     scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
     setTimerCounting(true)
     newRecord = contractions(contractionDate: Date(), contractionRecord: [])
+    currentRecordList.reloadData()
     isContracting.toggle()
   }
   
@@ -204,8 +300,9 @@ class ContractionTimerViewController: UIViewController {
   
   func setTimeLabel(_ val: Int){
     let time = secondsToMinutesSeconds(val)
-    let timeString = makeTimeString(min: time.0, sec: time.1)
-    timerLabel.text = timeString
+    minutesLabel.text = String(format: "%02d", time.0)
+    secondsLabel.text = String(format: "%02d", time.1)
+    timerValue = makeTimeString(min: time.0, sec: time.1)
   }
   
   func secondsToMinutesSeconds(_ ms: Int) -> (Int, Int){
@@ -215,29 +312,36 @@ class ContractionTimerViewController: UIViewController {
     return (min, sec)
   }
   
-  func makeTimeString(min: Int, sec: Int) -> String{
+  func makeTimeString(min: Int, sec: Int) -> String {
     var timeString  = ""
     timeString += String(format: "%02d", min)
     timeString += ":"
     timeString += String(format: "%02d", sec)
-    
     return timeString
   
   }
   
   func recordData(){
     if timerCounting {
-      newRecord?.contractionRecord?.append(details(state: currentRecordingTitle!, length: timerLabel.text!))
+      newRecord?.contractionRecord?.append(details(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      currentRecordList.reloadData()
     } else {
       newRecord = nil
       newRecord = contractions(contractionDate: Date(), contractionRecord: [])
     }
     setStartTime(date: Date())
-    timerLabel.text = makeTimeString(min: 0, sec: 0)
+    minutesLabel.text = "00"
+    secondsLabel.text = "00"
   }
   
-  func stopTimer(){
+  @objc func contractionAndRecordTabTapped() {
+    inRecordsTab.toggle()
+  }
+  
+  @objc func stopTimer(){
     if newRecord != nil {
+      newRecord?.contractionRecord?.append(details(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      currentRecordList.reloadData()
       if userConstractionRecords != nil {
         userConstractionRecords?.append(newRecord!)
       } else {
@@ -258,124 +362,108 @@ class ContractionTimerViewController: UIViewController {
   @objc func resetTimer(){
     setStopTime(date: nil)
     setStartTime(date: nil)
-    timerLabel.text = makeTimeString(min: 0, sec: 0)
-  }
-  
-  @objc func timerTabButtonTapped(){
-    timerTabButton.isEnabled = false
-    recordTabButton.isEnabled = true
-    timerAndButtonStackView.isHidden = false
-    recordList.isHidden = true
-  }
-  
-  @objc func recordTabButtonTapped(){
-    recordTabButton.isEnabled = false
-    timerTabButton.isEnabled = true
-    recordList.isHidden = false
-    timerAndButtonStackView.isHidden = true
-  }
-  
-  private func snpConstraints() {
-    timerAndButtonStackView.snp.makeConstraints{ (make) -> Void in
-      make.top.equalTo(titleLabel.snp.bottom)
-      make.width.equalTo(self.view.safeAreaLayoutGuide.snp.width)
-      //make.bottom.equalTo(0).offset(-50)
-      make.height.equalTo(view.frame.width / 2)
-    }
-    
-    titleLabel.snp.makeConstraints{(make) -> Void in
-      make.width.equalTo(view.frame.width)
-      make.top.equalTo(timerAndRecordNavBarStackView.snp.bottom)
-      make.height.equalTo(200)
-    }
-    
-    timerLabel.snp.makeConstraints{(make) -> Void in
-      make.top.equalTo(titleLabel.snp.bottom)
-      make.width.equalTo(timerAndButtonStackView.snp.width)
-      make.height.equalTo(80)
-    }
-    
-    buttonsStackView.snp.makeConstraints{(make) -> Void in
-      make.left.equalTo(timerAndButtonStackView.snp.left).offset(50)
-      make.right.equalTo(timerAndButtonStackView.snp.right).offset(-50)
-      make.height.equalTo(80)
-    }
-    
-    recordList.snp.makeConstraints{(make) -> Void in
-      make.top.equalTo(timerAndRecordNavBarStackView.snp.bottom)
-      make.left.equalTo(view.snp.left)
-      make.right.equalTo(view.snp.right)
-      make.bottom.equalTo(view.snp.bottom)
-    }
-    
-    timerTabButton.snp.makeConstraints { make in
-    make.height.equalTo(30)
-    }
-    
-    timerAndRecordNavBarStackView.snp.makeConstraints { make in
-    make.top.equalTo(self.view.safeAreaLayoutGuide.snp.top)
-    make.left.equalTo(0).offset(50)
-    make.right.equalTo(0).offset(-50)
-    make.height.equalTo(30)
-    }
+    minutesLabel.text = "00"
+    secondsLabel.text = "00"
   }
 }
 
 extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSource {
-  
+
   func numberOfSections(in tableView: UITableView) -> Int {
-    return userConstractionRecords?.count ?? 0
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    let currentCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section))
-    let currentCellisSelected = currentCell?.isSelected ?? false
-    
-    if currentCellisSelected && indexPath.row != 0 {
-      return tableView.rowHeight
-    } else if !currentCellisSelected && indexPath.row != 0 {
-      return 0
-    }
-    
-    return tableView.rowHeight
-  }
-  
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let rows = userConstractionRecords?[section].contractionRecord?.count {
-    return rows + 1
-    }
-  return 0
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell =  UITableViewCell(style: .value1, reuseIdentifier: "cell")
-    if indexPath.row == 0 {
-      let dateformatter = DateFormatter()
-      dateformatter.dateFormat = "E, d MMM yyyy - HH:mm:ss"
-      cell.textLabel?.text = dateformatter.string(from: userConstractionRecords![indexPath.section].contractionDate!)
+    if tableView == recordList {
+      return userConstractionRecords?.count ?? 0
     } else {
-      let detailrows = indexPath.row - 1
-      cell.textLabel?.text = userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].state
-      cell.detailTextLabel?.text = String(userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].length ?? "1")
-        cell.backgroundColor = (indexPath.row % 2) == 0 ? .white : #colorLiteral(red: 0.9490194917, green: 0.9490197301, blue: 0.9533253312, alpha: 1)
+      return 1
     }
-    cell.clipsToBounds = true
-    return cell
+  }
+
+  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    if tableView == currentRecordList {
+      tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+      tableView.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+      return "Length"
+    }
+    return nil
+  }
+  
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    return 50
+  }
+  
+  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    if let header = view as? UITableViewHeaderFooterView {
+      header.contentView.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.4588235294, blue: 0.968627451, alpha: 1)
+      header.textLabel?.textColor = UIColor.white
+      header.textLabel?.textAlignment = .center
+      header.textLabel?.frame.size.width = view.safeAreaLayoutGuide.layoutFrame.width
+    }
+  }
+    
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    if tableView == recordList {
+      let currentCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section))
+      let currentCellisSelected = currentCell?.isSelected ?? false
+      if currentCellisSelected && indexPath.row != 0 {
+        return tableView.rowHeight
+      } else if !currentCellisSelected && indexPath.row != 0 {
+        return 0
+      }
+      return tableView.rowHeight
+    } else {
+      return tableView.rowHeight
+    }
+  }
+
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tableView == recordList {
+      if let rows = userConstractionRecords?[section].contractionRecord?.count {
+        return rows + 1
+      }
+      return 0
+    } else {
+      return newRecord?.contractionRecord?.count ?? 0
+    }
+  }
+
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    
+    if tableView == recordList {
+      let cell =  UITableViewCell(style: .value1, reuseIdentifier: "savedRecordCell")
+      if indexPath.row == 0 {
+          let dateformatter = DateFormatter()
+          dateformatter.dateFormat = "E, d MMM yyyy - HH:mm:ss"
+          cell.textLabel?.text = dateformatter.string(from: userConstractionRecords![indexPath.section].contractionDate!)
+        } else {
+          
+          let detailrows = indexPath.row - 1
+          cell.textLabel?.text = userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].state
+          cell.detailTextLabel?.text = String((userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].length)!)
+            cell.backgroundColor = (indexPath.row % 2) == 0 ? .white : #colorLiteral(red: 0.9490194917, green: 0.9490197301, blue: 0.9533253312, alpha: 1)
+        }
+      cell.clipsToBounds = true
+      return cell
+    } else {
+      let cell1 =  UITableViewCell(style: .value1, reuseIdentifier: "currentRecordCell")
+      cell1.textLabel?.text = newRecord?.contractionRecord?[indexPath.row].state
+      cell1.detailTextLabel?.text = String((newRecord?.contractionRecord?[indexPath.row].length)!)
+      cell1.clipsToBounds = false
+      return cell1
+    }
   }
 
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    print(userConstractionRecords!)
+    //print(userConstractionRecords!)
 //    let currentCell = tableView.cellForRow(at: indexPath)
 ////    if currentCell!.isSelected {
 ////      currentCell?.isSelected = false
 ////      }
-      tableView.beginUpdates()
-      tableView.endUpdates()
+    guard tableView == recordList else { return }
+    tableView.beginUpdates()
+    tableView.endUpdates()
   }
-  
+
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
-      print(indexPath.section)
       userConstractionRecords?.remove(at: indexPath.section)
       tableView.reloadData()
     }

@@ -13,7 +13,7 @@ class ToDoNotesCell: UITableViewCell {
   let noteTextView: UITextView = {
     let textView = UITextView()
     textView.translatesAutoresizingMaskIntoConstraints = false
-    textView.font = .boldSystemFont(ofSize: 15)
+    textView.font = .boldSystemFont(ofSize: 18)
     textView.isUserInteractionEnabled = true
     return textView
   }()

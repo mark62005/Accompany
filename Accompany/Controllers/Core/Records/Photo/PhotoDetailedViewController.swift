@@ -16,6 +16,7 @@ class PhotoDetailedViewController: UIViewController {
     let imageView = UIImageView()
     imageView.image = UIImage(systemName: "photo.on.rectangle")
     imageView.backgroundColor = .clear
+    imageView.translatesAutoresizingMaskIntoConstraints = false
     
     return imageView
   }()

@@ -65,7 +65,8 @@ class OurBabyViewController: UIViewController {
     datePicker.timeZone = NSTimeZone.local
     datePicker.backgroundColor = .white
     datePicker.addTarget(self, action: #selector(datePickerValueChanged(_:)), for: .valueChanged)
-
+    datePicker.translatesAutoresizingMaskIntoConstraints = false
+    
     return datePicker
   }()
   

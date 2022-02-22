@@ -15,6 +15,7 @@ enum CellContent: CustomStringConvertible, CaseIterable {
   
   var description: String {
     switch self {
+      
     case .privacyPolicy:
       return """
       Privacy Policy
@@ -185,6 +186,7 @@ enum CellContent: CustomStringConvertible, CaseIterable {
 
       By email: accompany@accompany.com
       """
+      
     case .termsOfUse:
       return """
       Terms and Conditions
@@ -292,6 +294,7 @@ enum CellContent: CustomStringConvertible, CaseIterable {
 
       By email: accompany@accompany.com
       """
+      
     case.aboutAccompany:
       return """
     Looking for the most user-friendly pregnant application in the world? Come to Use Accompany!
@@ -303,7 +306,7 @@ enum CellContent: CustomStringConvertible, CaseIterable {
      ·Help you calculate the days left before your baby's due date. We will be looking forward to welcoming this baby to come together.
      ·Record photos and notes in this app. After your ultrasound, don’t forget to upload your baby’s sonograms. Create your own baby’s album. We believe all memories are cherishable and worth recording.
      ·Use our contraction timer to record your contraction. Analyzes the duration and frequency of contractions. It is one of the ways to estimate when you need to go to hospital.
-     ·Read useful pregnant articles from our app. These articles are all from the NHS website pregnancy club. Read more information and help you get relieved.
+//     ·Read useful pregnant articles from our app. These articles are all from the NHS website pregnancy club. Read more information and help you get relieved.
      ·Invite your partner or your family to have all datas in this app. They can get detailed information from this app. Your partner can easily know when the next time you need to see an obstetrician. ( IT IS THE MOST IMPORTANT PART WE WANT TO CREATE!!)
     """
       

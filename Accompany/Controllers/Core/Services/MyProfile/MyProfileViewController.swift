@@ -42,10 +42,8 @@ class MyProfileViewController: CustomTextViewController {
     navigationItem.rightBarButtonItem = editButtonItem
     
     setupLayout()
-    
     setPlaceholderText()
     
-//    self.dismissKeyboard()
   }
   
   private func setPlaceholderText() {

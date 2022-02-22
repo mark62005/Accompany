@@ -83,9 +83,9 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
       imagePicker.allowsEditing = true
 
       self.present(imagePicker, animated: true, completion: nil)
-      }
-
     }
+
+  }
 
   func openPhotoGallery() {
 
@@ -96,7 +96,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
       imagePicker.allowsEditing = true
 
       self.present(imagePicker, animated: true, completion: nil)
-      }
+    }
     
   }
 
@@ -104,7 +104,6 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
     collectionView.delegate = self
     collectionView.dataSource = self
-
     collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
     
   }
@@ -162,8 +161,8 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
        return section1
       
-       }
-     }
+      }
+    }
     return layout
 
   }
@@ -184,26 +183,19 @@ extension BabySonogramController: UICollectionViewDelegate {
 //
   }
 
-  
-
 }
 
 extension BabySonogramController: UICollectionViewDataSource {
   
   func numberOfSections(in collectionView: UICollectionView) -> Int {
-    
     return 2
-    
   }
   
   func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
     return 20
-    
   }
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
 
     return cell

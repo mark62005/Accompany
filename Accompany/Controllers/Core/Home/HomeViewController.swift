@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
+    notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
   }()
@@ -83,6 +84,7 @@ class HomeViewController: UIViewController {
       make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
+      make.bottom.equalTo(bgCircleView.snp.top).offset(-10)
     }
     
     view.addSubview(bgCircleView)
@@ -92,6 +94,7 @@ class HomeViewController: UIViewController {
       make.top.equalTo(notifyTableView.snp.bottom).offset(30)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(10)
     }
     
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
@@ -187,10 +190,10 @@ extension HomeViewController: UITableViewDataSource {
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
-      // 1. update model
+    // 1. update model
       let todo = Todo(title: "")
       todos.insert(todo, at: 0)
-      // 2. update view
+    // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
     

@@ -26,10 +26,10 @@ class CustomTextViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    
     view.addSubview(titleLabel)
     view.addSubview(textView)
-    
-   
+  
   }
 
 }
@@ -41,4 +41,3 @@ extension CustomTextViewController {
   }
 
 }
-

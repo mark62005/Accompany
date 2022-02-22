@@ -44,6 +44,7 @@ class TodoCell: UITableViewCell {
     stackView.alignment = .fill
     stackView.distribution = .fill
     stackView.spacing = 10
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     
     contentView.addSubview(stackView)
     stackView.snp.makeConstraints { make in

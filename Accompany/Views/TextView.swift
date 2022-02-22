@@ -11,7 +11,7 @@ class TextView: UITextView {
 
   required init?(coder: NSCoder) {
     super.init(coder: coder)
-    textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+    
     self.text = text
     self.font = .systemFont(ofSize: 16, weight: .regular)
     self.backgroundColor = .white
@@ -20,6 +20,7 @@ class TextView: UITextView {
     self.isEditable = true
     self.isSelectable = true
     self.translatesAutoresizingMaskIntoConstraints = false
+    textContainerInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
 
     if let text = text {
       self.text = text

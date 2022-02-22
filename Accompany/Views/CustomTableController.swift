@@ -46,8 +46,8 @@ class CustomTableController: UIViewController {
     contentTableView.snp.makeConstraints { make in
       make.top.equalTo(titleLabel.snp.bottom)
       make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.95)
-      make.height.equalTo(view.snp.height).multipliedBy(0.7)
+      make.width.equalTo(view.snp.width).multipliedBy(0.9)
+      make.height.equalTo(view.snp.height).multipliedBy(0.8)
     }
     
   }

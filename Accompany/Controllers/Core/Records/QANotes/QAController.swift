@@ -18,6 +18,8 @@ class DoctorNoteViewController: UIViewController {
     let button = UIButton()
     button.setTitle("Edit", for: .normal)
     button.setTitleColor(.blue, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
+    
     return button
   }()
   
@@ -25,6 +27,8 @@ class DoctorNoteViewController: UIViewController {
     let textView = UITextView()
     textView.isUserInteractionEnabled = false
     textView.font = .boldSystemFont(ofSize: 20)
+    textView.translatesAutoresizingMaskIntoConstraints = false
+    
     return textView
   }()
   
@@ -41,6 +45,8 @@ class DoctorNoteViewController: UIViewController {
     stackView.distribution = .fill
     //stackView.spacing = 20
     stackView.alignment = .center
+    stackView.translatesAutoresizingMaskIntoConstraints = false
+    
     return stackView
   }()
   
@@ -56,19 +62,19 @@ class DoctorNoteViewController: UIViewController {
     }
   }
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
-      view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-      
-      addSubview()
-      
-      titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-      
-      DrNoteTextView.text = noteContent
-      self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
-      rightBarButton.addTarget(self, action: #selector(rightBarButtonTapped), for: .touchUpInside)
-    }
+  override func viewDidLoad() {
+    super.viewDidLoad()
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
+    addSubview()
+    
+    titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
+    
+    DrNoteTextView.text = noteContent
+    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
+    rightBarButton.addTarget(self, action: #selector(rightBarButtonTapped), for: .touchUpInside)
+  }
+  
   private func addSubview() {
     noteViewContainer.addSubview(DrNoteTextView)
     titleAndNoteStackView.addArrangedSubview(titleLabel)
@@ -105,5 +111,6 @@ class DoctorNoteViewController: UIViewController {
   
   @objc func rightBarButtonTapped() {
     isEditingTextView.toggle()
+    
   }
 }

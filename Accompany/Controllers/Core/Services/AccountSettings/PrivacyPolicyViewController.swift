@@ -7,26 +7,29 @@
 
 import UIKit
 
-class PrivacyPolicyViewController: UIViewController {
-  
-  let privacyTitle = TitleLabel(title: AccountSettings.privacyPolicy.rawValue, size: .medium, color: .red)
+class PrivacyPolicyViewController: CustomTableController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    titleLabel.text = AccountSettings.privacyPolicy.rawValue
     
+    configureTableView()
+    contentTableView.dataSource = self
     setupLayout()
+    
+  }
+    
+}
+
+extension PrivacyPolicyViewController: UITableViewDataSource {
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 1
   }
   
-  private func setupLayout() {
-    view.addSubview(privacyTitle)
-    
-    privacyTitle.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
-    }
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    contentCell.contentTextLabel.text = CellContent.privacyPolicy.description
+    return contentCell
   }
     
 }

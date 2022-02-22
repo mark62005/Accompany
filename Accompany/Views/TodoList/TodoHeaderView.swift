@@ -15,7 +15,7 @@ class TodoHeaderView: UITableViewHeaderFooterView {
   var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .systemFont(ofSize: 20, weight: .bold)
+    label.font = .systemFont(ofSize: 20, weight: .regular)
     label.text = "🔺Weekly Tasks:"
     
     return label

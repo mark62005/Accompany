@@ -32,18 +32,7 @@ class MyProfileViewController: UIViewController {
     return label
   }()
   
-  let bioTextField: UITextField = {
-    let bioTextField = UITextField()
-    bioTextField.translatesAutoresizingMaskIntoConstraints = false
-    bioTextField.font = .systemFont(ofSize: 16, weight: .regular)
-    bioTextField.text = "Introduce yourself"
-    bioTextField.backgroundColor = .white
-    bioTextField.textAlignment = .left
-    bioTextField.contentVerticalAlignment = .fill
-    bioTextField.layer.cornerRadius = 13
-  
-    return bioTextField
-  }()
+  let bioTextField = TextField(text: "Introduce yourself")
 
   override func viewDidLoad() {
     super.viewDidLoad()

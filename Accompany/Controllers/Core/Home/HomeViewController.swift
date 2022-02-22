@@ -56,6 +56,7 @@ class HomeViewController: UIViewController {
   private func configureTableView() {
     notifyTableView.delegate = self
     notifyTableView.dataSource = self
+    notifyTableView.sectionHeaderTopPadding = .zero
   }
   
   private func setupLayout() {

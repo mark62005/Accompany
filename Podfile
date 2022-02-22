@@ -8,6 +8,10 @@ target 'Accompany' do
   # Pods for Accompany
   pod 'SnapKit', '~> 5.0.0'
   pod 'Gallery'
+
+  # Firebase
+  pod 'Firebase/Auth'
+  pod 'Firebase/Firestore'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

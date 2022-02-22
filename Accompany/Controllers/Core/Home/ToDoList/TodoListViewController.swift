@@ -31,7 +31,7 @@ class TodoListViewController: UIViewController {
     
     // fetch todos
     if todos.isEmpty {
-      todos = Todo.loadSampleToDos()
+//      todos = Todo.loadSampleToDos()
     }
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.bottom.equalTo(tableView.snp.top).offset(-20)
@@ -115,7 +115,7 @@ extension TodoListViewController: UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
       // 1. update model
-      let todo = Todo(title: "")
+      let todo = Todo(id: "0", title: "")
       todos.insert(todo, at: 0)
       // 2. update view
       tableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)

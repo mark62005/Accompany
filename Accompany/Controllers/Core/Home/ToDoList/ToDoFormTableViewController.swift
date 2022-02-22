@@ -52,7 +52,7 @@ class ToDoFormTableViewController: UITableViewController {
     let isComplete = toDoBasicInfoCell.isCompleteButton.isSelected
     let todoTitle = toDoBasicInfoCell.toDoTextField.text!
     let note = toDoNotesCell.noteTextView.text ?? ""
-    let newTodo = Todo(title: todoTitle, isCompleted: isComplete, note: note)
+    let newTodo = Todo(id: "0", title: todoTitle, isCompleted: isComplete, note: note)
     
     if todo != nil {
       delegate?.edit(todo: newTodo)

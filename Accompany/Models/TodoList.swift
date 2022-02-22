@@ -18,7 +18,7 @@ enum Trimester: String {
 
 struct TodoList {
   
-  var id = UUID()
+  var id: String
   var trimester: Trimester
   var todos: [Todo]?
   

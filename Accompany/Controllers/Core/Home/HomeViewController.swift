@@ -39,10 +39,17 @@ class HomeViewController: UIViewController {
     bgCircleView.image = UIImage(named: "grey-bg")
     
     // TODO: fetch todos
-    todos = Todo.loadSampleToDos()
+    Task {
+      do {
+        todos = try await DatabaseManager.shared.fetchTodos()
+        
+        configureTableView()
+        setupLayout()
+      } catch {
+        print("Error: \(error)")
+      }
+    }
     
-    configureTableView()
-    setupLayout()
     
     UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
            .textColor = UIColor.black
@@ -188,7 +195,7 @@ extension HomeViewController: UITableViewDataSource {
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
       // 1. update model
-      let todo = Todo(title: "")
+      let todo = Todo(id: "0", title: "")
       todos.insert(todo, at: 0)
       // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)

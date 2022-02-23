@@ -47,7 +47,9 @@ class MyProfileViewController: CustomTextViewController, ProfileDetailDelegate {
 
     configTableView()
     setupLayout()
-    
+   
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "My Profile", style: .plain, target: nil, action: nil)
   }
   
   @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {

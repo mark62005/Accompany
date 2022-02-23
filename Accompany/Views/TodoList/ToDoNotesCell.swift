@@ -15,6 +15,7 @@ class ToDoNotesCell: UITableViewCell {
     textView.translatesAutoresizingMaskIntoConstraints = false
     textView.font = .boldSystemFont(ofSize: 18)
     textView.isUserInteractionEnabled = true
+  
     return textView
   }()
   

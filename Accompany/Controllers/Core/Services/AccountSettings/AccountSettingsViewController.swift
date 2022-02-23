@@ -65,6 +65,9 @@ class AccountSettingsViewController: UIViewController {
     
     setupTitle()
     setupVStack()
+    
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+      title: Services.accountSettings.description, style: .plain, target: nil, action: nil)
   }
   
   @objc func deleteAlert(_ sender: UIButton) {

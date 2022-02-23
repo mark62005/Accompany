@@ -7,26 +7,30 @@
 
 import UIKit
 
-class TermsOfUseViewController: UIViewController {
-  
-  let termsOfUseTitle = TitleLabel(title: AccountSettings.termsOfUse.rawValue, size: .medium, color: .red)
+class TermsOfUseViewController: CustomTableController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
 
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    titleLabel.text = "Terms Of Use"
+    
+    configureTableView()
+    contentTableView.dataSource = self
   
     setupLayout()
   }
   
-  private func setupLayout() {
-    view.addSubview(termsOfUseTitle)
-    
-    termsOfUseTitle.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
-    }
-  }
+}
 
+extension TermsOfUseViewController: UITableViewDataSource {
+ 
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    return 1
+  }
+  
+  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    contentCell.contentTextLabel.text = CellContent.termsOfUse.description
+    return contentCell
+  }
+    
 }

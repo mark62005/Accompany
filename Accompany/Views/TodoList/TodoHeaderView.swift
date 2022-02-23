@@ -15,7 +15,7 @@ class TodoHeaderView: UITableViewHeaderFooterView {
   var titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .systemFont(ofSize: 20, weight: .bold)
+    label.font = .systemFont(ofSize: 20, weight: .regular)
     label.text = "🔺Weekly Tasks:"
     
     return label
@@ -26,7 +26,7 @@ class TodoHeaderView: UITableViewHeaderFooterView {
     
     contentView.addSubview(titleLabel)
     titleLabel.snp.makeConstraints { make in
-      make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0))
+      make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 2, left: 10, bottom: 0, right: 0))
     }
   }
   

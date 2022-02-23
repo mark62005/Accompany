@@ -17,6 +17,7 @@ class QAController: UIViewController, UIScrollViewDelegate {
     let button = UIButton()
     button.setTitle("Edit", for: .normal)
     button.setTitleColor(.systemBlue, for: .normal)
+    button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
   }()
@@ -25,6 +26,7 @@ class QAController: UIViewController, UIScrollViewDelegate {
     let textView = UITextView()
     textView.isUserInteractionEnabled = false
     textView.font = .boldSystemFont(ofSize: 18)
+    textView.translatesAutoresizingMaskIntoConstraints = false
     
     return textView
   }()
@@ -46,26 +48,25 @@ class QAController: UIViewController, UIScrollViewDelegate {
     DrNoteTextView.isUserInteractionEnabled.toggle()
   }
   
-  
   let scrollView : UIScrollView = {
     let scrollView = UIScrollView()
     return scrollView
   }()
   
-    override func viewDidLoad() {
-      super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
       
-      addSubview()
-      keyboardHasShown()
-      DrNoteTextView.text = noteContent
+    addSubview()
+    keyboardHasShown()
+    DrNoteTextView.text = noteContent
       
-      navigationItem.rightBarButtonItem = editButtonItem
+    navigationItem.rightBarButtonItem = editButtonItem
       
-      scrollView.delegate = self
-      scrollView.contentSize = CGSize(width:self.view.safeAreaLayoutGuide.layoutFrame.width, height: self.view.safeAreaLayoutGuide.layoutFrame.height)
-      scrollView.frame.size.height = view.safeAreaLayoutGuide.layoutFrame.height
-    }
-    
+    scrollView.delegate = self
+    scrollView.contentSize = CGSize(width:self.view.safeAreaLayoutGuide.layoutFrame.width, height: self.view.safeAreaLayoutGuide.layoutFrame.height)
+    scrollView.frame.size.height = view.safeAreaLayoutGuide.layoutFrame.height
+  }
+  
   private func addSubview() {
     noteViewContainer.addSubview(DrNoteTextView)
     scrollView.addSubview(titleLabel)
@@ -101,7 +102,6 @@ class QAController: UIViewController, UIScrollViewDelegate {
       make.edges.equalTo(UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
     }
   }
-
   
   func keyboardHasShown(){
       NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)

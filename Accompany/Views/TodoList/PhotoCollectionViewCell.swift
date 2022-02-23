@@ -19,7 +19,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(photoView)
     contentView.backgroundColor = .white
     
-    photoView.image = UIImage(systemName: "photo.on.rectangle")
+    photoView.image = UIImage(named: "logo-app")
 
     photoView.snp.makeConstraints { make in
       make.left.equalTo(contentView.snp.left).offset(5)
@@ -28,10 +28,9 @@ class PhotoCollectionViewCell: UICollectionViewCell {
       make.bottom.equalTo(contentView.snp.bottom).offset(5)
     }
   }
-    
+  
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-
 
 }

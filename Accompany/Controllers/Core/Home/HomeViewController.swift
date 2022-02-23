@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
+    notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
   }()
@@ -56,41 +57,45 @@ class HomeViewController: UIViewController {
   private func configureTableView() {
     notifyTableView.delegate = self
     notifyTableView.dataSource = self
+    notifyTableView.sectionHeaderTopPadding = .zero
   }
   
   private func setupLayout() {
-    let titleArrayStack = UIStackView(arrangedSubviews: [accompanyTitleLabel, welcomeTitleLabel])
-    titleArrayStack.axis = .vertical
-    titleArrayStack.alignment = .fill
-    titleArrayStack.distribution = .fill
-    titleArrayStack.spacing = 1
-    titleArrayStack.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addSubview(titleArrayStack)
+    view.addSubview(accompanyTitleLabel)
     
-    titleArrayStack.snp.makeConstraints { make in
+    accompanyTitleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
+      make.centerX.equalTo(view)
     }
     
+    view.addSubview(welcomeTitleLabel)
+    
+    welcomeTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(3)
+      make.centerX.equalTo(view)
+    }
+
     view.addSubview(notifyTableView)
        
     notifyTableView.backgroundColor = .white
      
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
-      make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
+      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
+   
     }
     
     view.addSubview(bgCircleView)
 
     bgCircleView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(notifyTableView.snp.bottom).offset(30)
+      make.top.equalTo(notifyTableView.snp.bottom).offset(20)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(3)
     }
     
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
@@ -186,10 +191,10 @@ extension HomeViewController: UITableViewDataSource {
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
-      // 1. update model
+    // 1. update model
       let todo = Todo(title: "")
       todos.insert(todo, at: 0)
-      // 2. update view
+    // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
     

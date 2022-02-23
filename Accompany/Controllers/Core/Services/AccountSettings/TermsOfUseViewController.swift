@@ -23,6 +23,7 @@ class TermsOfUseViewController: CustomTableController {
 }
 
 extension TermsOfUseViewController: UITableViewDataSource {
+ 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
   }

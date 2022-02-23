@@ -44,6 +44,7 @@ class TodoCell: UITableViewCell {
     stackView.alignment = .fill
     stackView.distribution = .fill
     stackView.spacing = 10
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     
     contentView.addSubview(stackView)
     stackView.snp.makeConstraints { make in
@@ -51,6 +52,7 @@ class TodoCell: UITableViewCell {
       make.left.equalTo(contentView).offset(10)
       make.right.equalTo(contentView).offset(-10)
     }
+    
     isCompleteButton.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
 
   }

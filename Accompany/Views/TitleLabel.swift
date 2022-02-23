@@ -42,7 +42,6 @@ class TitleLabel: UILabel {
       self.font = UIFont(name: "SimpleBoy", size: 50)
     case .large:
       self.font = UIFont(name: "SimpleBoy", size: 60)
-      
     }
     
     switch color {
@@ -61,7 +60,7 @@ class TitleLabel: UILabel {
   required init?(coder: NSCoder) {
     fatalError("init(coder:) has not been implemented")
   }
-  
+//  
   func setupLayout(superView: UIView) {
     self.snp.makeConstraints { make in
       make.top.equalTo(superView.safeAreaLayoutGuide).offset(30)

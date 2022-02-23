@@ -20,6 +20,7 @@ class SecondaryButton: UIButton {
 //    self.backgroundColor = #colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1)
     self.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.4588235294, blue: 0.968627451, alpha: 1)
     self.layer.cornerRadius = 16
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
   
   required init?(coder: NSCoder) {

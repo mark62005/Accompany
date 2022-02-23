@@ -9,7 +9,7 @@ import UIKit
 
 class PregnantArticlesTableViewController: UITableViewController {
   
-  let pregnantArticlesTitle = TitleLabel(title: Services.pregnantArticles.description, size: .medium, color: .red)
+  let articlesTitle = TitleLabel(title: Services.pregnantArticles.description, size: .medium, color: .red)
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -22,9 +22,9 @@ class PregnantArticlesTableViewController: UITableViewController {
   // MARK: - Table view data source
   
   func setupLayout() {
-    view.addSubview(pregnantArticlesTitle)
+    view.addSubview(articlesTitle)
     
-    pregnantArticlesTitle.snp.makeConstraints { make in
+    articlesTitle.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)

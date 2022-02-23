@@ -17,6 +17,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     button.setImage(UIImage(systemName: "checkmark.circle.fill"), for: .selected)
     button.isSelected = false
     button.setContentHuggingPriority(.init(rawValue: 251), for: .horizontal)
+    button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
   }()
@@ -26,6 +27,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     textField.textAlignment = .left
     textField.font = .boldSystemFont(ofSize: 30)
     textField.placeholder = "Title"
+    textField.translatesAutoresizingMaskIntoConstraints = false
     
     return textField
   }()
@@ -38,6 +40,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     stackView.alignment = .fill
     stackView.distribution = .fill
     stackView.spacing = 10
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     
     contentView.addSubview(stackView)
     

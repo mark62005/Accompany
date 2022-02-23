@@ -16,6 +16,7 @@ class PrivacyPolicyViewController: CustomTableController {
     
     configureTableView()
     contentTableView.dataSource = self
+    
     setupLayout()
     
   }
@@ -23,6 +24,7 @@ class PrivacyPolicyViewController: CustomTableController {
 }
 
 extension PrivacyPolicyViewController: UITableViewDataSource {
+  
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     return 1
   }

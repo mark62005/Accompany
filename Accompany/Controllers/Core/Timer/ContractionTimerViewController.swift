@@ -66,6 +66,7 @@ class ContractionTimerViewController: UIViewController {
     button.setTitle("Records", for: .normal)
     button.setTitleColor(.white, for: .normal)
     button.addTarget(self, action: #selector(contractionAndRecordTabTapped), for: .touchUpInside)
+    button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
   }()
@@ -76,6 +77,7 @@ class ContractionTimerViewController: UIViewController {
     buttonsStackView.distribution = .fillEqually
     buttonsStackView.alignment = .center
     buttonsStackView.spacing = 10
+    buttonsStackView.translatesAutoresizingMaskIntoConstraints = false
     
     return buttonsStackView
   }()
@@ -85,6 +87,7 @@ class ContractionTimerViewController: UIViewController {
     stackView.distribution = .equalSpacing
     stackView.axis = .horizontal
     stackView.alignment = .top
+    stackView.translatesAutoresizingMaskIntoConstraints = false
     
     return stackView
   }()
@@ -93,6 +96,7 @@ class ContractionTimerViewController: UIViewController {
     let label = UILabel()
     label.text = "00"
     label.font = UIFont(name: "Didot", size: 60)
+    label.translatesAutoresizingMaskIntoConstraints = false
 
     return label
   }()
@@ -101,6 +105,7 @@ class ContractionTimerViewController: UIViewController {
     let label = UILabel()
     label.text = "M"
     label.font = UIFont(name: "Didot", size: 20)
+    label.translatesAutoresizingMaskIntoConstraints = false
     
     return label
   }()
@@ -109,6 +114,7 @@ class ContractionTimerViewController: UIViewController {
     let label = UILabel()
     label.text = "00"
     label.font = UIFont(name: "Didot", size: 60)
+    label.translatesAutoresizingMaskIntoConstraints = false
     
     return label
   }()
@@ -117,6 +123,7 @@ class ContractionTimerViewController: UIViewController {
     let label = UILabel()
     label.text = "S"
     label.font = UIFont(name: "Didot", size: 20)
+    label.translatesAutoresizingMaskIntoConstraints = false
     
     return label
   }()
@@ -130,12 +137,15 @@ class ContractionTimerViewController: UIViewController {
     timerAndButtonStackView.distribution = .equalSpacing
     timerAndButtonStackView.alignment = .center
     timerAndButtonStackView.spacing = 30
+    timerAndButtonStackView.translatesAutoresizingMaskIntoConstraints = false
     
     return timerAndButtonStackView
   }()
   
   var currentRecordList : UITableView = {
     let tableView = UITableView()
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    
     return tableView
   }()
   

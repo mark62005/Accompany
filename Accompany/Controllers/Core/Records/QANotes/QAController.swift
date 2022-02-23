@@ -4,20 +4,19 @@
 //
 //  Created by Kelbin David on 2022-02-17.
 //
-
 import UIKit
 import SnapKit
 
-class DoctorNoteViewController: UIViewController {
+class QAController: UIViewController, UIScrollViewDelegate {
 
   var noteContent : String?
   
-  let titleLabel = TitleLabel(title: "Q&A To\nObstetrician", size: .medium, color: .red)
-
+  let titleLabel = TitleLabel(title: "Q&A To Obstetrician", size: .medium)
+  
   let rightBarButton : UIButton = {
     let button = UIButton()
     button.setTitle("Edit", for: .normal)
-    button.setTitleColor(.blue, for: .normal)
+    button.setTitleColor(.systemBlue, for: .normal)
     button.translatesAutoresizingMaskIntoConstraints = false
     
     return button
@@ -26,7 +25,7 @@ class DoctorNoteViewController: UIViewController {
   let DrNoteTextView : UITextView = {
     let textView = UITextView()
     textView.isUserInteractionEnabled = false
-    textView.font = .boldSystemFont(ofSize: 20)
+    textView.font = .boldSystemFont(ofSize: 18)
     textView.translatesAutoresizingMaskIntoConstraints = false
     
     return textView
@@ -35,82 +34,90 @@ class DoctorNoteViewController: UIViewController {
   let noteViewContainer : UIView = {
     let view = UIView()
     view.backgroundColor = .white
-    
+    view.layer.cornerRadius = 15
     return view
   }()
   
-  let titleAndNoteStackView : UIStackView = {
-    let stackView = UIStackView()
-    stackView.axis = .vertical
-    stackView.distribution = .fill
-    //stackView.spacing = 20
-    stackView.alignment = .center
-    stackView.translatesAutoresizingMaskIntoConstraints = false
-    
-    return stackView
-  }()
-  
-  var isEditingTextView : Bool = false {
-    didSet {
-      rightBarButton.setTitle(isEditingTextView ? "Save" : "Edit", for: .normal)
-      if isEditingTextView {
-        DrNoteTextView.becomeFirstResponder()
-      } else {
-        noteContent = DrNoteTextView.text
-      }
-      DrNoteTextView.isUserInteractionEnabled.toggle()
+  override func setEditing(_ editing: Bool, animated: Bool) {
+    super.setEditing(editing, animated: animated)
+    if isEditing {
+      DrNoteTextView.becomeFirstResponder()
+    } else {
+      noteContent = DrNoteTextView.text
     }
+    DrNoteTextView.isUserInteractionEnabled.toggle()
   }
+  
+  let scrollView : UIScrollView = {
+    let scrollView = UIScrollView()
+    return scrollView
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
+      
     addSubview()
-    
-    titleLabel.lineBreakMode = NSLineBreakMode.byWordWrapping
-    
+    keyboardHasShown()
     DrNoteTextView.text = noteContent
-    self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: rightBarButton)
-    rightBarButton.addTarget(self, action: #selector(rightBarButtonTapped), for: .touchUpInside)
+      
+    navigationItem.rightBarButtonItem = editButtonItem
+      
+    scrollView.delegate = self
+    scrollView.contentSize = CGSize(width:self.view.safeAreaLayoutGuide.layoutFrame.width, height: self.view.safeAreaLayoutGuide.layoutFrame.height)
+    scrollView.frame.size.height = view.safeAreaLayoutGuide.layoutFrame.height
   }
   
   private func addSubview() {
     noteViewContainer.addSubview(DrNoteTextView)
-    titleAndNoteStackView.addArrangedSubview(titleLabel)
-    titleAndNoteStackView.addArrangedSubview(noteViewContainer)
-    view.addSubview(titleAndNoteStackView)
+    scrollView.addSubview(titleLabel)
+    scrollView.addSubview(noteViewContainer)
+    view.addSubview(scrollView)
     addConstraints()
-    
   }
   
   private func addConstraints() {
-    titleAndNoteStackView.snp.makeConstraints { make in
-      make.edges.equalTo(UIEdgeInsets(top: 100, left: 30, bottom: 100, right: 30))
+    
+    scrollView.snp.makeConstraints { make in
+      make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+      make.left.equalTo(view.safeAreaLayoutGuide.snp.left)
+      make.right.equalTo(view.safeAreaLayoutGuide.snp.right)
+      make.bottom.equalTo(0)
+    }
+    
+    titleLabel.snp.makeConstraints { make in
+      make.top.equalTo(scrollView.snp.top)
+      make.centerX.equalTo(scrollView.snp.centerX)
+      make.width.equalTo(view.frame.width - 150)
     }
     
     noteViewContainer.snp.makeConstraints{ make in
-      make.left.right.bottom.equalTo(0)
+      make.centerX.equalTo(scrollView.snp.centerX)
+      make.width.equalTo(view.frame.width - 60)
+      make.height.equalTo(view.safeAreaLayoutGuide.layoutFrame.width)
+      make.bottom.equalTo(scrollView.snp.bottom)
       make.top.equalTo(titleLabel.snp.bottom)
     }
     
     DrNoteTextView.snp.makeConstraints{ make in
       make.edges.equalTo(UIEdgeInsets(top: 15, left: 15, bottom: 15, right: 15))
     }
-    
-    rightBarButton.snp.makeConstraints{ make in
-      make.width.equalTo(40)
-    }
-    
-    titleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide)
-      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
-      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
-    }
   }
   
-  @objc func rightBarButtonTapped() {
-    isEditingTextView.toggle()
+  func keyboardHasShown(){
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasShown(_:)), name: UIResponder.keyboardDidShowNotification, object: nil)
+      NotificationCenter.default.addObserver(self, selector: #selector(keyboardWasHidden(_:)), name: UIResponder.keyboardDidHideNotification, object: nil )
+  }
+  
+  @objc func keyboardWasShown(_ notification: NSNotification){
     
+      guard let info = notification.userInfo, let keyboardFrameValue = info[ UIResponder.keyboardFrameBeginUserInfoKey] as? NSValue else { return }
+      let keyboardFrame = keyboardFrameValue.cgRectValue
+      let keyboardSize = keyboardFrame.size
+      scrollView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+    scrollView.scrollIndicatorInsets = UIEdgeInsets(top: 0, left: 0, bottom: keyboardSize.height, right: 0)
+  }
+  
+  @objc func keyboardWasHidden(_ notification: NotificationCenter){
+    scrollView.contentInset = .zero
   }
 }

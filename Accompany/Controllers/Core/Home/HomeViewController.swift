@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import FirebaseAuth
 
 class HomeViewController: UIViewController {
 
@@ -37,6 +38,9 @@ class HomeViewController: UIViewController {
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
  
     bgCircleView.image = UIImage(named: "grey-bg")
+    
+    // sign user out - for debugging
+    try? Auth.auth().signOut()
     
     // TODO: fetch todos
     Task {

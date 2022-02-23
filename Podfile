@@ -12,6 +12,7 @@ target 'Accompany' do
   # Firebase
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
+  pod 'FirebaseUI'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

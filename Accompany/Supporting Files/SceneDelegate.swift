@@ -6,6 +6,9 @@
 //
 
 import UIKit
+import FirebaseAuth
+import FirebaseAuthUI
+import FirebaseEmailAuthUI
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -18,11 +21,33 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     guard let windowScene = (scene as? UIWindowScene) else { return }
     
-    let window = UIWindow(windowScene: windowScene)
-    window.makeKeyAndVisible()
-    window.rootViewController = TabBarViewController()
+    window = UIWindow(windowScene: windowScene)
+    window?.makeKeyAndVisible()
+    
+    try? Auth.auth().signOut()
+    
+    if let user = Auth.auth().currentUser {
+      // fetch user data?
+      
+      window?.rootViewController = TabBarViewController()
+    } else {
+      handleNotAuthenticated()
+    }
         
-    self.window = window
+  }
+  
+  private func handleNotAuthenticated() {
+    let authUI = FUIAuth.defaultAuthUI()
+    authUI?.delegate = self
+    
+    let providers = [FUIEmailAuth()]
+    authUI?.providers = providers
+  
+    
+    let authVC = authUI!.authViewController()
+    authVC.view.backgroundColor = .white
+    
+    self.window?.rootViewController = authVC
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -54,5 +79,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   }
 
 
+}
+
+extension SceneDelegate: FUIAuthDelegate {
+  
+  func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+    self.window?.rootViewController = TabBarViewController()
+  }
+  
+}
+
+extension FUIAuthBaseViewController {
+  
+  open override func viewWillAppear(_ animated: Bool) {
+    self.navigationItem.leftBarButtonItem = nil
+  }
+  
 }
 

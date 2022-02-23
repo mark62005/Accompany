@@ -8,9 +8,11 @@
 import UIKit
 import Photos
 import Firebase
+import FirebaseAuth
+import FirebaseAuthUI
 
 @main
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
 
 
 
@@ -20,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     
+    let authUI = FUIAuth.defaultAuthUI()
+    // You need to adopt a FUIAuthDelegate protocol to receive callback
+    authUI?.delegate = self
+
     return true
   }
 

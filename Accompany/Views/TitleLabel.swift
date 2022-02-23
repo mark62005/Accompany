@@ -61,12 +61,12 @@ class TitleLabel: UILabel {
     fatalError("init(coder:) has not been implemented")
   }
 //  
-//  func setupLayout(superView: UIView) {
-//    self.snp.makeConstraints { make in
-//      make.top.equalTo(superView.safeAreaLayoutGuide).offset(30)
-//      make.centerX.equalTo(superView)
-//      make.width.equalTo(superView.snp.width).multipliedBy(0.8)
-//    }
-//  }
+  func setupLayout(superView: UIView) {
+    self.snp.makeConstraints { make in
+      make.top.equalTo(superView.safeAreaLayoutGuide).offset(30)
+      make.centerX.equalTo(superView)
+      make.width.equalTo(superView.snp.width).multipliedBy(0.8)
+    }
+  }
 
 }

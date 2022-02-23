@@ -61,30 +61,31 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-    let titleArrayStack = UIStackView(arrangedSubviews: [accompanyTitleLabel, welcomeTitleLabel])
-    titleArrayStack.axis = .vertical
-    titleArrayStack.alignment = .fill
-    titleArrayStack.distribution = .fill
-    titleArrayStack.spacing = 1
-    titleArrayStack.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addSubview(titleArrayStack)
+    view.addSubview(accompanyTitleLabel)
     
-    titleArrayStack.snp.makeConstraints { make in
+    accompanyTitleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
+      make.centerX.equalTo(view)
     }
     
+    view.addSubview(welcomeTitleLabel)
+    
+    welcomeTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(3)
+      make.centerX.equalTo(view)
+    }
+
     view.addSubview(notifyTableView)
        
     notifyTableView.backgroundColor = .white
      
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
-      make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
+      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
-      make.bottom.equalTo(bgCircleView.snp.top).offset(-10)
+   
     }
     
     view.addSubview(bgCircleView)

@@ -76,7 +76,7 @@ class RecordsViewController: UIViewController {
       navigationController?.pushViewController(timerVC, animated: true)
     case goToQAButton:
       // MARK: Need to be adjusted
-      let qaVC = DoctorNoteViewController()
+      let qaVC = QAController()
       navigationController?.pushViewController(qaVC, animated: true)
       
     default:

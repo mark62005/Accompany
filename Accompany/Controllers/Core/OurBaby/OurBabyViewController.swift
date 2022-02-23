@@ -86,6 +86,7 @@ class OurBabyViewController: UIViewController {
    
     setupLayout()
     
+    leftTitle.textAlignment = .left
   }
   
   func configPicker() {
@@ -146,9 +147,9 @@ class OurBabyViewController: UIViewController {
       stackView.axis = .horizontal
       stackView.distribution = .fill
       stackView.alignment = .fill
-      stackView.spacing = 15
+      stackView.spacing = 5
       stackView.translatesAutoresizingMaskIntoConstraints = false
-
+      
       return stackView
     }()
 

@@ -49,7 +49,7 @@ class ToDoFormTableViewController: UITableViewController {
   
   @objc func saveButtonTapped() {
     let isComplete = toDoBasicInfoCell.isCompleteButton.isSelected
-    let todoTitle = toDoBasicInfoCell.toDoTextField.text!
+    let todoTitle = toDoBasicInfoCell.toDoTextView.text!
     let note = toDoNotesCell.noteTextView.text ?? ""
     let newTodo = Todo(title: todoTitle, isCompleted: isComplete, note: note)
     
@@ -63,14 +63,14 @@ class ToDoFormTableViewController: UITableViewController {
   }
 
   func updateSaveButtonState() {
-    let title = toDoBasicInfoCell.toDoTextField.text ?? ""
+    let title = toDoBasicInfoCell.toDoTextView.text ?? ""
     saveBarButton.isEnabled = !title.isEmpty
   }
   
   @objc func isCompleteButtonTapped(sender: UIButton) {
     updateSaveButtonState()
     sender.isSelected.toggle()
-    toDoBasicInfoCell.toDoTextField.becomeFirstResponder()
+    toDoBasicInfoCell.toDoTextView.becomeFirstResponder()
   }
   
   @objc func toDoTitleTextFieldEditingChanged(sender: UITextField) {
@@ -107,8 +107,8 @@ class ToDoFormTableViewController: UITableViewController {
     if indexPath.section == 0 {
       toDoBasicInfoCell.isCompleteButton.addTarget(self, action: #selector(isCompleteButtonTapped), for: .touchUpInside)
       toDoBasicInfoCell.isCompleteButton.isSelected = todo?.isCompleted == nil ? false : todo!.isCompleted
-      toDoBasicInfoCell.toDoTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
-      toDoBasicInfoCell.toDoTextField.text = todo?.title
+      //toDoBasicInfoCell.toDoTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
+      toDoBasicInfoCell.toDoTextView.text = todo?.title
       return toDoBasicInfoCell
     } else {
       toDoNotesCell.contentView.isUserInteractionEnabled = false

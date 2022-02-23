@@ -201,14 +201,14 @@ extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
-      var todo = todos[indexPath.row]
-      todo.isCompleted.toggle()
-      
+//      var todo = todos[indexPath.row]
+//      todo.isCompleted.toggle()
+//
       // update model
-      todos[indexPath.row] = todo
-      
-      notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-      
+      todos[indexPath.row].isCompleted.toggle()
+      todos.remove(at: indexPath.row)
+      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
       // TODO: save changes to database
     }
   }

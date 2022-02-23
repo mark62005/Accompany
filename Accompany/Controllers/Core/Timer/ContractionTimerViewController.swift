@@ -92,15 +92,21 @@ class ContractionTimerViewController: UIViewController {
   var minutesLabel : UILabel = {
     let label = UILabel()
     label.text = "00"
-    label.font = UIFont(name: "Didot", size: 60)
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.font = .systemFont(ofSize: 60)
+    //label.font = UIFont(name: "Didot", size: 60)
 
     return label
   }()
   
+  
+  
   var minutesSignLabel : UILabel = {
     let label = UILabel()
     label.text = "M"
-    label.font = UIFont(name: "Didot", size: 20)
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.font = .systemFont(ofSize: 20)
+    //label.font = UIFont(name: "Didot", size: 20)
     
     return label
   }()
@@ -108,7 +114,9 @@ class ContractionTimerViewController: UIViewController {
   var secondsLabel : UILabel = {
     let label = UILabel()
     label.text = "00"
-    label.font = UIFont(name: "Didot", size: 60)
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.font = .systemFont(ofSize: 60)
+    //label.font = UIFont(name: "Didot", size: 60)
     
     return label
   }()
@@ -116,7 +124,9 @@ class ContractionTimerViewController: UIViewController {
   var secondsSignLabel : UILabel = {
     let label = UILabel()
     label.text = "S"
-    label.font = UIFont(name: "Didot", size: 20)
+    label.textColor = #colorLiteral(red: 0.501960814, green: 0.501960814, blue: 0.501960814, alpha: 1)
+    label.font = .systemFont(ofSize: 20)
+    //label.font = UIFont(name: "Didot", size: 20)
     
     return label
   }()
@@ -136,10 +146,23 @@ class ContractionTimerViewController: UIViewController {
   
   var currentRecordList : UITableView = {
     let tableView = UITableView()
+    
     return tableView
   }()
   
   var recordList = UITableView()
+  
+  let headerLabel : UILabel = {
+    let label = UILabel()
+    label.font = UIFont.boldSystemFont(ofSize: 18)
+    label.textAlignment = .center
+    label.text = "Length"
+    label.textColor = .white
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.4588235294, blue: 0.968627451, alpha: 1)
+    
+    return label
+  }()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -193,6 +216,7 @@ class ContractionTimerViewController: UIViewController {
     
     view.addSubview(titleLabel)
     view.addSubview(timerAndButtonStackView)
+    view.addSubview(headerLabel)
     view.addSubview(currentRecordList)
     view.addSubview(recordList)
     view.addSubview(contractionAndRecordTab)
@@ -215,8 +239,15 @@ class ContractionTimerViewController: UIViewController {
       make.right.equalTo(timerAndButtonStackView.snp.right).offset(-50)
     }
     
+    headerLabel.snp.makeConstraints { make in
+      make.top.equalTo(timerAndButtonStackView.snp.bottom).offset(30)
+      make.centerX.equalTo(view.snp.centerX)
+      make.width.equalTo(view.snp.width)
+      make.height.equalTo(50)
+    }
+    
     currentRecordList.snp.makeConstraints { make in
-      make.top.equalTo(timerAndButtonStackView.snp.bottom).offset(15)
+      make.top.equalTo(headerLabel.snp.bottom)
       make.width.equalTo(view.snp.width)
       make.bottom.equalTo(contractionAndRecordTab.snp.top)
     }
@@ -234,6 +265,16 @@ class ContractionTimerViewController: UIViewController {
       make.height.equalTo(50)
       make.bottom.equalTo(-15 + -(self.tabBarController!.tabBar.frame.size.height))
     }
+    
+    minutesSignLabel.snp.makeConstraints { make in
+      make.height.equalTo(40)
+    }
+    
+    secondsSignLabel.snp.makeConstraints { make in
+      make.height.equalTo(40)
+    }
+    
+ 
   }
   
   func tableViewsSetup() {
@@ -371,37 +412,21 @@ class ContractionTimerViewController: UIViewController {
 extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSource {
 
   func numberOfSections(in tableView: UITableView) -> Int {
-    if tableView == recordList {
+    switch tableView {
+    case recordList:
       return userConstractionRecords?.count ?? 0
-    } else {
+    default:
       return 1
     }
-  }
-
-  func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-    if tableView == currentRecordList {
-      tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-      tableView.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-      return "Length"
-    }
-    return nil
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
     return 50
   }
-  
-  func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-    if let header = view as? UITableViewHeaderFooterView {
-      header.contentView.backgroundColor = #colorLiteral(red: 0.5490196078, green: 0.4588235294, blue: 0.968627451, alpha: 1)
-      header.textLabel?.textColor = UIColor.white
-      header.textLabel?.textAlignment = .center
-      header.textLabel?.frame.size.width = view.safeAreaLayoutGuide.layoutFrame.width
-    }
-  }
     
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if tableView == recordList {
+    switch tableView {
+    case recordList:
       let currentCell = tableView.cellForRow(at: IndexPath(row: 0, section: indexPath.section))
       let currentCellisSelected = currentCell?.isSelected ?? false
       if currentCellisSelected && indexPath.row != 0 {
@@ -410,45 +435,52 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
         return 0
       }
       return tableView.rowHeight
-    } else {
+    default:
       return tableView.rowHeight
     }
   }
 
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if tableView == recordList {
+    switch tableView {
+    case recordList:
       if let rows = userConstractionRecords?[section].contractionRecord?.count {
-        return rows + 1
+        return rows + 2
       }
-      return 0
-    } else {
+      fallthrough
+    case currentRecordList:
       return newRecord?.contractionRecord?.count ?? 0
+    default:
+      return 0
     }
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    if tableView == recordList {
+    switch tableView {
+    case recordList:
       let cell =  UITableViewCell(style: .value1, reuseIdentifier: "savedRecordCell")
+      let numberOfContraction = userConstractionRecords?[indexPath.section].contractionRecord?.count ?? 0
+      print("\(indexPath.row) and \(numberOfContraction)")
       if indexPath.row == 0 {
           let dateformatter = DateFormatter()
           dateformatter.dateFormat = "E, d MMM yyyy - HH:mm:ss"
           cell.textLabel?.text = dateformatter.string(from: userConstractionRecords![indexPath.section].contractionDate!)
-        } else {
-          
+      } else if indexPath.row == numberOfContraction + 1 {
+        cell.textLabel?.text = "Total number of contraction: \(Array(1...numberOfContraction).reduce(0) {$0 + ($1 % 2)})"
+        cell.textLabel?.font = .boldSystemFont(ofSize: 16.0)
+      } else {
           let detailrows = indexPath.row - 1
           cell.textLabel?.text = userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].state
           cell.detailTextLabel?.text = String((userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].length)!)
-            cell.backgroundColor = (indexPath.row % 2) == 0 ? .white : #colorLiteral(red: 0.9490194917, green: 0.9490197301, blue: 0.9533253312, alpha: 1)
+          cell.backgroundColor = (indexPath.row % 2) == 0 ? .white : #colorLiteral(red: 0.9490194917, green: 0.9490197301, blue: 0.9533253312, alpha: 1)
         }
       cell.clipsToBounds = true
       return cell
-    } else {
-      let cell1 =  UITableViewCell(style: .value1, reuseIdentifier: "currentRecordCell")
-      cell1.textLabel?.text = newRecord?.contractionRecord?[indexPath.row].state
-      cell1.detailTextLabel?.text = String((newRecord?.contractionRecord?[indexPath.row].length)!)
-      cell1.clipsToBounds = false
-      return cell1
+    default:
+      let cell =  UITableViewCell(style: .value1, reuseIdentifier: "currentRecordCell")
+      cell.textLabel?.text = newRecord?.contractionRecord?[indexPath.row].state
+      cell.detailTextLabel?.text = String((newRecord?.contractionRecord?[indexPath.row].length)!)
+      cell.clipsToBounds = false
+      return cell
     }
   }
 
@@ -469,5 +501,4 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
       tableView.reloadData()
     }
   }
-  
 }

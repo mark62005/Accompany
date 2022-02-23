@@ -14,18 +14,7 @@ protocol ProfileDetailDelegate {
 class ProfileDetailViewController: CustomTextViewController {
   
   var delegate: ProfileDetailDelegate?
-  
-//  let title: UILabel = {
-//    let title = UILabel()
-//    title.textAlignment = .center
-//    title.text = "Edit Information"
-//    title.textColor = .black
-//    title.font = UIFont.systemFont(ofSize: 18)
-//    title.translatesAutoresizingMaskIntoConstraints = false
-//
-//    return title
-//  }()
-  
+
   let confirmButton = OutlineButton(title: "Confirmation")
   
   var info: Info?
@@ -33,12 +22,15 @@ class ProfileDetailViewController: CustomTextViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
       
-      titleLabel.text = "Edit Information"
+      titleLabel.text = ""
       textView.text = "Edit"
       
       confirmButton.addTarget(self, action: #selector(pressBtn(_:)), for: .touchUpInside)
       
       setupLayout()
+      
+      self.navigationItem.backBarButtonItem = UIBarButtonItem(
+          title: "My Profile", style: .plain, target: nil, action: nil)
       
     }
   

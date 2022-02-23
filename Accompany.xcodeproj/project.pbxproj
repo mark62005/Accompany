@@ -277,6 +277,7 @@
 				43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */,
 				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
 				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
+				6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -284,7 +285,6 @@
 		43FB2AF327BDDBD1004A641D /* Album */ = {
 			isa = PBXGroup;
 			children = (
-				6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */,
 			);
 			path = Album;
 			sourceTree = "<group>";

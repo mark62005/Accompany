@@ -175,10 +175,11 @@ class OurBabyViewController: UIViewController {
     view.addSubview(babyImageView)
  
     babyImageView.snp.makeConstraints { make in
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-10)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-5)
+//      make.top.equalTo(showTitleDateStack.snp.bottom).offset(-10)
       make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
-      make.height.equalTo(view.snp.height).multipliedBy(0.3)
+      make.width.equalTo(view.snp.width).multipliedBy(0.7)
+      make.height.equalTo(view.snp.height).multipliedBy(0.28)
     }
     
   }

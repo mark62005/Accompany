@@ -11,7 +11,7 @@ import PhotosUI
 import UIKit
 import SnapKit
 
-class BabySonogramController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class BabySonogramController: UIViewController {
   
   // MARK: Section Definitions
   enum Section {
@@ -53,6 +53,9 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAdd))
     
+    self.navigationItem.backBarButtonItem = UIBarButtonItem(
+        title: "Photo Album", style: .plain, target: nil, action: nil)
+    
   }
   
   @objc func didPressAdd() {
@@ -65,11 +68,9 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
       self.openPhotoGallery()
     }))
     alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
-    print("User click Dismiss button")
     }))
     
     self.present(alert, animated: true, completion: {
-    print("completion block")
     })
     
   }
@@ -172,15 +173,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 extension BabySonogramController: UICollectionViewDelegate {
     
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
-//    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-//    
-//    let selectedImage = images[indexPath.item]
-//    
-//    se
-    
-//    selectedImage.addObserver(<#T##observer: NSObject##NSObject#>, forKeyPath: <#T##String#>, options: ., context: <#T##UnsafeMutableRawPointer?#>)
-//
+  
   }
 
 }
@@ -197,10 +190,25 @@ extension BabySonogramController: UICollectionViewDataSource {
 
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
-
+    
+    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
+    cell.photoView.isUserInteractionEnabled = true
+    cell.photoView.tag = indexPath.row
+    cell.photoView.addGestureRecognizer(tapGestureRecognizer)
+    
     return cell
-
-  }
+    }
+  
+    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
+   
+       let photoDetailVC = PhotoDetailedViewController()
+   
+       navigationController?.pushViewController(photoDetailVC, animated: true)
+     }
 
 }
 
+extension BabySonogramController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  
+ 
+}

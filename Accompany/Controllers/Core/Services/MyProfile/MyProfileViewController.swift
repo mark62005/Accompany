@@ -19,7 +19,7 @@ class MyProfileViewController: CustomTextViewController, ProfileDetailDelegate {
     return profileTableView
   }()
   
-  let userImageView = UIImageView(image: UIImage(systemName: "logo-app"))
+  let userImageView = UIImageView(image: UIImage(systemName: "person.fill"))
   
   var infoArray: [Info] = [
   Info(text: "Username:"),
@@ -38,10 +38,10 @@ class MyProfileViewController: CustomTextViewController, ProfileDetailDelegate {
     userImageView.isUserInteractionEnabled = true
     userImageView.addGestureRecognizer(tapGestureRecognizer)
     
-    userImageView.contentMode = .scaleAspectFill
+    userImageView.contentMode = .scaleAspectFit
     userImageView.layer.borderWidth = 1.0
     userImageView.layer.masksToBounds = false
-    userImageView.layer.borderColor = UIColor.white.cgColor
+    userImageView.layer.borderColor = #colorLiteral(red: 1, green: 0.8831380575, blue: 0.9568627451, alpha: 1)
     userImageView.layer.cornerRadius = userImageView.bounds.width / 2
     userImageView.clipsToBounds = true
 
@@ -51,7 +51,6 @@ class MyProfileViewController: CustomTextViewController, ProfileDetailDelegate {
   }
   
   @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-    let tappedImage = tapGestureRecognizer.view as! UIImageView
     
     let alert = UIAlertController(title: "Accompany Would Like to Access your Photos.", message: "Choose one way to upload photos", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in

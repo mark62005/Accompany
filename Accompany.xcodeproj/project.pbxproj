@@ -46,6 +46,9 @@
 		6C1FC57627BF2454007D625E /* ImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C1FC57527BF2454007D625E /* ImageView.swift */; };
 		6C1FC57A27C36F83007D625E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FC57927C36F83007D625E /* Assets.xcassets */; };
 		6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */; };
+		6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */; };
+		6CB9D45F27C5F35F00D377F7 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */; };
+		6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */; };
 		6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* BabySonogramController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
 		6CF5E38627C3C26B00F427A2 /* QAController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38527C3C26B00F427A2 /* QAController.swift */; };
@@ -96,6 +99,9 @@
 		6C1FC57927C36F83007D625E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple Boy ttf.ttf"; sourceTree = "<group>"; };
 		6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewController.swift; sourceTree = "<group>"; };
+		6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
+		6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
+		6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* BabySonogramController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabySonogramController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		6CF5E38527C3C26B00F427A2 /* QAController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QAController.swift; sourceTree = "<group>"; };
@@ -125,6 +131,7 @@
 				4354219627BDD88C002160DA /* Todo.swift */,
 				43FB2AF427BDDC7C004A641D /* TodoList.swift */,
 				641452EB27BF0B0D0058800B /* Contraction.swift */,
+				6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +276,7 @@
 				6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */,
 				43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */,
 				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
+				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
 			);
 			path = TodoList;
 			sourceTree = "<group>";
@@ -303,6 +311,7 @@
 			isa = PBXGroup;
 			children = (
 				43FB2B1527BE49BD004A641D /* MyProfileViewController.swift */,
+				6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */,
 			);
 			path = MyProfile;
 			sourceTree = "<group>";
@@ -523,8 +532,10 @@
 				43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */,
 				6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */,
 				430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */,
+				6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */,
 				4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */,
 				437721FB27ADE97B00EC8A98 /* HomeViewController.swift in Sources */,
+				6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */,
 				4354219727BDD88C002160DA /* Todo.swift in Sources */,
 				43FB2AF527BDDC7C004A641D /* TodoList.swift in Sources */,
 				6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */,
@@ -536,6 +547,7 @@
 				430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */,
 				6CF5E38627C3C26B00F427A2 /* QAController.swift in Sources */,
 				43FB2B0727BE37F0004A641D /* VStack.swift in Sources */,
+				6CB9D45F27C5F35F00D377F7 /* ProfileOption.swift in Sources */,
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
 				43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */,
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,

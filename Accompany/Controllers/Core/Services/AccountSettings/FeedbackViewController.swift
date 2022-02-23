@@ -14,7 +14,7 @@ class FeedbackViewController: CustomTextViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
+       
     titleLabel.text = "Feedback"
     textView.text = "If you have any problems or suggestions, please let us know."
     
@@ -35,7 +35,7 @@ class FeedbackViewController: CustomTextViewController {
       make.top.equalTo(view.safeAreaLayoutGuide)
       make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
       make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
-    } 
+    }
     
     view.addSubview(textView)
     
@@ -53,7 +53,7 @@ class FeedbackViewController: CustomTextViewController {
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.3)
     }
-
+    
   }
    
 }

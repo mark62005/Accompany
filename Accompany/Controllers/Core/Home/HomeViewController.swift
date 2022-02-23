@@ -92,10 +92,10 @@ class HomeViewController: UIViewController {
 
     bgCircleView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(notifyTableView.snp.bottom).offset(30)
+      make.top.equalTo(notifyTableView.snp.bottom).offset(20)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(3)
     }
     
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]

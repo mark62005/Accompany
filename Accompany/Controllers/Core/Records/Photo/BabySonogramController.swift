@@ -30,8 +30,7 @@ class BabySonogramController: UIViewController {
 
   let sections = [Section.videoSection, Section.photoSection]
   
-  let photoImage = PhotoCollectionViewCell()
-  
+  let collectionImage = PhotoCollectionViewCell()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -165,13 +164,9 @@ class BabySonogramController: UIViewController {
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     
     print(#function)
-    print(photoImage)
     let image = info[.originalImage] as! UIImage
-    
-      self.photoImage.photoView.image = image
-    print(image)
-    
-    
+    collectionImage.photoView.image = image
+
     self.dismiss(animated: true, completion: nil)
 
   }

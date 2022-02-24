@@ -9,35 +9,12 @@ import UIKit
 class ProfileCell: UITableViewCell {
   
   static let identifier = "ProfileCell"
-  
-  class TextField: UITextField {
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
-      return bounds.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-    }
-    
-    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-      return bounds.inset(by: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-    }
-    
-    override var intrinsicContentSize: CGSize {
-      return .init(width: 0, height: 44)
-    }
-    
-    
-  }
-  
-//  let textField: UITextField = {
-//    let textField = UITextField()
-//    textField.translatesAutoresizingMaskIntoConstraints = false
-//    
-//    return textField
-//    
-//  }()
-  
+
   let label: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 18, weight: .regular)
+    label.textColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 1)
     
     return label
   }()
@@ -46,11 +23,6 @@ class ProfileCell: UITableViewCell {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     
     backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
-//    addSubview(textField)
-//
-//    textField.snp.makeConstraints { make in
-//      make.edges.equalTo(0).inset(UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10))
-//    }
     
     addSubview(label)
     

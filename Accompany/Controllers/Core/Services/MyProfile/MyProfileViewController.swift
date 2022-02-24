@@ -182,7 +182,6 @@ extension MyProfileViewController: UITableViewDataSource {
     }
     
     cell.update(with: fieldValue ?? "")
-    cell.textField.textAlignment
 
     return cell
   }

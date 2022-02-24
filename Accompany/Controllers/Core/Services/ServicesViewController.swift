@@ -10,7 +10,7 @@ import UIKit
 enum Services: CustomStringConvertible, CaseIterable {
   
   case myProfile
-  case invitePartner
+//  case invitePartner
   case accountSettings
 //  case pregnantArticles
   case aboutAccompany
@@ -20,8 +20,8 @@ enum Services: CustomStringConvertible, CaseIterable {
     switch self {
     case .myProfile:
       return "My Profile"
-    case .invitePartner:
-      return "Invite Partner"
+//    case .invitePartner:
+//      return "Invite Partner"
     case .accountSettings:
       return "Account Settings"
 //    case .pregnantArticles:
@@ -114,12 +114,12 @@ class ServicesViewController: UIViewController {
       
       navigationController?.pushViewController(myProfileVC, animated: true)
     // Invite Partner
-    case Services.invitePartner.description:
-      let invitePartnerVC = InvitePartnerViewController()
+//    case Services.invitePartner.description:
+//      let invitePartnerVC = InvitePartnerViewController()
       
       // TODO: do something?
       
-      navigationController?.pushViewController(invitePartnerVC, animated: true)
+//      navigationController?.pushViewController(invitePartnerVC, animated: true)
     // Account Settings
     case Services.accountSettings.description:
       navigationController?.pushViewController(AccountSettingsViewController(), animated: true)

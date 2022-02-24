@@ -15,7 +15,7 @@ struct Info {
   var bio: String?
   
   static func loadSampleInfo() -> Info {
-    return Info(username: "mark62005", email: "mark@email.com", babyName: "Thomas", statusMessage: "LOL", bio: "This is my bio...")
+    return Info(username: "Username:", email: "Email:", babyName: "Baby's Name: (optional)", statusMessage: "Status Message: (optional)", bio: "Bio: (optional)")
   }
   
 }

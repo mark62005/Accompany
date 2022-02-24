@@ -12,7 +12,7 @@ enum Services: CustomStringConvertible, CaseIterable {
   case myProfile
   case invitePartner
   case accountSettings
-  case pregnantArticles
+//  case pregnantArticles
   case aboutAccompany
   case logOut
   
@@ -24,8 +24,8 @@ enum Services: CustomStringConvertible, CaseIterable {
       return "Invite Partner"
     case .accountSettings:
       return "Account Settings"
-    case .pregnantArticles:
-      return "Pregnant Articles"
+//    case .pregnantArticles:
+//      return "Pregnant Articles"
     case .aboutAccompany:
       return "About Accompany"
     case .logOut:
@@ -124,12 +124,12 @@ class ServicesViewController: UIViewController {
     case Services.accountSettings.description:
       navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
     // Pregnant Articles
-    case Services.pregnantArticles.description:
-      let pregnantArticlesTVC = PregnantArticlesTableViewController()
+//    case Services.pregnantArticles.description:
+//      let pregnantArticlesTVC = PregnantArticlesTableViewController()
       
       // TODO: fetch articles
       
-      navigationController?.pushViewController(pregnantArticlesTVC, animated: true)
+//      navigationController?.pushViewController(pregnantArticlesTVC, animated: true)
     // About Accompany
     case Services.aboutAccompany.description:
       navigationController?.pushViewController(AboutAccompanyViewController(), animated: true)

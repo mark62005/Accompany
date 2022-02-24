@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class MyProfileViewController: CustomTextViewController, ProfileDetailDelegate {
+class MyProfileViewController: CustomTextViewController {
   
   let profileTableView: UITableView = {
     let profileTableView = UITableView()
@@ -175,4 +175,18 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
     self.dismiss(animated: true, completion: nil)
   }
 
+}
+
+extension MyProfileViewController: ProfileDetailDelegate {
+  
+  func textViewDidFinish(text: String) {
+    Info.init(text: text)
+  }
+  
+  @objc func presentDetailVC() {
+    let detailVC = ProfileDetailViewController()
+    detailVC.delegate = self
+    present(detailVC, animated: true, completion: nil)
+  }
+  
 }

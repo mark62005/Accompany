@@ -8,14 +8,15 @@
 import UIKit
 
 protocol ProfileDetailDelegate {
-  
+  func textViewDidFinish(text: String)
+
 }
 
 class ProfileDetailViewController: CustomTextViewController {
   
-  var delegate: ProfileDetailDelegate?
+  var delegate: ProfileDetailDelegate!
 
-  let confirmButton = OutlineButton(title: "Confirmation")
+  let confirmButton = OutlineButton(title: "Confirm")
   
   var info: Info?
 
@@ -34,6 +35,7 @@ class ProfileDetailViewController: CustomTextViewController {
     }
   
   @objc func pressBtn(_ sender: UIButton) {
+    
     
   }
   

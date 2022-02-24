@@ -40,8 +40,7 @@ class HomeViewController: UIViewController {
     bgCircleView.image = UIImage(named: "grey-bg")
     
     // TODO: fetch todos
-    todos = Todo.loadSampleToDos()
-    
+
     configureTableView()
     setupLayout()
     
@@ -123,12 +122,16 @@ class HomeViewController: UIViewController {
     switch button {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
+      todos = Todo.loadSampleToDos(Cycle.firstTrimester)
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
+      todos = Todo.loadSampleToDos(Cycle.secondTrimester)
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
+      todos = Todo.loadSampleToDos(Cycle.thirdTrimester)
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
+      todos = Todo.loadSampleToDos(Cycle.afterBirth)
     default:
       return
     }
@@ -206,17 +209,17 @@ extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
-//      var todo = todos[indexPath.row]
-//      todo.isCompleted.toggle()
-//
-      // update model
-      todos[indexPath.row].isCompleted.toggle()
-      todos.remove(at: indexPath.row)
-      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-      notifyTableView.reloadData()
-      // TODO: save changes to database
-    }
-  }
+    //      var todo = todos[indexPath.row]
+    //      todo.isCompleted.toggle()
+    //
+          // update model
+          todos[indexPath.row].isCompleted.toggle()
+          todos.remove(at: indexPath.row)
+          //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+          notifyTableView.reloadData()
+          // TODO: save changes to database
+        }
+      }
   
 }
 

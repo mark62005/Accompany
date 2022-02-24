@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import FirebaseCore
 import FirebaseAuth
 import FirebaseAuthUI
 import FirebaseEmailAuthUI
+import FirebaseOAuthUI
+import GoogleSignIn
+import FirebaseGoogleAuthUI
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -40,7 +45,10 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let authUI = FUIAuth.defaultAuthUI()
     authUI?.delegate = self
     
-    let providers = [FUIEmailAuth()]
+    let providers: [FUIAuthProvider] = [
+      FUIEmailAuth(),
+      FUIGoogleAuth.init(authUI: authUI!)
+    ]
     authUI?.providers = providers
   
     
@@ -93,6 +101,43 @@ extension FUIAuthBaseViewController {
   
   open override func viewWillAppear(_ animated: Bool) {
     self.navigationItem.leftBarButtonItem = nil
+    
+    signInWithGoogle()
+  }
+  
+  private func signInWithGoogle() {
+    guard let clientID = FirebaseApp.app()?.options.clientID else { return }
+
+    // Create Google Sign In configuration object.
+    let config = GIDConfiguration(clientID: clientID)
+
+    // Start the sign in flow!
+    GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
+
+      if let error = error {
+        // ...
+        print("Error: \(error)")
+        return
+      }
+
+      guard let authentication = user?.authentication,
+            let idToken = authentication.idToken else {
+        return
+      }
+
+      Task {
+        
+        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
+        
+        do {
+          try await Auth.auth().signIn(with: credential)
+        } catch let error as NSError {
+          print(error.localizedDescription)
+        }
+        
+      }
+      
+    }
   }
   
 }

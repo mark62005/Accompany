@@ -44,6 +44,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
   
   private func handleNotAuthenticated() {
     let authUI = FUIAuth.defaultAuthUI()
+    authUI?.shouldHideCancelButton = true
     authUI?.delegate = self
     
     let providers: [FUIAuthProvider] = [
@@ -101,14 +102,6 @@ extension SceneDelegate: FUIAuthDelegate {
       
       self.window?.rootViewController = TabBarViewController()
     }
-  }
-  
-}
-
-extension FUIAuthBaseViewController {
-  
-  open override func viewWillAppear(_ animated: Bool) {
-    self.navigationItem.leftBarButtonItem = nil
   }
   
 }

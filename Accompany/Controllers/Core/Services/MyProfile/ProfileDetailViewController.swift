@@ -4,37 +4,43 @@
 //
 //  Created by Esperanza on 2022-02-22.
 //
-
 import UIKit
 
-protocol ProfileDetailDelegate {
-  
+protocol ProfileDetailViewControllerDelegate {
+  func edit(_ value: String, for field: InfoField)
 }
 
 class ProfileDetailViewController: CustomTextViewController {
   
-  var delegate: ProfileDetailDelegate?
+  var delegate: ProfileDetailViewControllerDelegate?
 
-  let confirmButton = OutlineButton(title: "Confirmation")
+  let confirmButton = OutlineButton(title: "Confirm")
   
-  var info: Info?
+  var field: InfoField?
+  var fieldValue: String?
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
       
-      titleLabel.text = ""
-      textView.text = "Edit"
+    confirmButton.addTarget(self, action: #selector(pressBtn(_:)), for: .touchUpInside)
       
-      confirmButton.addTarget(self, action: #selector(pressBtn(_:)), for: .touchUpInside)
+    setupLayout()
       
-      setupLayout()
+    navigationItem.title = "Edit Info"
+    
+    updateConfirmButtonState()
       
-      navigationItem.title = "Edit Info"
-      
-    }
+  }
   
   @objc func pressBtn(_ sender: UIButton) {
-    
+    confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
+    setupLayout()
+    updateConfirmButtonState()
+  }
+  
+  @objc func pressBtn() {
+    delegate?.edit(textView.text ?? "", for: field!)
+    navigationController?.popViewController(animated: true)
   }
   
   func setupLayout() {
@@ -61,9 +67,34 @@ class ProfileDetailViewController: CustomTextViewController {
       make.height.equalTo(confirmButton.snp.width).multipliedBy(0.3)
     }
   }
-    
   
-
+  func updateUI(_ field: InfoField) {
     
-
+    // update title and placeholder
+    title = "Edit \(field.rawValue)"
+    
+    switch field {
+    case .username:
+      textView.text = fieldValue!
+    case .email:
+      textView.text = fieldValue!
+    case .babyName:
+      textView.text = fieldValue ?? ""
+    case .statusMessage:
+      textView.text = fieldValue ?? ""
+    case .bio:
+      textView.text = fieldValue ?? ""
+    }
+    
+  }
+  
+  private func updateConfirmButtonState() {
+    // check if username is not empty
+    if field == InfoField.username {
+      confirmButton.isEnabled = !textView.text.isEmpty
+//    } else if field == InfoField.email {
+//      // check if email is not empty && is validate
+//      confirmButton.isEnabled = !textView.text.isEmpty && isValidEmail(textView.text)
+    }
+  }
 }

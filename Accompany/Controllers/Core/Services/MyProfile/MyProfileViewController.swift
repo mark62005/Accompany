@@ -11,10 +11,14 @@ enum InfoField: String, CaseIterable {
   
   case username = "Username"
   case email = "Email"
-  case babyName = "Baby's Name"
+  case babyName = "Baby Name"
   case statusMessage = "Status Message"
   case bio = "Bio"
   
+}
+
+protocol MyProfileViewControllerDelegate {
+  func getBabyNameToShow (string: String)
 }
 
 class MyProfileViewController: CustomTextViewController {
@@ -32,9 +36,18 @@ class MyProfileViewController: CustomTextViewController {
   
   var userInfo: Info?
   var selectedIndexPath: IndexPath?
- 
+  
+  var delegate: MyProfileViewControllerDelegate!
+
+  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    let data = userInfo?.babyName ?? "Not decided yet"
+    delegate?.getBabyNameToShow(string: data)
+    
+    navigationController?.popToViewController(BabySonogramController, animated: true)
+    dismiss(animated: true)
     
     fetchUserInfo()
     

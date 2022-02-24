@@ -8,7 +8,12 @@
 import UIKit
 import SnapKit
 
-class OurBabyViewController: UIViewController {
+class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
+  func getBabyNameToShow(string: String) {
+    nameTitle.text = string
+  }
+  
+  let babyVC =
   
   let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
 
@@ -23,6 +28,7 @@ class OurBabyViewController: UIViewController {
   let leftNumberTitle = TitleLabel(title: "", size: .mini, color: .black)
   let leftTitle = TitleLabel(title: "Days left", size: .mini, color: .grey)
   var dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
+  
 
   let contentView: UIView = {
     let contentView = UIView()

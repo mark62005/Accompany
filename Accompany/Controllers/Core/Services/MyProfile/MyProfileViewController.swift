@@ -4,9 +4,18 @@
 //
 //  Created by Mark Wong on 2022-02-17.
 //
-
 import UIKit
 import SnapKit
+
+enum InfoField: String, CaseIterable {
+  
+  case username = "Username"
+  case email = "Email"
+  case babyName = "Baby's Name"
+  case statusMessage = "Status Message"
+  case bio = "Bio"
+  
+}
 
 class MyProfileViewController: CustomTextViewController {
   
@@ -21,16 +30,13 @@ class MyProfileViewController: CustomTextViewController {
   
   let userImageView = UIImageView(image: UIImage(systemName: "person.fill"))
   
-  var infoArray: [Info] = [
-  Info(text: "Username:"),
-  Info(text: "Email:"),
-  Info(text: "Baby's name:"),
-  Info(text: "Status Message:"),
-  Info(text: "Bio:")
-  ]
+  var userInfo: Info?
+  var selectedIndexPath: IndexPath?
  
   override func viewDidLoad() {
     super.viewDidLoad()
+    
+    fetchUserInfo()
     
     titleLabel.text = Services.myProfile.description
     
@@ -50,6 +56,11 @@ class MyProfileViewController: CustomTextViewController {
    
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "My Profile", style: .plain, target: nil, action: nil)
+  }
+  
+  // TODO: fetch user info from db
+  private func fetchUserInfo() {
+    userInfo = Info.loadSampleInfo()
   }
   
   @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
@@ -142,27 +153,66 @@ extension MyProfileViewController: UITableViewDelegate {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return 65
   }
-
+  
 }
 
 extension MyProfileViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return infoArray.count
+    return 5
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-    let info = infoArray[indexPath.row]
-    cell.update(with: info)
+    
+    let fieldValue: String?
+    
+    switch indexPath.row {
+    case 0:
+      fieldValue = userInfo?.username
+    case 1:
+      fieldValue = userInfo?.email
+    case 2:
+      fieldValue = userInfo?.babyName ?? "Not decided yet"
+    case 3:
+      fieldValue = userInfo?.statusMessage
+    case 4:
+      fieldValue = userInfo?.bio
+    default:
+      fieldValue = nil
+    }
+    
+    cell.update(with: fieldValue ?? "")
+    cell.textField.textAlignment
 
     return cell
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    
     let profileDetailVC = ProfileDetailViewController()
-    profileDetailVC.info = infoArray[indexPath.row]
+    profileDetailVC.delegate = self
+    
+    switch indexPath.row {
+    case 0:
+      profileDetailVC.fieldValue = userInfo?.username
+    case 1:
+      profileDetailVC.fieldValue = userInfo?.email
+    case 2:
+      profileDetailVC.fieldValue = userInfo?.babyName
+    case 3:
+      profileDetailVC.fieldValue = userInfo?.statusMessage
+    case 4:
+      profileDetailVC.fieldValue = userInfo?.bio
+    default:
+      profileDetailVC.fieldValue = ""
+    }
+    
+    profileDetailVC.field = InfoField.allCases[indexPath.row]
+    profileDetailVC.updateUI(InfoField.allCases[indexPath.row])
+    
     navigationController?.pushViewController(profileDetailVC, animated: true)
+    
+    selectedIndexPath = indexPath
+    tableView.deselectRow(at: indexPath, animated: false)
   }
 
 }
@@ -177,16 +227,23 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
 
 }
 
-extension MyProfileViewController: ProfileDetailDelegate {
+extension MyProfileViewController: ProfileDetailViewControllerDelegate {
   
-  func textViewDidFinish(text: String) {
-    Info.init(text: text)
-  }
-  
-  @objc func presentDetailVC() {
-    let detailVC = ProfileDetailViewController()
-    detailVC.delegate = self
-    present(detailVC, animated: true, completion: nil)
+  func edit(_ value: String, for field: InfoField) {
+    switch field {
+    case .username:
+      userInfo?.username = value
+    case .email:
+      userInfo?.email = value
+    case .babyName:
+      userInfo?.babyName = value.isEmpty ? "Not decided yet" : value
+    case .statusMessage:
+      userInfo?.statusMessage = value
+    case .bio:
+      userInfo?.bio = value
+    }
+    
+    profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }
   
 }

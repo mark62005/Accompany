@@ -11,7 +11,7 @@ import PhotosUI
 import UIKit
 import SnapKit
 
-class BabySonogramController: UIViewController {
+class BabySonogramController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
   
   // MARK: Section Definitions
   enum Section {
@@ -57,6 +57,48 @@ class BabySonogramController: UIViewController {
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Photo Album ", style: .plain, target: nil, action: nil)
+  }
+  
+  @objc func didPressAdd() {
+
+    let alert = UIAlertController(title: "\(appName) APP Would Like to Access your Photos.", message: "Choose one way to upload photos", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+      self.openCamera()
+    }))
+    alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) in
+      self.openPhotoGallery()
+    }))
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+    }))
+    
+    self.present(alert, animated: true, completion: {
+    })
+    
+  }
+
+  func openCamera() {
+
+    if UIImagePickerController.isSourceTypeAvailable(.camera) {
+      let imagePicker = UIImagePickerController()
+      imagePicker.delegate = self
+      imagePicker.sourceType = .camera
+      imagePicker.allowsEditing = true
+
+      self.present(imagePicker, animated: true, completion: nil)
+    }
+
+  }
+
+  func openPhotoGallery() {
+
+    if UIImagePickerController.isSourceTypeAvailable((.photoLibrary)) {
+      let imagePicker = UIImagePickerController()
+      imagePicker.delegate = self
+      imagePicker.sourceType = .photoLibrary
+      imagePicker.allowsEditing = true
+
+      self.present(imagePicker, animated: true, completion: nil)
+    }
     
   }
 
@@ -216,6 +258,3 @@ extension BabySonogramController: UICollectionViewDataSource {
 
 }
 
-extension BabySonogramController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-
-}

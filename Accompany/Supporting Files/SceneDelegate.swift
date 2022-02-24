@@ -96,7 +96,7 @@ extension SceneDelegate: FUIAuthDelegate {
   
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
     if let error = error {
-      print("Error: \(error)")
+      print("Error: \(error.localizedDescription)")
     } else if let user = authDataResult?.user {
       print("Successfully signed in with id: \(user.uid), email: \(user.email ?? "")")
       

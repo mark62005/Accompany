@@ -76,6 +76,7 @@
 		437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4377220027ADE99300EC8A98 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		4378AA2127C84D230019773E /* Accompany.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Accompany.entitlements; sourceTree = "<group>"; };
 		438320FC27C4C75000285A84 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		438320FF27C4CAA300285A84 /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
@@ -169,6 +170,7 @@
 		437721DC27ADE4E700EC8A98 /* Accompany */ = {
 			isa = PBXGroup;
 			children = (
+				4378AA2127C84D230019773E /* Accompany.entitlements */,
 				437721F127ADE83600EC8A98 /* Supporting Files */,
 				438320FE27C4CA9300285A84 /* Managers */,
 				4306D26827B5D26B00050369 /* Models */,

@@ -11,6 +11,7 @@ import Firebase
 import FirebaseAuth
 import FirebaseAuthUI
 import GoogleSignIn
+import FBSDKCoreKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
@@ -25,6 +26,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, FUIAuthDelegate {
     let authUI = FUIAuth.defaultAuthUI()
     // You need to adopt a FUIAuthDelegate protocol to receive callback
     authUI?.delegate = self
+    
+    FBSDKCoreKit.ApplicationDelegate.shared.application(application,didFinishLaunchingWithOptions: launchOptions)
 
     return true
   }

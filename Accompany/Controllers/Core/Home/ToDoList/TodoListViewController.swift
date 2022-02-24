@@ -16,6 +16,8 @@ class TodoListViewController: UIViewController {
     let tableView = UITableView()
     tableView.register(TodoCell.self, forCellReuseIdentifier: TodoCell.identifier)
     tableView.layer.cornerRadius = 20
+    tableView.translatesAutoresizingMaskIntoConstraints = false
+    
     return tableView
   }()
   
@@ -33,6 +35,7 @@ class TodoListViewController: UIViewController {
     if todos.isEmpty {
 //      todos = Todo.loadSampleToDos()
     }
+    
     todoListTitleLabel.snp.makeConstraints { (make) -> Void in
       make.bottom.equalTo(tableView.snp.top).offset(-20)
       make.centerX.equalTo(view)
@@ -47,7 +50,6 @@ class TodoListViewController: UIViewController {
   private func configureTableView() {
     tableView.delegate = self
     tableView.dataSource = self
-  
   }
   
   @objc func didTapAdd() {

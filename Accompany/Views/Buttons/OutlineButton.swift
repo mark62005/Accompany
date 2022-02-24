@@ -28,6 +28,7 @@ class OutlineButton: UIButton {
     self.setTitleColor(#colorLiteral(red: 0.9921568627, green: 0.3882352941, blue: 0.5333333333, alpha: 1), for: .normal)
     
     self.layer.cornerRadius = 16
+    self.translatesAutoresizingMaskIntoConstraints = false
   }
   
   required init?(coder: NSCoder) {

@@ -25,6 +25,7 @@ class HomeViewController: UIViewController {
     notifyTableView.register(TodoHeaderView.self, forHeaderFooterViewReuseIdentifier: TodoHeaderView.identifier)
     notifyTableView.isUserInteractionEnabled = true
     notifyTableView.layer.cornerRadius = 10
+    notifyTableView.translatesAutoresizingMaskIntoConstraints = false
     
     return notifyTableView
   }()
@@ -71,38 +72,41 @@ class HomeViewController: UIViewController {
   }
   
   private func setupLayout() {
-    let titleArrayStack = UIStackView(arrangedSubviews: [accompanyTitleLabel, welcomeTitleLabel])
-    titleArrayStack.axis = .vertical
-    titleArrayStack.alignment = .fill
-    titleArrayStack.distribution = .fill
-    titleArrayStack.spacing = 1
-    titleArrayStack.translatesAutoresizingMaskIntoConstraints = false
     
-    view.addSubview(titleArrayStack)
+    view.addSubview(accompanyTitleLabel)
     
-    titleArrayStack.snp.makeConstraints { make in
+    accompanyTitleLabel.snp.makeConstraints { make in
       make.top.equalTo(view.safeAreaLayoutGuide)
-      make.centerX.equalTo(view.safeAreaLayoutGuide)
+      make.centerX.equalTo(view)
     }
     
+    view.addSubview(welcomeTitleLabel)
+    
+    welcomeTitleLabel.snp.makeConstraints { make in
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(3)
+      make.centerX.equalTo(view)
+    }
+
     view.addSubview(notifyTableView)
        
     notifyTableView.backgroundColor = .white
      
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
-      make.top.equalTo(titleArrayStack.snp.bottom).offset(20)
+      make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
       make.width.equalTo(view.snp.width).multipliedBy(0.8)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
+   
     }
     
     view.addSubview(bgCircleView)
 
     bgCircleView.snp.makeConstraints { make in
       make.centerX.equalTo(view)
-      make.top.equalTo(notifyTableView.snp.bottom).offset(30)
+      make.top.equalTo(notifyTableView.snp.bottom).offset(20)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
+      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(3)
     }
     
     let buttons = [firstTrimesterButton, secondTrimesterButton, thirdTrimesterButton, afterButton]
@@ -201,7 +205,7 @@ extension HomeViewController: UITableViewDataSource {
       // 1. update model
       let todo = Todo(id: "0", title: "")
       todos.insert(todo, at: 0)
-      // 2. update view
+    // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
     
@@ -213,14 +217,14 @@ extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
-      var todo = todos[indexPath.row]
-      todo.isCompleted.toggle()
-      
+//      var todo = todos[indexPath.row]
+//      todo.isCompleted.toggle()
+//
       // update model
-      todos[indexPath.row] = todo
-      
-      notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-      
+      todos[indexPath.row].isCompleted.toggle()
+      todos.remove(at: indexPath.row)
+      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
       // TODO: save changes to database
     }
   }

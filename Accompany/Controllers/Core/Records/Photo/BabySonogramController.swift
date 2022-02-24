@@ -11,7 +11,7 @@ import PhotosUI
 import UIKit
 import SnapKit
 
-class BabySonogramController: UIViewController {
+class BabySonogramController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
   
   // MARK: Section Definitions
   enum Section {
@@ -54,7 +54,7 @@ class BabySonogramController: UIViewController {
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAdd))
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Photo Album", style: .plain, target: nil, action: nil)
+        title: "Home Page", style: .plain, target: nil, action: nil)
     
   }
   
@@ -195,20 +195,17 @@ extension BabySonogramController: UICollectionViewDataSource {
     cell.photoView.isUserInteractionEnabled = true
     cell.photoView.tag = indexPath.row
     cell.photoView.addGestureRecognizer(tapGestureRecognizer)
-    
+  
     return cell
-    }
-  
-    @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
-   
-       let photoDetailVC = PhotoDetailedViewController()
-   
-       navigationController?.pushViewController(photoDetailVC, animated: true)
-     }
 
-}
-
-extension BabySonogramController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+  }
   
+  @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
  
+     let photoDetailVC = PhotoDetailedViewController()
+ 
+     navigationController?.pushViewController(photoDetailVC, animated: true)
+   }
+
 }
+

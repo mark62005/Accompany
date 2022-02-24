@@ -29,8 +29,7 @@ class ProfileDetailViewController: CustomTextViewController {
       
       setupLayout()
       
-      self.navigationItem.backBarButtonItem = UIBarButtonItem(
-          title: "My Profile", style: .plain, target: nil, action: nil)
+      navigationItem.title = "Edit Info"
       
     }
   

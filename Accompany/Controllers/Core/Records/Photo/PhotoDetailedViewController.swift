@@ -12,6 +12,7 @@ class PhotoDetailedViewController: UIViewController {
   let imageView = ImageView()
   let deleteImage = ImageView()
 
+
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)

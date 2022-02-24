@@ -20,6 +20,8 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     contentView.backgroundColor = .white
     
     photoView.image = UIImage(named: "logo-app")
+    photoView.contentMode = .scaleAspectFill
+    photoView.clipsToBounds = true
 
     photoView.snp.makeConstraints { make in
       make.left.equalTo(contentView.snp.left).offset(5)

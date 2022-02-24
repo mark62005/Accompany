@@ -532,6 +532,7 @@ PODS:
   - SnapKit (5.0.1)
 
 DEPENDENCIES:
+  - FBSDKLoginKit
   - Firebase/Auth
   - Firebase/Firestore
   - FirebaseUI
@@ -619,6 +620,6 @@ SPEC CHECKSUMS:
   SDWebImage: 53179a2dba77246efa8a9b85f5c5b21f8f43e38f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: f67280acf505873e9cac1c86eb0d6a01adfe79cf
+PODFILE CHECKSUM: cee821ca6f8491a8f59a5825dd84adf24db151d9
 
 COCOAPODS: 1.11.2

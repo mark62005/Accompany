@@ -13,6 +13,7 @@ import FirebaseEmailAuthUI
 import FirebaseOAuthUI
 import GoogleSignIn
 import FirebaseGoogleAuthUI
+import FirebaseFacebookAuthUI
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -47,15 +48,16 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let providers: [FUIAuthProvider] = [
       FUIEmailAuth(),
-      FUIGoogleAuth.init(authUI: authUI!)
+      FUIGoogleAuth.init(authUI: authUI!),
+      FUIFacebookAuth.init(authUI: authUI!),
+      FUIOAuth.appleAuthProvider()
     ]
     authUI?.providers = providers
-  
     
     let authVC = authUI!.authViewController()
     authVC.view.backgroundColor = .white
     
-    self.window?.rootViewController = authVC
+    window?.rootViewController = authVC
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -92,7 +94,13 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: FUIAuthDelegate {
   
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-    self.window?.rootViewController = TabBarViewController()
+    if let error = error {
+      print("Error: \(error)")
+    } else if let user = authDataResult?.user {
+      print("Successfully signed in with id: \(user.uid), email: \(user.email ?? "")")
+      
+      self.window?.rootViewController = TabBarViewController()
+    }
   }
   
 }
@@ -101,43 +109,6 @@ extension FUIAuthBaseViewController {
   
   open override func viewWillAppear(_ animated: Bool) {
     self.navigationItem.leftBarButtonItem = nil
-    
-    signInWithGoogle()
-  }
-  
-  private func signInWithGoogle() {
-    guard let clientID = FirebaseApp.app()?.options.clientID else { return }
-
-    // Create Google Sign In configuration object.
-    let config = GIDConfiguration(clientID: clientID)
-
-    // Start the sign in flow!
-    GIDSignIn.sharedInstance.signIn(with: config, presenting: self) { [unowned self] user, error in
-
-      if let error = error {
-        // ...
-        print("Error: \(error)")
-        return
-      }
-
-      guard let authentication = user?.authentication,
-            let idToken = authentication.idToken else {
-        return
-      }
-
-      Task {
-        
-        let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
-        
-        do {
-          try await Auth.auth().signIn(with: credential)
-        } catch let error as NSError {
-          print(error.localizedDescription)
-        }
-        
-      }
-      
-    }
   }
   
 }

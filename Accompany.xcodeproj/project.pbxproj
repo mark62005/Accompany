@@ -207,7 +207,7 @@
 				43FB2AEF27BDDB70004A641D /* TodoList */,
 				43FB2AF327BDDBD1004A641D /* Album */,
 				6413589C27C0625F0086BB39 /* Timer */,
-				6413589D27C0626A0086BB39 /* Services */,
+				43FA282127C798DF00B0B7A6 /* Services */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +282,13 @@
 			path = Managers;
 			sourceTree = "<group>";
 		};
+		43FA282127C798DF00B0B7A6 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
 		43FB2AEF27BDDB70004A641D /* TodoList */ = {
 			isa = PBXGroup;
 			children = (
@@ -354,13 +361,6 @@
 			children = (
 			);
 			path = Timer;
-			sourceTree = "<group>";
-		};
-		6413589D27C0626A0086BB39 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Services;
 			sourceTree = "<group>";
 		};
 		6C1FC57B27C3BEB1007D625E /* Photo */ = {
@@ -727,6 +727,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Accompany/Accompany.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7669655F54;
@@ -757,6 +758,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
+				CODE_SIGN_ENTITLEMENTS = Accompany/Accompany.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 7669655F54;

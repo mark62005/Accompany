@@ -13,6 +13,9 @@ target 'Accompany' do
   pod 'Firebase/Auth'
   pod 'Firebase/Firestore'
   pod 'FirebaseUI'
+
+  # Facebook
+  pod 'FBSDKLoginKit'
   
   post_install do |installer|
     installer.pods_project.targets.each do |target|

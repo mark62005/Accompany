@@ -57,7 +57,7 @@ class BabySonogramController: UIViewController {
 //    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAdd))
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Photo Album", style: .plain, target: nil, action: nil)
+        title: "Photo Album ", style: .plain, target: nil, action: nil)
     
   }
 

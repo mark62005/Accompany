@@ -8,13 +8,8 @@
 import UIKit
 import SnapKit
 
-class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
-  func getBabyNameToShow(string: String) {
-    nameTitle.text = string
-  }
-  
-  
-  
+class OurBabyViewController: UIViewController {
+
   let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
 
   let nameTitle = TitleLabel(title: "Baby's name", size: .small, color: .black)

@@ -17,6 +17,8 @@ class FeedbackViewController: CustomTextViewController {
        
     titleLabel.text = "Feedback"
     textView.text = "If you have any problems or suggestions, please let us know."
+    textView.textAlignment = .center
+    textView.layer.cornerRadius = 10
     
     submitButton.addTarget(self, action: #selector(submitData(_:)), for: .touchUpInside)
     
@@ -24,9 +26,10 @@ class FeedbackViewController: CustomTextViewController {
   }
   
   @objc func submitData(_ sender: UIButton) {
-    //MARK: Save it to the database
+    //TODO: Receive one automatically email from Accompany
     
     textView.text = ""
+    
   }
   
   func setupLayout() {

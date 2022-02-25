@@ -131,6 +131,7 @@ class AccountSettingsViewController: UIViewController {
       navigationController?.pushViewController(FeedbackViewController(), animated: true)
     case deleteAccountButton:
       // TODO: Prompt confirm delete message
+      // TODO: Back to Sign up Page
       print(AccountSettings.deleteAccount.rawValue)
     default:
       return

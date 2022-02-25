@@ -64,21 +64,17 @@ class HomeViewController: UIViewController {
     
     // assign current todos
     currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
-    
-    print("Todos: \(currentTodos), trimester: \(currentTrimester.rawValue)")
   }
   
   private func getCurrentTrimester() -> Trimester {
-    
     // due date
     let dueDate = Date.init("2022-12-31")
-    print(dueDate.description)
     
-    print(Date().description)
+    // TODO: get date of pregnancy
     
     // calculate which trimester
+    // TODO: change Date() to date of pregnancy
     let dateDifference = (dueDate - Date()).asDays()
-    print("date difference: \(dateDifference)")
     
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
@@ -90,7 +86,6 @@ class HomeViewController: UIViewController {
     default:
       return .firstTrimester
     }
-  
   }
   
   private func configureTableView() {
@@ -252,14 +247,14 @@ extension HomeViewController: TodoCellDelegate {
     //      var todo = todos[indexPath.row]
     //      todo.isCompleted.toggle()
     //
-          // update model
-          currentTodos[indexPath.row].isCompleted.toggle()
-          currentTodos.remove(at: indexPath.row)
-          //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-          notifyTableView.reloadData()
-          // TODO: save changes to database
-        }
-      }
+      // update model
+      currentTodos[indexPath.row].isCompleted.toggle()
+      currentTodos.remove(at: indexPath.row)
+      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
+      // TODO: save changes to database
+    }
+  }
   
 }
 

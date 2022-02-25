@@ -58,7 +58,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     let authVC = authUI!.authViewController()
     authVC.view.backgroundColor = .white
     
-    window?.rootViewController = authVC
+    self.window?.rootViewController = authVC
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {

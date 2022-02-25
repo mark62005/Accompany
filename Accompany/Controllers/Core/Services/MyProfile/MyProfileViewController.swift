@@ -11,11 +11,15 @@ enum InfoField: String, CaseIterable {
   
   case username = "Username"
   case email = "Email"
-  case babyName = "Baby's Name"
+  case babyName = "Baby Name"
   case statusMessage = "Status Message"
   case bio = "Bio"
   case dateOfPregnancy = "Date of Pregnancy"
-  
+ 
+}
+
+protocol MyProfileViewControllerDelegate {
+  func getBabyNameToShow (string: String)
 }
 
 class MyProfileViewController: CustomTextViewController {

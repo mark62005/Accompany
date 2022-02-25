@@ -28,22 +28,21 @@ class TabBarViewController: UITabBarController {
   
   private func configureViewControllers() {
     let homeVC = HomeViewController()
-    homeVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.home.rawValue)", image: UIImage(named: "homeIcon"), tag: 1)
+    homeVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.home.rawValue)", image: UIImage(named: "home-menu-icon"), tag: 1)
 
     let ourBabyVC = OurBabyViewController()
-    ourBabyVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.ourBaby.rawValue)", image: UIImage(named: "babyIcon"), tag: 1)
+    ourBabyVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.ourBaby.rawValue)", image: UIImage(named: "our-baby-icon"), tag: 1)
     
     let recordsVC = RecordsViewController()
-    recordsVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.records.rawValue)", image: UIImage(named: "recordIcon"), tag: 1)
+    recordsVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.records.rawValue)", image: UIImage(named: "record-menu-icon"), tag: 1)
     
     let contractionTimerVC = ContractionTimerViewController()
-    contractionTimerVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.timer.rawValue)", image: UIImage(named: "timerIcon"), tag: 1)
+    contractionTimerVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.timer.rawValue)", image: UIImage(named: "timer-menu-icon"), tag: 1)
     
-    let servicesVC = ServicesViewController()
-//    servicesVC.titleLabel.text = TabBarVCTitle.services.rawValue
-    servicesVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.services.rawValue)", image: UIImage(named: "serviceIcon"), tag: 1)
+    let serviceVC = ServiceViewController()
+    serviceVC.tabBarItem = UITabBarItem(title: "\(TabBarVCTitle.services.rawValue)", image: UIImage(named: "service-menu-icon"), tag: 1)
     
-    let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, servicesVC]
+    let vcs = [homeVC, ourBabyVC, recordsVC, contractionTimerVC, serviceVC]
     
     self.viewControllers = vcs.map { UINavigationController(rootViewController: $0) }
   }

@@ -23,18 +23,8 @@ class ProfileDetailViewController: CustomTextViewController {
     super.viewDidLoad()
       
     confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
-<<<<<<< HEAD
-      
-    setupLayout()
-      
-    navigationItem.title = "Edit Info"
-    
-    updateConfirmButtonState()
-      
-=======
     setupLayout()
     updateConfirmButtonState()
->>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
   }
   
   @objc func pressBtn() {

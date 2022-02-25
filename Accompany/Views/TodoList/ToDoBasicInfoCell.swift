@@ -25,8 +25,8 @@ class ToDoBasicInfoCell : UITableViewCell {
   var toDoTextView : UITextView = {
     let textView = UITextView()
     textView.textAlignment = .left
-    textView.font = .boldSystemFont(ofSize: 30)
-    //textView.placeholder = "Title"
+    textView.font = .boldSystemFont(ofSize: 18)
+    textView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: -5, right: -5)
     textView.translatesAutoresizingMaskIntoConstraints = false
     
     return textView

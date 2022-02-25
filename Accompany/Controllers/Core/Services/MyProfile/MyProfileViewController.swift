@@ -14,6 +14,7 @@ enum InfoField: String, CaseIterable {
   case babyName = "Baby Name"
   case statusMessage = "Status Message"
   case bio = "Bio"
+  case startO
   
 }
 
@@ -46,8 +47,8 @@ class MyProfileViewController: CustomTextViewController {
     let data = userInfo?.babyName ?? "Not decided yet"
     delegate?.getBabyNameToShow(string: data)
     
-    navigationController?.popToViewController(BabySonogramController, animated: true)
-    dismiss(animated: true)
+//    navigationController?.popToViewController(BabySonogramController, animated: true)
+//    dismiss(animated: true)
     
     fetchUserInfo()
     

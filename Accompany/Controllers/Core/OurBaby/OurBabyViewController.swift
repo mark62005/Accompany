@@ -13,7 +13,7 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
     nameTitle.text = string
   }
   
-  let babyVC =
+  
   
   let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
 

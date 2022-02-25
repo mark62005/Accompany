@@ -99,8 +99,17 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
       self.present(imagePicker, animated: true, completion: nil)
     }
+
+  }
+  
+  func gotoDetail() {
+    
+    let photoDetailVC = PhotoDetailedViewController()
+
+    navigationController?.pushViewController(photoDetailVC, animated: true)
     
   }
+  
 
   private func configCollectionView() {
 
@@ -169,49 +178,16 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
   }
   
-  func openCamera() {
-
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .camera
-      imagePicker.allowsEditing = true
-
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-
-  }
-
-  func openPhotoGallery() {
-
-    if UIImagePickerController.isSourceTypeAvailable((.photoLibrary)) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .photoLibrary
-      imagePicker.allowsEditing = true
-
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-
-  }
   
-  func gotoDetail() {
-    
-    let photoDetailVC = PhotoDetailedViewController()
-
-    navigationController?.pushViewController(photoDetailVC, animated: true)
-    
-  }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-    
-    print(#function)
-    let image = info[.originalImage] as! UIImage
-    collectionImage.photoView.image = image
-
-    self.dismiss(animated: true, completion: nil)
-
-  }
+//  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+//    
+//    print(#function)
+//    let image = info[.originalImage] as! UIImage
+//    collectionImage.photoView.image = image
+//
+//    self.dismiss(animated: true, completion: nil)
+//
+//  }
 
 }
 

@@ -22,7 +22,7 @@ class ProfileDetailViewController: CustomTextViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
       
-    confirmButton.addTarget(self, action: #selector(pressBtn(_:)), for: .touchUpInside)
+    confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
       
     setupLayout()
       
@@ -30,12 +30,6 @@ class ProfileDetailViewController: CustomTextViewController {
     
     updateConfirmButtonState()
       
-  }
-  
-  @objc func pressBtn(_ sender: UIButton) {
-    confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
-    setupLayout()
-    updateConfirmButtonState()
   }
   
   @objc func pressBtn() {

@@ -41,14 +41,13 @@ class HomeViewController: UIViewController {
  
     bgCircleView.image = UIImage(named: "grey-bg")
     
-<<<<<<< HEAD
     // sign user out - for debugging
     try? Auth.auth().signOut()
     
     // TODO: fetch todos
     Task {
       do {
-        todos = try await DatabaseManager.shared.fetchTodos()
+        currentTodos = try await DatabaseManager.shared.fetchTodos()
         
         configureTableView()
         setupLayout()
@@ -57,10 +56,8 @@ class HomeViewController: UIViewController {
       }
     }
     
-=======
-    // TODO: fetch todoLists
-    fetchTodoLists()
->>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
+//    // TODO: fetch todoLists
+//    fetchTodoLists()
 
     configureTableView()
     setupLayout()
@@ -83,21 +80,17 @@ class HomeViewController: UIViewController {
     
     // assign current todos
     currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
-    
-    print("Todos: \(currentTodos), trimester: \(currentTrimester.rawValue)")
   }
   
   private func getCurrentTrimester() -> Trimester {
-    
     // due date
     let dueDate = Date.init("2022-12-31")
-    print(dueDate.description)
     
-    print(Date().description)
+    // TODO: get date of pregnancy
     
     // calculate which trimester
+    // TODO: change Date() to date of pregnancy
     let dateDifference = (dueDate - Date()).asDays()
-    print("date difference: \(dateDifference)")
     
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
@@ -109,7 +102,6 @@ class HomeViewController: UIViewController {
     default:
       return .firstTrimester
     }
-  
   }
   
   private func configureTableView() {
@@ -177,26 +169,6 @@ class HomeViewController: UIViewController {
    
   @objc func goToTodoList(_ button: UIButton) {
     let todoListVC = TodoListViewController()
-<<<<<<< HEAD
-//    
-//    switch button {
-//    case firstTrimesterButton:
-//      todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
-//      todos = Todo.loadSampleToDos(Cycle.firstTrimester)
-//    case secondTrimesterButton:
-//      todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
-//      todos = Todo.loadSampleToDos(Cycle.secondTrimester)
-//    case thirdTrimesterButton:
-//      todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
-//      todos = Todo.loadSampleToDos(Cycle.thirdTrimester)
-//    case afterButton:
-//      todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
-//      todos = Todo.loadSampleToDos(Cycle.afterBirth)
-//    default:
-//      return
-//    }
-//    
-=======
     
     switch button {
     case firstTrimesterButton:
@@ -215,7 +187,6 @@ class HomeViewController: UIViewController {
       return
     }
     
->>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
     navigationController?.pushViewController(todoListVC, animated: true)
   
   }
@@ -274,15 +245,9 @@ extension HomeViewController: UITableViewDataSource {
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
-<<<<<<< HEAD
       // 1. update model
       let todo = Todo(id: "0", title: "")
-      todos.insert(todo, at: 0)
-=======
-    // 1. update model
-      let todo = Todo(title: "")
       currentTodos.insert(todo, at: 0)
->>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
     // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
@@ -298,14 +263,14 @@ extension HomeViewController: TodoCellDelegate {
     //      var todo = todos[indexPath.row]
     //      todo.isCompleted.toggle()
     //
-          // update model
-          currentTodos[indexPath.row].isCompleted.toggle()
-          currentTodos.remove(at: indexPath.row)
-          //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-          notifyTableView.reloadData()
-          // TODO: save changes to database
-        }
-      }
+      // update model
+      currentTodos[indexPath.row].isCompleted.toggle()
+      currentTodos.remove(at: indexPath.row)
+      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
+      // TODO: save changes to database
+    }
+  }
   
 }
 

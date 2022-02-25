@@ -9,8 +9,18 @@ import UIKit
 class ProfileCell: UITableViewCell {
   
   static let identifier = "ProfileCell"
+  
+  let titleLabel: UILabel = {
+    let label = UILabel()
+    label.translatesAutoresizingMaskIntoConstraints = false
+    label.font = .systemFont(ofSize: 18, weight: .regular)
+    label.textColor = .black
+    label.setContentHuggingPriority(UILayoutPriority(252), for: .horizontal)
+    
+    return label
+  }()
 
-  let label: UILabel = {
+  let contentLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 18, weight: .regular)
@@ -24,9 +34,12 @@ class ProfileCell: UITableViewCell {
     
     backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
-    addSubview(label)
+    let hStack = VStack(arrangedSubviews: [titleLabel, contentLabel])
+    hStack.axis = .horizontal
     
-    label.snp.makeConstraints { make in
+    addSubview(hStack)
+    
+    hStack.snp.makeConstraints { make in
       make.edges.equalTo(0).inset(UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10))
     }
   }
@@ -35,8 +48,9 @@ class ProfileCell: UITableViewCell {
     fatalError("init(coder:) has not been implemented")
   }
   
-  func update(with value: String) {
-    self.label.text = value
+  func update(with value: String, for field: InfoField) {
+    self.titleLabel.text = "\(field.rawValue): "
+    self.contentLabel.text = value
   }
 
 }

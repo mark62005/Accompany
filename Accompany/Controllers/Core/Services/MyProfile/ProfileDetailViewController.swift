@@ -23,13 +23,9 @@ class ProfileDetailViewController: CustomTextViewController {
     super.viewDidLoad()
       
     confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
-      
     setupLayout()
-      
-    navigationItem.title = "Edit Info"
-    
     updateConfirmButtonState()
-      
+
   }
   
   @objc func pressBtn() {
@@ -78,6 +74,8 @@ class ProfileDetailViewController: CustomTextViewController {
       textView.text = fieldValue ?? ""
     case .bio:
       textView.text = fieldValue ?? ""
+    default:
+      return
     }
     
   }

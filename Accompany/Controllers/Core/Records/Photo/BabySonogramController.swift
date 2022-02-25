@@ -178,16 +178,14 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
   }
   
-  
-//  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-//    
-//    print(#function)
-//    let image = info[.originalImage] as! UIImage
-//    collectionImage.photoView.image = image
-//
-//    self.dismiss(animated: true, completion: nil)
-//
-//  }
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    let image = info[.originalImage] as! UIImage
+    collectionImage.photoView.image = image
+
+    self.dismiss(animated: true, completion: nil)
+
+  }
 
 }
 

@@ -14,8 +14,8 @@ enum InfoField: String, CaseIterable {
   case babyName = "Baby Name"
   case statusMessage = "Status Message"
   case bio = "Bio"
-  case startO
-  
+  case dateOfPregnancy = "Date of Pregnancy"
+ 
 }
 
 protocol MyProfileViewControllerDelegate {
@@ -33,22 +33,17 @@ class MyProfileViewController: CustomTextViewController {
     return profileTableView
   }()
   
+  let datePickerCell = DatePickerTableViewCell()
+  
   let userImageView = UIImageView(image: UIImage(systemName: "person.fill"))
   
   var userInfo: Info?
   var selectedIndexPath: IndexPath?
   
-  var delegate: MyProfileViewControllerDelegate!
-
-  
+  let datePickerIndexPath = IndexPath(row: 5, section: 0)
+ 
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    let data = userInfo?.babyName ?? "Not decided yet"
-    delegate?.getBabyNameToShow(string: data)
-    
-//    navigationController?.popToViewController(BabySonogramController, animated: true)
-//    dismiss(animated: true)
     
     fetchUserInfo()
     
@@ -172,60 +167,80 @@ extension MyProfileViewController: UITableViewDelegate {
 
 extension MyProfileViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 5
+    return 6
   }
 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
-    
-    let fieldValue: String?
-    
-    switch indexPath.row {
-    case 0:
-      fieldValue = userInfo?.username
-    case 1:
-      fieldValue = userInfo?.email
-    case 2:
-      fieldValue = userInfo?.babyName ?? "Not decided yet"
-    case 3:
-      fieldValue = userInfo?.statusMessage
-    case 4:
-      fieldValue = userInfo?.bio
-    default:
-      fieldValue = nil
+    if indexPath == datePickerIndexPath {
+      // configure datePickerCell...
+      datePickerCell.datePicker.addTarget(self, action: #selector(datePickerValueChanged), for: .valueChanged)
+            
+      return datePickerCell
     }
     
-    cell.update(with: fieldValue ?? "")
-
-    return cell
+    else {
+      let cell = profileTableView.dequeueReusableCell(withIdentifier: ProfileCell.identifier, for: indexPath) as! ProfileCell
+      
+      switch indexPath.row {
+      case 0:
+        cell.update(with: userInfo!.username, for: InfoField.username)
+      case 1:
+        cell.update(with: userInfo!.email, for: InfoField.email)
+      case 2:
+        cell.update(with: userInfo?.babyName ?? "Not decided yet", for: InfoField.babyName)
+      case 3:
+        cell.update(with: userInfo?.statusMessage ?? "", for: InfoField.statusMessage)
+      case 4:
+        cell.update(with: userInfo?.bio ?? "", for: InfoField.bio)
+      default:
+        cell.update(with: "", for: .bio)
+      }
+      
+      return cell
+    }
+    
+    
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    let profileDetailVC = ProfileDetailViewController()
-    profileDetailVC.delegate = self
     
-    switch indexPath.row {
-    case 0:
-      profileDetailVC.fieldValue = userInfo?.username
-    case 1:
-      profileDetailVC.fieldValue = userInfo?.email
-    case 2:
-      profileDetailVC.fieldValue = userInfo?.babyName
-    case 3:
-      profileDetailVC.fieldValue = userInfo?.statusMessage
-    case 4:
-      profileDetailVC.fieldValue = userInfo?.bio
-    default:
-      profileDetailVC.fieldValue = ""
+    if indexPath == datePickerIndexPath {
+      return
     }
     
-    profileDetailVC.field = InfoField.allCases[indexPath.row]
-    profileDetailVC.updateUI(InfoField.allCases[indexPath.row])
+    else {
+      let profileDetailVC = ProfileDetailViewController()
+      profileDetailVC.delegate = self
+      
+      switch indexPath.row {
+      case 0:
+        profileDetailVC.fieldValue = userInfo?.username
+      case 1:
+        profileDetailVC.fieldValue = userInfo?.email
+      case 2:
+        profileDetailVC.fieldValue = userInfo?.babyName
+      case 3:
+        profileDetailVC.fieldValue = userInfo?.statusMessage
+      case 4:
+        profileDetailVC.fieldValue = userInfo?.bio
+      default:
+        profileDetailVC.fieldValue = ""
+      }
+      
+      profileDetailVC.field = InfoField.allCases[indexPath.row]
+      profileDetailVC.updateUI(InfoField.allCases[indexPath.row])
+      
+      navigationController?.pushViewController(profileDetailVC, animated: true)
+      
+      selectedIndexPath = indexPath
+      tableView.deselectRow(at: indexPath, animated: false)
+    }
     
-    navigationController?.pushViewController(profileDetailVC, animated: true)
-    
-    selectedIndexPath = indexPath
-    tableView.deselectRow(at: indexPath, animated: false)
+  }
+  
+  @objc func datePickerValueChanged(_ datePicker: UIDatePicker) {
+    // TODO: update database
+    userInfo?.dateOfPregnancy = datePicker.date
   }
 
 }
@@ -254,6 +269,8 @@ extension MyProfileViewController: ProfileDetailViewControllerDelegate {
       userInfo?.statusMessage = value
     case .bio:
       userInfo?.bio = value
+    default:
+      return
     }
     
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)

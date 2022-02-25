@@ -22,37 +22,12 @@ class TodoListViewController: UIViewController {
   }()
   
   var todos = [Todo]()
-  var todoCycle: Cycle!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
 //    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
-    // fetch todos
-//    if let todoCycle = todoCycle {
-//      if todos.isEmpty {
-  //      switch todoCycle {
-  //      case.firstTrimester:
-//        todos = Todo.loadSampleToDos(todoCycle)
-////    }
-    if todos.isEmpty {
-      switch todoCycle {
-      case.firstTrimester:
-      todos = Todo.loadSampleToDos(todoCycle)
-      case.secondTrimester:
-        todos = Todo.loadSampleToDos(Cycle.secondTrimester)
-      case .thirdTrimester:
-        todos = Todo.loadSampleToDos(Cycle.thirdTrimester)
-      case.afterBirth:
-        todos = Todo.loadSampleToDos(Cycle.afterBirth)
-
-      default:
-        return
-      }
-      
-    }
     
     configureTableView()
         

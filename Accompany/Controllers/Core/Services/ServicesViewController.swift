@@ -113,29 +113,26 @@ class ServicesViewController: UIViewController {
       // TODO: fetch user info
       
       navigationController?.pushViewController(myProfileVC, animated: true)
-    // Invite Partner
-//    case Services.invitePartner.description:
-//      let invitePartnerVC = InvitePartnerViewController()
-      
-      // TODO: do something?
-      
-//      navigationController?.pushViewController(invitePartnerVC, animated: true)
     // Account Settings
     case Services.accountSettings.description:
       navigationController?.pushViewController(AccountSettingsViewController(), animated: true)
-    // Pregnant Articles
-//    case Services.pregnantArticles.description:
-//      let pregnantArticlesTVC = PregnantArticlesTableViewController()
-      
-      // TODO: fetch articles
-      
-//      navigationController?.pushViewController(pregnantArticlesTVC, animated: true)
     // About Accompany
     case Services.aboutAccompany.description:
       navigationController?.pushViewController(AboutAccompanyViewController(), animated: true)
     // Log Out
     case Services.logOut.description:
-      navigationController?.pushViewController(LogOutViewController(), animated: true)
+      
+      let alert = UIAlertController(title: "Log Out", message: "Confirm to log out?", preferredStyle: .alert)
+      alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+      alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+        // TODO: Log out with database
+        print("Log out")
+        
+        // back to log in page (scene delegate?)
+      }))
+      
+      self.present(alert, animated: true, completion: nil)
+      
     default:
       return
     }

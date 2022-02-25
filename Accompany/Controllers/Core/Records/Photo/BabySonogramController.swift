@@ -163,16 +163,17 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     
+    // update model
     let image = info[.originalImage] as! UIImage
     // TODO: Upload Image to Database
-    if selectedIndexPath!.row < images.count {
+    if selectedIndexPath!.row  < images.count {
       images[selectedIndexPath!.row] = image
   
     } else {
       images.append(image)
     }
-    
-    collectionView.reloadItems(at: [selectedIndexPath!])
+    // update view
+    collectionView.reloadData()
     
     self.dismiss(animated: true, completion: nil)
     

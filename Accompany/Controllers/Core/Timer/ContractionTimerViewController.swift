@@ -12,8 +12,8 @@ class ContractionTimerViewController: UIViewController {
   
   let titleLabel = TitleLabel(title: "Contraction Timer", size: .medium, color: .red)
  
-  var userConstractionRecords : [contractions]?
-  var newRecord: contractions?
+  var userConstractionRecords : [Contractions]?
+  var newRecord: Contractions?
   var timerValue : String?
   var todaysRecord = [[String]]()
   
@@ -202,10 +202,10 @@ class ContractionTimerViewController: UIViewController {
     }
     
     userConstractionRecords = [
-      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:04"),details(state: "Rest", length: "00:04")]),
-      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:06"),details(state: "Rest", length: "00:02")])]
+      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:04")]),
+      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:06"),Detail(state: "Rest", length: "00:02")])]
     newRecord =
-      contractions(contractionDate: Date(), contractionRecord: [details(state: "Constracting", length: "00:04"),details(state: "Rest", length: "00:07")])
+      Contractions(contractionDate: Date(), contractionRecord: [Detail(state: "Constracting", length: "00:04"),Detail(state: "Rest", length: "00:07")])
     
   }
   
@@ -332,7 +332,7 @@ class ContractionTimerViewController: UIViewController {
   func startTimer() {
     scheduledTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(refreshValue), userInfo: nil, repeats: true)
     setTimerCounting(true)
-    newRecord = contractions(contractionDate: Date(), contractionRecord: [])
+    newRecord = Contractions(contractionDate: Date(), contractionRecord: [])
     currentRecordList.reloadData()
     isContracting.toggle()
   }
@@ -372,11 +372,11 @@ class ContractionTimerViewController: UIViewController {
   
   func recordData(){
     if timerCounting {
-      newRecord?.contractionRecord?.append(details(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       currentRecordList.reloadData()
     } else {
       newRecord = nil
-      newRecord = contractions(contractionDate: Date(), contractionRecord: [])
+      newRecord = Contractions(contractionDate: Date(), contractionRecord: [])
     }
     setStartTime(date: Date())
     minutesLabel.text = "00"
@@ -389,7 +389,7 @@ class ContractionTimerViewController: UIViewController {
   
   @objc func stopTimer(){
     if newRecord != nil {
-      newRecord?.contractionRecord?.append(details(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       currentRecordList.reloadData()
       if userConstractionRecords != nil {
         userConstractionRecords?.append(newRecord!)

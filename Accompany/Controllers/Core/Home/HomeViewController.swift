@@ -31,7 +31,8 @@ class HomeViewController: UIViewController {
   
   let bgCircleView = ImageView()
   
-  var todos = [Todo]()
+  var todoLists = [TodoList]()
+  var currentTodos = [Todo]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -39,7 +40,8 @@ class HomeViewController: UIViewController {
  
     bgCircleView.image = UIImage(named: "grey-bg")
     
-    // TODO: fetch todos
+    // TODO: fetch todoLists
+    fetchTodoLists()
 
     configureTableView()
     setupLayout()
@@ -51,6 +53,44 @@ class HomeViewController: UIViewController {
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
+  }
+  
+  private func fetchTodoLists() {
+    // fetch todolists
+    todoLists = TodoList.loadSampleTodoLists()
+    
+    // decide current trimester
+    let currentTrimester = getCurrentTrimester()
+    
+    // assign current todos
+    currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
+    
+    print("Todos: \(currentTodos), trimester: \(currentTrimester.rawValue)")
+  }
+  
+  private func getCurrentTrimester() -> Trimester {
+    
+    // due date
+    let dueDate = Date.init("2022-12-31")
+    print(dueDate.description)
+    
+    print(Date().description)
+    
+    // calculate which trimester
+    let dateDifference = (dueDate - Date()).asDays()
+    print("date difference: \(dateDifference)")
+    
+    switch Double(dateDifference) / 7.0 {
+    case Double(Int.min)..<14:
+      return .after
+    case 14..<29:
+      return .thirdTrimester
+    case 29..<41:
+      return .secondTrimester
+    default:
+      return .firstTrimester
+    }
+  
   }
   
   private func configureTableView() {
@@ -122,16 +162,16 @@ class HomeViewController: UIViewController {
     switch button {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
-      todos = Todo.loadSampleToDos(Cycle.firstTrimester)
+      todoListVC.todos = TodoList.getTodos(of: .firstTrimester, from: todoLists) ?? [Todo]()
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
-      todos = Todo.loadSampleToDos(Cycle.secondTrimester)
+      todoListVC.todos = TodoList.getTodos(of: .secondTrimester, from: todoLists) ?? [Todo]()
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
-      todos = Todo.loadSampleToDos(Cycle.thirdTrimester)
+      todoListVC.todos = TodoList.getTodos(of: .thirdTrimester, from: todoLists) ?? [Todo]()
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
-      todos = Todo.loadSampleToDos(Cycle.afterBirth)
+      todoListVC.todos = TodoList.getTodos(of: .after, from: todoLists) ?? [Todo]()
     default:
       return
     }
@@ -157,7 +197,7 @@ extension HomeViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return todos.count
+    return currentTodos.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -170,7 +210,7 @@ extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
-    let toDo = todos[indexPath.row]
+    let toDo = currentTodos[indexPath.row]
     cell.delegate = self
     cell.update(with: toDo)
     cell.backgroundColor = .white
@@ -181,7 +221,7 @@ extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addNoteTVC = ToDoFormTableViewController()
-    addNoteTVC.todo = todos[indexPath.row]
+    addNoteTVC.todo = currentTodos[indexPath.row]
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
     
@@ -190,13 +230,13 @@ extension HomeViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
     if editingStyle == .delete {
     // 1. update model
-      todos.remove(at: indexPath.row)
+      currentTodos.remove(at: indexPath.row)
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
     } else if editingStyle == .insert {
     // 1. update model
       let todo = Todo(title: "")
-      todos.insert(todo, at: 0)
+      currentTodos.insert(todo, at: 0)
     // 2. update view
       notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
@@ -213,8 +253,8 @@ extension HomeViewController: TodoCellDelegate {
     //      todo.isCompleted.toggle()
     //
           // update model
-          todos[indexPath.row].isCompleted.toggle()
-          todos.remove(at: indexPath.row)
+          currentTodos[indexPath.row].isCompleted.toggle()
+          currentTodos.remove(at: indexPath.row)
           //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
           notifyTableView.reloadData()
           // TODO: save changes to database
@@ -226,17 +266,27 @@ extension HomeViewController: TodoCellDelegate {
 extension HomeViewController: ToDoFormTableViewControllerDelegate {
   
   func add(todo: Todo) {
-    todos.append(todo)
-    notifyTableView.insertRows(at: [IndexPath(row: todos.count - 1, section: 0)], with: .automatic)
+    currentTodos.append(todo)
+    notifyTableView.insertRows(at: [IndexPath(row: currentTodos.count - 1, section: 0)], with: .automatic)
     
   }
   
   func edit(todo: Todo) {
     if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
-      todos[selectedIndexPath.row] = todo
+      currentTodos[selectedIndexPath.row] = todo
       notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
     
   }
   
+}
+
+extension Date {
+  init(_ dateString:String) {
+    let dateStringFormatter = DateFormatter()
+    dateStringFormatter.dateFormat = "yyyy-MM-dd"
+    dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+    let date = dateStringFormatter.date(from: dateString)!
+    self.init(timeInterval:0, since:date)
+  }
 }

@@ -169,32 +169,6 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
   }
   
-  func openCamera() {
-
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .camera
-      imagePicker.allowsEditing = true
-
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-
-  }
-
-  func openPhotoGallery() {
-
-    if UIImagePickerController.isSourceTypeAvailable((.photoLibrary)) {
-      let imagePicker = UIImagePickerController()
-      imagePicker.delegate = self
-      imagePicker.sourceType = .photoLibrary
-      imagePicker.allowsEditing = true
-
-      self.present(imagePicker, animated: true, completion: nil)
-    }
-
-  }
-  
   func gotoDetail() {
     
     let photoDetailVC = PhotoDetailedViewController()

@@ -123,7 +123,7 @@ class ToDoFormTableViewController: UITableViewController {
   override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     switch indexPath {
     case basicInfoCellIndexPath:
-      return 65
+      return 60
     case notesCellIndexPath:
       return 300
     default:

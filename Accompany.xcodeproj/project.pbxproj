@@ -47,7 +47,7 @@
 		6C1FC57A27C36F83007D625E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6C1FC57927C36F83007D625E /* Assets.xcassets */; };
 		6CB9D45B27C4D11C00D377F7 /* CustomTextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */; };
 		6CB9D45D27C5F07C00D377F7 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */; };
-		6CB9D45F27C5F35F00D377F7 /* ProfileOption.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */; };
+		6CB9D45F27C5F35F00D377F7 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D45E27C5F35F00D377F7 /* User.swift */; };
 		6CB9D46127C60B8200D377F7 /* ProfileDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */; };
 		6CF45F7427BE520100ED0942 /* BabySonogramController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7327BE520100ED0942 /* BabySonogramController.swift */; };
 		6CF45F7627BE624400ED0942 /* PhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */; };
@@ -100,7 +100,7 @@
 		6C96352827B7C252001D0E45 /* Simple Boy ttf.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Simple Boy ttf.ttf"; sourceTree = "<group>"; };
 		6CB9D45A27C4D11C00D377F7 /* CustomTextViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTextViewController.swift; sourceTree = "<group>"; };
 		6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
-		6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileOption.swift; sourceTree = "<group>"; };
+		6CB9D45E27C5F35F00D377F7 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		6CB9D46027C60B8200D377F7 /* ProfileDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileDetailViewController.swift; sourceTree = "<group>"; };
 		6CF45F7327BE520100ED0942 /* BabySonogramController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BabySonogramController.swift; sourceTree = "<group>"; };
 		6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -128,10 +128,10 @@
 		4306D26827B5D26B00050369 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4354219627BDD88C002160DA /* Todo.swift */,
+				6CB9D45E27C5F35F00D377F7 /* User.swift */,
 				43FB2AF427BDDC7C004A641D /* TodoList.swift */,
+				4354219627BDD88C002160DA /* Todo.swift */,
 				641452EB27BF0B0D0058800B /* Contraction.swift */,
-				6CB9D45E27C5F35F00D377F7 /* ProfileOption.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -546,7 +546,7 @@
 				430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */,
 				6CF5E38627C3C26B00F427A2 /* QAController.swift in Sources */,
 				43FB2B0727BE37F0004A641D /* VStack.swift in Sources */,
-				6CB9D45F27C5F35F00D377F7 /* ProfileOption.swift in Sources */,
+				6CB9D45F27C5F35F00D377F7 /* User.swift in Sources */,
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
 				43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */,
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,

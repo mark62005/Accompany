@@ -1,5 +1,5 @@
 //
-//  ServicesViewController.swift
+//  ServiceViewController.swift
 //  Accompany
 //
 //  Created by Mark Wong on 2022-02-04.
@@ -35,9 +35,9 @@ enum Services: CustomStringConvertible, CaseIterable {
 
 }
 
-class ServicesViewController: UIViewController {
+class ServiceViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: "Service", size: .medium, color: .red)
+  let titleLabel = TitleLabel(title: "Service", size: .large, color: .red)
   
   let bgImage = ImageView()
   
@@ -66,7 +66,7 @@ class ServicesViewController: UIViewController {
     view.addSubview(bgImage)
     
     bgImage.snp.makeConstraints { make in
-      make.top.equalTo(titleLabel.snp.bottom).offset(15)
+      make.top.equalTo(titleLabel.snp.bottom).offset(25)
       make.centerX.equalTo(view)
       make.left.equalTo(view.safeAreaLayoutGuide)
       make.right.equalTo(view.safeAreaLayoutGuide)
@@ -79,17 +79,17 @@ class ServicesViewController: UIViewController {
     var buttons = [UIButton]()
     for i in 0..<Services.allCases.count {
       switch i {
-      case 0, 1:
+      case 0 :
         buttons.append(SecondaryButton(title: Services.allCases[i].description))
-      case 2, 3, 4:
+      case 1, 2, 3:
         buttons.append(PrimaryButton(title: Services.allCases[i].description))
-      case 5:
+      case 4:
         buttons.append(OutlineButton(title: Services.allCases[i].description))
       default:
         return
       }
 
-      buttons[i].addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside)
+//      buttons[i].addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside)
     }
     
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
@@ -98,7 +98,7 @@ class ServicesViewController: UIViewController {
     view.addSubview(vStack)
     
     vStack.snp.makeConstraints { make in
-      make.top.equalTo(bgImage.snp.top).offset(60)
+      make.top.equalTo(bgImage.snp.top).offset(80)
       make.centerX.equalTo(view.safeAreaLayoutGuide)
       make.width.equalTo(view.snp.width).multipliedBy(0.55)
     }
@@ -122,9 +122,9 @@ class ServicesViewController: UIViewController {
     // Log Out
     case Services.logOut.description:
       
-      let alert = UIAlertController(title: "Log Out", message: "Confirm to log out?", preferredStyle: .alert)
+      let alert = UIAlertController(title: "Log Out of Accompany?", message: nil, preferredStyle: .alert)
       alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      alert.addAction(UIAlertAction(title: "Yes", style: .default, handler: { _ in
+      alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
         // TODO: Log out with database
         print("Log out")
         

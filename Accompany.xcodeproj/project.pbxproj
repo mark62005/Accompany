@@ -22,6 +22,7 @@
 		437721FF27ADE98B00EC8A98 /* RecordsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */; };
 		4377220127ADE99300EC8A98 /* ServicesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220027ADE99300EC8A98 /* ServicesViewController.swift */; };
 		4377220327ADE9A800EC8A98 /* TabBarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4377220227ADE9A800EC8A98 /* TabBarViewController.swift */; };
+		4378AA2527C86C5B0019773E /* DatePickerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */; };
 		439FC07227B705660016CD7F /* TodoListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 439FC07127B705660016CD7F /* TodoListViewController.swift */; };
 		43A8C58227C0790F00FD647F /* ToDoNotesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */; };
 		43FB2AF527BDDC7C004A641D /* TodoList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2AF427BDDC7C004A641D /* TodoList.swift */; };
@@ -74,6 +75,7 @@
 		437721FE27ADE98B00EC8A98 /* RecordsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordsViewController.swift; sourceTree = "<group>"; };
 		4377220027ADE99300EC8A98 /* ServicesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServicesViewController.swift; sourceTree = "<group>"; };
 		4377220227ADE9A800EC8A98 /* TabBarViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarViewController.swift; sourceTree = "<group>"; };
+		4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerTableViewCell.swift; sourceTree = "<group>"; };
 		439FC07127B705660016CD7F /* TodoListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListViewController.swift; sourceTree = "<group>"; };
 		43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ToDoNotesCell.swift; sourceTree = "<group>"; };
 		43FB2AF427BDDC7C004A641D /* TodoList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoList.swift; sourceTree = "<group>"; };
@@ -276,7 +278,6 @@
 				6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */,
 				43A8C58127C0790F00FD647F /* ToDoNotesCell.swift */,
 				6CF5E38727C3D9D000F427A2 /* ContentCell.swift */,
-				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
 				6CF45F7527BE624400ED0942 /* PhotoCollectionViewCell.swift */,
 			);
 			path = TodoList;
@@ -345,6 +346,8 @@
 		6413589D27C0626A0086BB39 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6CB9D45C27C5F07C00D377F7 /* ProfileCell.swift */,
+				4378AA2427C86C5B0019773E /* DatePickerTableViewCell.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -551,6 +554,7 @@
 				43FB2AFC27BDEB91004A641D /* TitleLabel.swift in Sources */,
 				43FB2B1A27BE49F4004A641D /* InvitePartnerViewController.swift in Sources */,
 				4354218D27BC66B2002160DA /* ContractionTimerViewController.swift in Sources */,
+				4378AA2527C86C5B0019773E /* DatePickerTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

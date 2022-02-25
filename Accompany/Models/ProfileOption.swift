@@ -11,11 +11,19 @@ struct Info {
   var username: String
   var email: String
   var babyName: String?
+  var dateOfPregnancy: Date?
   var statusMessage: String?
   var bio: String?
   
   static func loadSampleInfo() -> Info {
     return Info(username: "Username:", email: "Email:", babyName: "Baby's Name: (optional)", statusMessage: "Status Message: (optional)", bio: "Bio: (optional)")
   }
+  
+}
+
+struct User {
+  
+  var dueDate: Date?
+  var info: Info?
   
 }

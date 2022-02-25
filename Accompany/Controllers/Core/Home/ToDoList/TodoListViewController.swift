@@ -22,7 +22,6 @@ class TodoListViewController: UIViewController {
   }()
   
   var todos = [Todo]()
-  var todoCycle: Cycle!
 
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -30,6 +29,7 @@ class TodoListViewController: UIViewController {
 //    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
+<<<<<<< HEAD
     // fetch todos
 //    if let todoCycle = todoCycle {
 //      if todos.isEmpty {
@@ -55,6 +55,8 @@ class TodoListViewController: UIViewController {
       
     }
     
+=======
+>>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
     configureTableView()
         
     navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didTapAdd))

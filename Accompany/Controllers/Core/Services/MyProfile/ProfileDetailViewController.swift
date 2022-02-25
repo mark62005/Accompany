@@ -23,6 +23,7 @@ class ProfileDetailViewController: CustomTextViewController {
     super.viewDidLoad()
       
     confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
+<<<<<<< HEAD
       
     setupLayout()
       
@@ -30,6 +31,10 @@ class ProfileDetailViewController: CustomTextViewController {
     
     updateConfirmButtonState()
       
+=======
+    setupLayout()
+    updateConfirmButtonState()
+>>>>>>> ec787023da1b37327aa0937a16f19ca8722b36f4
   }
   
   @objc func pressBtn() {
@@ -78,6 +83,8 @@ class ProfileDetailViewController: CustomTextViewController {
       textView.text = fieldValue ?? ""
     case .bio:
       textView.text = fieldValue ?? ""
+    default:
+      return
     }
     
   }

@@ -29,7 +29,9 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   var images = [URL]()
 
   let sections = [Section.videoSection, Section.photoSection]
-
+  
+  let collectionImage = PhotoCollectionViewCell()
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
@@ -51,11 +53,10 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
     collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
 
-    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAdd))
+//    navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(didPressAdd))
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
-        title: "Home Page", style: .plain, target: nil, action: nil)
-    
+        title: "Photo Album ", style: .plain, target: nil, action: nil)
   }
   
   @objc func didPressAdd() {
@@ -167,12 +168,46 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     return layout
 
   }
+  
+  func gotoDetail() {
+    
+    let photoDetailVC = PhotoDetailedViewController()
+
+    navigationController?.pushViewController(photoDetailVC, animated: true)
+    
+  }
+  
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    
+    print(#function)
+    let image = info[.originalImage] as! UIImage
+    collectionImage.photoView.image = image
+
+    self.dismiss(animated: true, completion: nil)
+
+  }
 
 }
 
 extension BabySonogramController: UICollectionViewDelegate {
     
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    let alert = UIAlertController(title: "\(appName) APP Would Like to Access your Photos.", message: "Choose one way to upload photos", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "Camera", style: .default, handler: { (_) in
+      self.openCamera()
+    }))
+    alert.addAction(UIAlertAction(title: "Photo Library", style: .default, handler: { (_) in
+      self.openPhotoGallery()
+    }))
+    alert.addAction(UIAlertAction(title: "Go to Detail", style: .default, handler: { (_) in
+      self.gotoDetail()
+    }))
+                                  
+    alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (_) in
+    }))
+    
+    self.present(alert, animated: true, completion: {
+    })
   
   }
 
@@ -191,21 +226,9 @@ extension BabySonogramController: UICollectionViewDataSource {
   func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
     
-    let tapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(imageTapped(tapGestureRecognizer:)))
-    cell.photoView.isUserInteractionEnabled = true
-    cell.photoView.tag = indexPath.row
-    cell.photoView.addGestureRecognizer(tapGestureRecognizer)
-  
     return cell
 
   }
-  
-  @objc func imageTapped(tapGestureRecognizer: UITapGestureRecognizer) {
- 
-     let photoDetailVC = PhotoDetailedViewController()
- 
-     navigationController?.pushViewController(photoDetailVC, animated: true)
-   }
 
 }
 

@@ -22,23 +22,37 @@ class TodoListViewController: UIViewController {
   }()
   
   var todos = [Todo]()
+  var todoCycle: Cycle!
 
   override func viewDidLoad() {
     super.viewDidLoad()
     
 //    prepareLabel(label: self.todoListTitleLabel, string: "1", superScript: "st")
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    view.addSubview(todoListTitleLabel)
-    view.addSubview(tableView)
     
     // fetch todos
+//    if let todoCycle = todoCycle {
+//      if todos.isEmpty {
+  //      switch todoCycle {
+  //      case.firstTrimester:
+//        todos = Todo.loadSampleToDos(todoCycle)
+////    }
     if todos.isEmpty {
-//      todos = Todo.loadSampleToDos()
-    }
-    
-    todoListTitleLabel.snp.makeConstraints { (make) -> Void in
-      make.bottom.equalTo(tableView.snp.top).offset(-20)
-      make.centerX.equalTo(view)
+
+//      switch todoCycle {
+//      case.firstTrimester:
+//      todos = Todo.loadSampleToDos(todoCycle)
+//      case.secondTrimester:
+//        todos = Todo.loadSampleToDos(Cycle.secondTrimester)
+//      case .thirdTrimester:
+//        todos = Todo.loadSampleToDos(Cycle.thirdTrimester)
+//      case.afterBirth:
+//        todos = Todo.loadSampleToDos(Cycle.afterBirth)
+//
+//      default:
+//        return
+//      }
+      
     }
     
     configureTableView()
@@ -62,6 +76,15 @@ class TodoListViewController: UIViewController {
   override func viewDidLayoutSubviews() {
     super.viewDidLayoutSubviews()
     
+    view.addSubview(todoListTitleLabel)
+    
+    todoListTitleLabel.snp.makeConstraints { (make) -> Void in
+      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.left.equalTo(view.safeAreaLayoutGuide).offset(10)
+      make.right.equalTo(view.safeAreaLayoutGuide).offset(-10)
+    }
+    
+    view.addSubview(tableView)
     tableView.backgroundColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
     
     tableView.snp.makeConstraints { (make) -> Void in

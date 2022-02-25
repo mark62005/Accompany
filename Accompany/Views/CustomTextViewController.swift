@@ -18,7 +18,7 @@ class CustomTextViewController: UIViewController {
     textView.textColor = #colorLiteral(red: 0.631372549, green: 0.631372549, blue: 0.631372549, alpha: 1)
     textView.textAlignment = .left
     textView.layer.cornerRadius = 10
-    textView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 0, right: 0)
+    textView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: -20)
     textView.translatesAutoresizingMaskIntoConstraints = false
     
     return textView

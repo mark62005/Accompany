@@ -64,8 +64,9 @@ class TodoListViewController: UIViewController {
     tableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.centerY.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
-      make.height.equalTo(view.snp.width).multipliedBy(0.85)
+      make.top.equalTo(todoListTitleLabel.snp.bottom).offset(10)
+      make.width.equalTo(view.snp.width).multipliedBy(0.85)
+      make.height.equalTo(view.snp.height).multipliedBy(0.5)
     }
   }
   
@@ -90,7 +91,7 @@ extension TodoListViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 60
+    return 55
      
   }
   

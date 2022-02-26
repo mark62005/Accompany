@@ -11,7 +11,9 @@ import SnapKit
 class HomeViewController: UIViewController {
 
   let accompanyTitleLabel = TitleLabel(title: "Accompany", size: .large, color: .red)
-  let welcomeTitleLabel = TitleLabel(title: "Welcome back user!", size: .mini, color: .black)
+  
+  //TODO: Fetch username, and titlLabel text will be welcome back \(username)
+  let welcomeTitleLabel = TitleLabel(title: "Welcome back!", size: .mini, color: .black)
 
   let firstTrimesterButton = PrimaryButton(title: Trimester.firstTrimester.rawValue)
   let secondTrimesterButton = PrimaryButton(title: Trimester.secondTrimester.rawValue)
@@ -68,8 +70,10 @@ class HomeViewController: UIViewController {
   
   private func getCurrentTrimester() -> Trimester {
     // due date
+    // TODO: fetch due date from DB
     let dueDate = Date.init("2022-12-31")
     
+    print(Date().description(with: .current))
     // TODO: get date of pregnancy
     
     // calculate which trimester

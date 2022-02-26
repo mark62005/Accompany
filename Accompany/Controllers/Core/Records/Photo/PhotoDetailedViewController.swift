@@ -17,7 +17,7 @@ class PhotoDetailedViewController: UIViewController {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
-    imageView.image = UIImage(named: "logo-app")
+//    imageView.image = UIImage(named: "logo-app")
     imageView.backgroundColor = .white
     imageView.layer.borderWidth = 1.0
     imageView.layer.masksToBounds = false

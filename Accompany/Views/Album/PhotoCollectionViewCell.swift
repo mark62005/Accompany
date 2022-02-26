@@ -10,7 +10,7 @@ import SnapKit
 
 class PhotoCollectionViewCell: UICollectionViewCell {
 
-  static let identifier = "photoCollectionCell"
+  static let reuseIdentifier = "photoCollectionCell"
   
   let photoView = ImageView()
 
@@ -19,7 +19,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     contentView.addSubview(photoView)
     contentView.backgroundColor = .white
     
-    photoView.image = UIImage(named: "logo-app")
+//    photoView.image = UIImage(named: "logo-app")
     photoView.contentMode = .scaleAspectFill
     photoView.clipsToBounds = true
 

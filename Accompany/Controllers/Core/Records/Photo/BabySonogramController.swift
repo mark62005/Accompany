@@ -10,15 +10,16 @@ import Photos
 import PhotosUI
 import UIKit
 import SnapKit
+import Gallery
 
 class BabySonogramController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
   
   // MARK: Section Definitions
-  enum Section {
-    case videoSection
-    case photoSection
+  enum Section: Hashable {
+    case randomPhoto
+    case uploadPhoto
   }
-
+  
   let appName = "Accompany"
   
   let babyTitleLabel = TitleLabel(title: "Baby's Sonogram", size: .medium)
@@ -26,14 +27,36 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewLayout())
 
   // MARK: Data
-  var images = [UIImage]()
+  
+  lazy var randomImages: [Image] = uploadedImages[randomPick: 10]
+    
+  var uploadedImages: [Image] = {
+    var images = [Image]()
+     
+    for i in 1..<21 {
+     images.append(Image(id: i, uiImage: UIImage(named: "logo-app")!))
+    }
+     
+    return images
+  }()
 
-  let sections = [Section.videoSection, Section.photoSection]
+  var sections = [Section]()
   
   var selectedIndexPath: IndexPath?
   
-//  var photoCell = PhotoCollectionViewCell()
-  
+  var dataSource: UICollectionViewDiffableDataSource<Section, Image>!
+  var snapshot: NSDiffableDataSourceSnapshot<Section, Image> {
+    var snapshot = NSDiffableDataSourceSnapshot<Section, Image>()
+    snapshot.appendSections([.randomPhoto])
+    snapshot.appendItems(randomImages, toSection: .randomPhoto)
+    print(randomImages)
+    
+    snapshot.appendSections([.uploadPhoto])
+    snapshot.appendItems(uploadedImages, toSection: .uploadPhoto)
+    
+    return snapshot
+  }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
@@ -41,9 +64,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     
     setupLabelLayout()
 
-    collectionView.setCollectionViewLayout(setupCollectionLayout(), animated: false)
-
-    configCollectionView()
+   
 
     view.addSubview(collectionView)
     collectionView.snp.makeConstraints { make in
@@ -54,6 +75,10 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     }
 
     collectionView.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    configCollectionView()
+    collectionView.setCollectionViewLayout(setupCollectionLayout(), animated: false)
+    
+    configureDataSource()
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Photo Album ", style: .plain, target: nil, action: nil)
@@ -93,12 +118,27 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     
   }
   
+  private func configureDataSource() {
+
+    //MARK: Data Source Initializaion
+
+    dataSource = .init(collectionView: collectionView, cellProvider: { (collectionView, indexPath, item) -> UICollectionViewCell? in
+      let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier, for: indexPath) as! PhotoCollectionViewCell
+      cell.photoView.image = item.uiImage
+      
+      return cell
+    })
+
+    sections = snapshot.sectionIdentifiers
+    dataSource.apply(snapshot)
+    
+  }
 
   private func configCollectionView() {
 
     collectionView.delegate = self
-    collectionView.dataSource = self
-    collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.identifier)
+    
+    collectionView.register(PhotoCollectionViewCell.self, forCellWithReuseIdentifier: PhotoCollectionViewCell.reuseIdentifier)
     
   }
 
@@ -118,7 +158,7 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
     let section = self.sections[sectionIndex]
 
     switch section {
-      case .videoSection:
+      case .randomPhoto:
        // Section 1 - 'Full' - A full width item
        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(2/3))
        let item = NSCollectionLayoutItem(layoutSize: itemSize)
@@ -129,11 +169,11 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
        let section = NSCollectionLayoutSection(group: group)
        section.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
-       section.orthogonalScrollingBehavior = .groupPaging
+       section.orthogonalScrollingBehavior = .groupPagingCentered
 
        return section
 
-     case .photoSection:
+     case .uploadPhoto:
        // Section 2
        // 'Triplet' - three 1/3 width items stacked horizontally
        let tripleItem = NSCollectionLayoutItem(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1/3), heightDimension: .fractionalWidth(1/3)))
@@ -150,10 +190,11 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
 
        let nestedGroup = NSCollectionLayoutGroup.vertical(layoutSize: NSCollectionLayoutSize(widthDimension: .fractionalWidth(1), heightDimension: .fractionalWidth(5/3)), subitems: [tripleGroup, doubleGroup])
 
-       let section1 = NSCollectionLayoutSection(group: nestedGroup)
-       section1.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+       let section = NSCollectionLayoutSection(group: nestedGroup)
+       section.contentInsets = NSDirectionalEdgeInsets(top: spacing, leading: spacing, bottom: spacing, trailing: spacing)
+       section.orthogonalScrollingBehavior = .groupPagingCentered
 
-       return section1
+       return section
       
       }
     }
@@ -163,29 +204,30 @@ class BabySonogramController: UIViewController, UIImagePickerControllerDelegate 
   
   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
     
-    // update model
-    let image = info[.originalImage] as! UIImage
+    // update snapshot
+    let uiImage = info[.editedImage] as! UIImage
     // TODO: Upload Image to Database
-    if selectedIndexPath!.row  < images.count {
-      images[selectedIndexPath!.row] = image
+    if selectedIndexPath!.row  < uploadedImages.count {
+      uploadedImages[selectedIndexPath!.row].uiImage = uiImage
   
     } else {
-      images.append(image)
+      uploadedImages.append(Image(id: selectedIndexPath!.row, uiImage: uiImage))
     }
-    // update view
-    collectionView.reloadData()
+    randomImages = uploadedImages[randomPick: 10]
+    
+    // update dataSource
+    dataSource.apply(snapshot, animatingDifferences: true)
     
     self.dismiss(animated: true, completion: nil)
-    
 
   }
 
 }
 
 extension BabySonogramController: UICollectionViewDelegate {
-    
+
   func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    
+
     if indexPath.section == 0 {
       gotoDetail()
     } else {
@@ -199,48 +241,26 @@ extension BabySonogramController: UICollectionViewDelegate {
       alert.addAction(UIAlertAction(title: "Go to Detail", style: .default, handler: { (_) in
         self.gotoDetail()
       }))
-                                    
+
       alert.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
-      
+
       self.present(alert, animated: true, completion: nil)
-        
+
     }
-    
+
     selectedIndexPath = indexPath
-  
-  }
-
-}
-
-extension BabySonogramController: UICollectionViewDataSource {
-  
-  func numberOfSections(in collectionView: UICollectionView) -> Int {
-    return 2
-  }
-  
-  func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-    
-    if section == 0 {
-      return 10
-    }
-    
-    return images.count < 20 ? 20 : images.count
-  }
-
-  func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCollectionViewCell.identifier, for: indexPath) as! PhotoCollectionViewCell
-    
-    if indexPath.section == 0 {
-      return cell
-    } else {
-      if indexPath.row < images.count {
-        let image = images[indexPath.row]
-        cell.photoView.image = image
-      }
-      return cell
-    }
 
   }
 
 }
 
+extension Array {
+    subscript (randomPick n: Int) -> [Element] {
+        var indices = [Int](0..<count)
+        var randoms = [Int]()
+        for _ in 0..<n {
+            randoms.append(indices.remove(at: Int(arc4random_uniform(UInt32(indices.count)))))
+        }
+        return randoms.map { self[$0] }
+    }
+}

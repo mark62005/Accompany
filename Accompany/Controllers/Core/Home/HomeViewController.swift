@@ -125,7 +125,7 @@ class HomeViewController: UIViewController {
     notifyTableView.snp.makeConstraints { (make) -> Void in
       make.centerX.equalTo(view)
       make.top.equalTo(welcomeTitleLabel.snp.bottom).offset(20)
-      make.width.equalTo(view.snp.width).multipliedBy(0.8)
+      make.width.equalTo(view.snp.width).multipliedBy(0.84)
       make.height.equalTo(view.snp.width).multipliedBy(0.5)
    
     }
@@ -204,7 +204,7 @@ extension HomeViewController: UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 42
+    return 58
   }
   
 }
@@ -225,7 +225,7 @@ extension HomeViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addNoteTVC = ToDoFormTableViewController()
     addNoteTVC.todo = currentTodos[indexPath.row]
-    addNoteTVC.delegate = self
+//    addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
     
   }
@@ -236,13 +236,14 @@ extension HomeViewController: UITableViewDataSource {
       currentTodos.remove(at: indexPath.row)
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
-    } else if editingStyle == .insert {
-    // 1. update model
-      let todo = Todo(title: "")
-      currentTodos.insert(todo, at: 0)
-    // 2. update view
-      notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
     }
+//    } else if editingStyle == .insert {
+//    // 1. update model
+//      let todo = Todo(title: "")
+//      currentTodos.insert(todo, at: 0)
+//    // 2. update view
+//      notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
+//    }
     
   }
   
@@ -252,13 +253,14 @@ extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
-    //      var todo = todos[indexPath.row]
-    //      todo.isCompleted.toggle()
+          var todo = currentTodos[indexPath.row]
+          todo.isCompleted.toggle()
     //
           // update model
-          currentTodos[indexPath.row].isCompleted.toggle()
-          currentTodos.remove(at: indexPath.row)
-          //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      currentTodos[indexPath.row].isCompleted.toggle()
+  
+//          currentTodos.remove(at: indexPath.row)
+          notifyTableView.reloadRows(at: [indexPath], with: .automatic)
           notifyTableView.reloadData()
           // TODO: save changes to database
         }
@@ -266,23 +268,23 @@ extension HomeViewController: TodoCellDelegate {
   
 }
 
-extension HomeViewController: ToDoFormTableViewControllerDelegate {
-  
-  func add(todo: Todo) {
-    currentTodos.append(todo)
-    notifyTableView.insertRows(at: [IndexPath(row: currentTodos.count - 1, section: 0)], with: .automatic)
-    
-  }
-  
-  func edit(todo: Todo) {
-    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
-      currentTodos[selectedIndexPath.row] = todo
-      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-    }
-    
-  }
-  
-}
+//extension HomeViewController: ToDoFormTableViewControllerDelegate {
+//
+//  func add(todo: Todo) {
+//    currentTodos.append(todo)
+//    notifyTableView.insertRows(at: [IndexPath(row: currentTodos.count - 1, section: 0)], with: .automatic)
+//
+//  }
+//
+//  func edit(todo: Todo) {
+//    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
+//      currentTodos[selectedIndexPath.row] = todo
+//      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+//    }
+//
+//  }
+//
+//}
 
 extension Date {
   init(_ dateString:String) {

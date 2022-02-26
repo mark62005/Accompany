@@ -66,22 +66,19 @@ class HomeViewController: UIViewController {
     
     // assign current todos
     currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
-    
-    print("Todos: \(currentTodos), trimester: \(currentTrimester.rawValue)")
   }
   
   private func getCurrentTrimester() -> Trimester {
-    
     // due date
     // TODO: fetch due date from DB
     let dueDate = Date.init("2022-12-31")
-    print(dueDate.description)
     
     print(Date().description(with: .current))
+    // TODO: get date of pregnancy
     
     // calculate which trimester
+    // TODO: change Date() to date of pregnancy
     let dateDifference = (dueDate - Date()).asDays()
-    print("date difference: \(dateDifference)")
     
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
@@ -93,7 +90,6 @@ class HomeViewController: UIViewController {
     default:
       return .firstTrimester
     }
-  
   }
   
   private func configureTableView() {
@@ -255,14 +251,14 @@ extension HomeViewController: TodoCellDelegate {
     //      var todo = todos[indexPath.row]
     //      todo.isCompleted.toggle()
     //
-          // update model
-          currentTodos[indexPath.row].isCompleted.toggle()
-          currentTodos.remove(at: indexPath.row)
-          //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-          notifyTableView.reloadData()
-          // TODO: save changes to database
-        }
-      }
+      // update model
+      currentTodos[indexPath.row].isCompleted.toggle()
+      currentTodos.remove(at: indexPath.row)
+      //notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
+      // TODO: save changes to database
+    }
+  }
   
 }
 
@@ -285,11 +281,14 @@ extension HomeViewController: ToDoFormTableViewControllerDelegate {
 }
 
 extension Date {
-  init(_ dateString:String) {
+  
+  init(_ dateString: String) {
     let dateStringFormatter = DateFormatter()
     dateStringFormatter.dateFormat = "yyyy-MM-dd"
     dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+    
     let date = dateStringFormatter.date(from: dateString)!
     self.init(timeInterval:0, since:date)
   }
+  
 }

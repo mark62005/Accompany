@@ -66,7 +66,7 @@ class TodoListViewController: UIViewController {
       make.centerY.equalTo(view)
       make.top.equalTo(todoListTitleLabel.snp.bottom).offset(10)
       make.width.equalTo(view.snp.width).multipliedBy(0.85)
-      make.height.equalTo(view.snp.height).multipliedBy(0.5)
+      make.height.equalTo(view.snp.height).multipliedBy(0.4)
     }
   }
   

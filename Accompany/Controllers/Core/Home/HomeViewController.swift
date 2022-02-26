@@ -66,22 +66,19 @@ class HomeViewController: UIViewController {
     
     // assign current todos
     currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
-    
-    print("Todos: \(currentTodos), trimester: \(currentTrimester.rawValue)")
   }
   
   private func getCurrentTrimester() -> Trimester {
-    
     // due date
     // TODO: fetch due date from DB
     let dueDate = Date.init("2022-12-31")
-    print(dueDate.description)
     
     print(Date().description(with: .current))
+    // TODO: get date of pregnancy
     
     // calculate which trimester
+    // TODO: change Date() to date of pregnancy
     let dateDifference = (dueDate - Date()).asDays()
-    print("date difference: \(dateDifference)")
     
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
@@ -93,7 +90,6 @@ class HomeViewController: UIViewController {
     default:
       return .firstTrimester
     }
-  
   }
   
   private func configureTableView() {
@@ -225,7 +221,7 @@ extension HomeViewController: UITableViewDataSource {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addNoteTVC = ToDoFormTableViewController()
     addNoteTVC.todo = currentTodos[indexPath.row]
-//    addNoteTVC.delegate = self
+    addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
     
   }
@@ -237,13 +233,6 @@ extension HomeViewController: UITableViewDataSource {
     // 2. update view
       tableView.deleteRows(at: [indexPath], with: .fade)
     }
-//    } else if editingStyle == .insert {
-//    // 1. update model
-//      let todo = Todo(title: "")
-//      currentTodos.insert(todo, at: 0)
-//    // 2. update view
-//      notifyTableView.insertRows(at: [IndexPath(row: 0, section: 0)], with: .automatic)
-//    }
     
   }
   
@@ -253,45 +242,46 @@ extension HomeViewController: TodoCellDelegate {
   
   func isCompleteButtonTapped(sender: TodoCell) {
     if let indexPath = notifyTableView.indexPath(for: sender) {
-          var todo = currentTodos[indexPath.row]
-          todo.isCompleted.toggle()
-    //
-          // update model
+      var todo = currentTodos[indexPath.row]
+      todo.isCompleted.toggle()
+
+      // update model
       currentTodos[indexPath.row].isCompleted.toggle()
-  
-//          currentTodos.remove(at: indexPath.row)
-          notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-          notifyTableView.reloadData()
-          // TODO: save changes to database
-        }
-      }
-  
+
+
+      notifyTableView.reloadRows(at: [indexPath], with: .automatic)
+      notifyTableView.reloadData()
+      // TODO: save changes to database
+    }
+  }
 }
 
-//extension HomeViewController: ToDoFormTableViewControllerDelegate {
-//
-//  func add(todo: Todo) {
-//    currentTodos.append(todo)
-//    notifyTableView.insertRows(at: [IndexPath(row: currentTodos.count - 1, section: 0)], with: .automatic)
-//
-//  }
-//
-//  func edit(todo: Todo) {
-//    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
-//      currentTodos[selectedIndexPath.row] = todo
-//      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-//    }
-//
-//  }
-//
-//}
+
+extension HomeViewController: ToDoFormTableViewControllerDelegate {
+
+  func add(todo: Todo) {
+
+  }
+
+  func edit(todo: Todo) {
+    if let selectedIndexPath = notifyTableView.indexPathForSelectedRow {
+      currentTodos[selectedIndexPath.row] = todo
+      notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+    }
+
+  }
+
+}
 
 extension Date {
-  init(_ dateString:String) {
+  
+  init(_ dateString: String) {
     let dateStringFormatter = DateFormatter()
     dateStringFormatter.dateFormat = "yyyy-MM-dd"
     dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
+    
     let date = dateStringFormatter.date(from: dateString)!
     self.init(timeInterval:0, since:date)
   }
+  
 }

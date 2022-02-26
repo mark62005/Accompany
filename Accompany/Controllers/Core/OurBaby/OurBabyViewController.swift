@@ -267,29 +267,17 @@ extension OurBabyViewController: UIPickerViewDelegate, UIPickerViewDataSource {
 }
 
 extension Date {
+  
   static func - (lhs: Date, rhs: Date) -> TimeInterval {
     return lhs.timeIntervalSinceReferenceDate - rhs.timeIntervalSinceReferenceDate
-    
   }
-  
-//  static func getDateDifference(to dueDate: Date) -> TimeInterval {
-//    let formatter = DateFormatter()
-//    formatter.timeStyle = .none
-//    formatter.dateStyle = .medium
-//    formatter.dateFormat = "dd/MM/yyyy"
-//
-//    let formattedDueDate = formatter.date(from: dueDate)
-//    let formattedCurrentDate = formatter.date(from: Date())
-//    let difference = (formattedDueDate! - formattedCurrentDate!)
-//    return difference.asDays()
-//  }
   
 }
 
 extension TimeInterval {
+  
   func asDays() -> Int {
     return Int(self / (60 * 60 * 24))
-    
   }
   
 }

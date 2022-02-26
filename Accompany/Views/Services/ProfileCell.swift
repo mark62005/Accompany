@@ -13,8 +13,8 @@ class ProfileCell: UITableViewCell {
   let titleLabel: UILabel = {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
-    label.font = .systemFont(ofSize: 18, weight: .regular)
-    label.textColor = .black
+    label.font = .systemFont(ofSize: 16, weight: .bold)
+    label.textColor = #colorLiteral(red: 0.2462079227, green: 0.2246411145, blue: 0.2394523323, alpha: 1)
     label.setContentHuggingPriority(UILayoutPriority(252), for: .horizontal)
     
     return label
@@ -40,7 +40,7 @@ class ProfileCell: UITableViewCell {
     addSubview(hStack)
     
     hStack.snp.makeConstraints { make in
-      make.edges.equalTo(0).inset(UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 10))
+      make.edges.equalTo(contentView).inset(UIEdgeInsets(top: 20, left: 20, bottom: 10, right: 10))
     }
   }
   

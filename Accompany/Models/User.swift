@@ -10,14 +10,14 @@ struct Info {
   
   var username: String
   var email: String
-  var babyName: String?
-  var dateOfPregnancy: Date?
+  var babyName: String
+  var dateOfPregnancy: String?
   var dueDate: Date?
   var statusMessage: String?
   var bio: String?
   
   static func loadSampleInfo() -> Info {
-    return Info(username: "Username:", email: "Email:", babyName: "Baby's Name: (optional)", statusMessage: "Status Message: (optional)", bio: "Bio: (optional)")
+    return Info(username: "Accompany", email: "accompany@email.com", babyName: "Not decided yet", dateOfPregnancy: nil, dueDate: nil, statusMessage: "Happy Mom, Happy Baby!", bio: " Accompany is a pregnant app...")
   }
   
 }

@@ -8,15 +8,11 @@
 import UIKit
 import SnapKit
 
-class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
-  func getBabyNameToShow(string: String) {
-    nameTitle.text = string
-  }
-  
-  
-  
-  let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
+class OurBabyViewController: UIViewController {
 
+  let babyTitle = TitleLabel(title: "Baby", size: .medium, color: .red)
+  
+  //TODO: Fetch baby's name from DB
   let nameTitle = TitleLabel(title: "Baby's name", size: .small, color: .black)
   
   let babyIconTextField = UITextField()
@@ -27,6 +23,8 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
   
   let leftNumberTitle = TitleLabel(title: "", size: .mini, color: .black)
   let leftTitle = TitleLabel(title: "Days left", size: .mini, color: .grey)
+  
+  //TODO: Fetch due date from DB
   var dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
   
 
@@ -83,13 +81,14 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
     
     babyIconTextField.inputView = pickerView
     babyIconTextField.backgroundColor = .white
-    babyIconTextField.layer.cornerRadius = 70
+    babyIconTextField.layer.cornerRadius = 15
     babyIconTextField.textAlignment = .center
     babyIconTextField.text = "👶🏻"
   
     babyImageView.image = UIImage(named: "baby-image")
     
     datePicker.datePickerMode = .date
+    datePicker.minimumDate = NSCalendar.current.date(byAdding: .day, value: +1, to: Date())
    
     setupLayout()
     
@@ -115,8 +114,8 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
     babyIconTextField.snp.makeConstraints { make in
       make.top.equalTo(babyTitle.snp.bottom)
       make.centerX.equalTo(view)
-      make.width.equalTo(view.snp.width).multipliedBy(0.18)
-      make.height.equalTo(babyIconTextField.snp.width).multipliedBy(0.8)
+      make.width.equalTo(30)
+      make.height.equalTo(30)
     }
     
     let stackView: UIStackView = {
@@ -136,6 +135,7 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
       make.top.equalTo(babyIconTextField.snp.bottom).offset(15)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.9)
+      make.height.equalTo(stackView.snp.width).multipliedBy(0.7)
     }
     
     let titleAndDueStack: UIStackView = {
@@ -182,8 +182,7 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
     view.addSubview(babyImageView)
  
     babyImageView.snp.makeConstraints { make in
-      make.bottom.equalTo(view.safeAreaLayoutGuide).offset(-5)
-//      make.top.equalTo(showTitleDateStack.snp.bottom).offset(-10)
+      make.top.equalTo(contentView.snp.bottom).offset(5)
       make.centerX.equalTo(view)
       make.width.equalTo(view.snp.width).multipliedBy(0.7)
       make.height.equalTo(view.snp.height).multipliedBy(0.28)
@@ -217,12 +216,13 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
       leftTitle.text = ""
       leftNumberTitle.text = ""
       
-      let button = OutlineButton(title: "One message")
+      let button = OutlineButton(title: "🎉🎉🎉")
       button.addTarget(self, action: #selector(btnTapped(_:)), for: .touchUpInside)
       view.addSubview(button)
       
       button.snp.makeConstraints { make in
         make.centerX.equalTo(contentView)
+        make.top.equalTo(lineSeperator.snp.bottom).offset(15)
         make.bottom.equalTo(contentView.snp.bottom).offset(-5)
         make.width.equalTo(view.snp.width).multipliedBy(0.33)
       }
@@ -234,7 +234,7 @@ class OurBabyViewController: UIViewController, MyProfileViewControllerDelegate {
   }
   
   @objc func btnTapped(_ sender: UIButton) {
-    let alert = UIAlertController(title: "🎉Congratulations", message: "Your baby is coming today!", preferredStyle: .alert)
+    let alert = UIAlertController(title: "Congratulations!", message: "Your baby is coming today!", preferredStyle: .alert)
     alert.addAction(UIAlertAction(title: "I'm ready!", style: .default, handler: nil))
     self.present(alert, animated: true, completion: nil)
 

@@ -21,7 +21,9 @@ class ProfileDetailViewController: CustomTextViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
-      
+     
+    textView.textAlignment = .left
+    
     confirmButton.addTarget(self, action: #selector(pressBtn), for: .touchUpInside)
     setupLayout()
     updateConfirmButtonState()
@@ -68,11 +70,11 @@ class ProfileDetailViewController: CustomTextViewController {
     case .email:
       textView.text = fieldValue!
     case .babyName:
-      textView.text = fieldValue ?? ""
+      textView.text = fieldValue!
     case .statusMessage:
-      textView.text = fieldValue ?? ""
+      textView.text = fieldValue!
     case .bio:
-      textView.text = fieldValue ?? ""
+      textView.text = fieldValue!
     default:
       return
     }

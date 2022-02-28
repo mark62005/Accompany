@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0E8E0CE2D4818B0742E03E0E /* Pods_Accompany.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */; };
 		430F6D8C27BF67DC0095DB8D /* PrivacyPolicyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */; };
 		430F6D8E27BF67E40095DB8D /* TermsOfUseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8D27BF67E40095DB8D /* TermsOfUseViewController.swift */; };
 		430F6D9027BF67F20095DB8D /* FeedbackViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 430F6D8F27BF67F20095DB8D /* FeedbackViewController.swift */; };
@@ -45,6 +44,8 @@
 		43FB2B1C27BE4A0B004A641D /* AccountSettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1B27BE4A0B004A641D /* AccountSettingsViewController.swift */; };
 		43FB2B2027BE4A71004A641D /* PregnantArticlesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B1F27BE4A71004A641D /* PregnantArticlesTableViewController.swift */; };
 		43FB2B2227BE4A8B004A641D /* AboutAccompanyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 43FB2B2127BE4A8B004A641D /* AboutAccompanyViewController.swift */; };
+		4EBA6B6C27CD7C6C00D3AE0D /* Pods_Accompany.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */; };
+		4EBA6B6D27CD7C6C00D3AE0D /* Pods_Accompany.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = ED3EE95DCFB5055A0F9A73C2 /* Pods_Accompany.framework */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		6413589A27C0623B0086BB39 /* ToDoBasicInfoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6413589827C0623B0086BB39 /* ToDoBasicInfoCell.swift */; };
 		641452EC27BF0B0D0058800B /* Contraction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452EB27BF0B0D0058800B /* Contraction.swift */; };
 		641452F427BF9E3F0058800B /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 641452F327BF9E3E0058800B /* Extensions.swift */; };
@@ -63,6 +64,20 @@
 		6CF5E38A27C44B4A00F427A2 /* TextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38927C44B4900F427A2 /* TextView.swift */; };
 		6CF5E38C27C4957400F427A2 /* CustomTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6CF5E38B27C4957400F427A2 /* CustomTableController.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		4EBA6B6E27CD7C6C00D3AE0D /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4EBA6B6D27CD7C6C00D3AE0D /* Pods_Accompany.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		430F6D8B27BF67DC0095DB8D /* PrivacyPolicyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrivacyPolicyViewController.swift; sourceTree = "<group>"; };
@@ -133,7 +148,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0E8E0CE2D4818B0742E03E0E /* Pods_Accompany.framework in Frameworks */,
+				4EBA6B6C27CD7C6C00D3AE0D /* Pods_Accompany.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -452,6 +467,7 @@
 				437721D827ADE4E700EC8A98 /* Resources */,
 				BCAC3C74BBBC1798B7AC7162 /* [CP] Embed Pods Frameworks */,
 				75537C20E77542C33821C529 /* [CP] Copy Pods Resources */,
+				4EBA6B6E27CD7C6C00D3AE0D /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -768,7 +784,7 @@
 				CODE_SIGN_ENTITLEMENTS = Accompany/Accompany.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7669655F54;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -799,7 +815,7 @@
 				CODE_SIGN_ENTITLEMENTS = Accompany/Accompany.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 7669655F54;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = Accompany/Info.plist;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;

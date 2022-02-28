@@ -20,7 +20,7 @@ class PhotoCollectionViewCell: UICollectionViewCell {
     contentView.backgroundColor = .white
     
 //    photoView.image = UIImage(named: "logo-app")
-    photoView.contentMode = .scaleAspectFill
+    photoView.contentMode = .scaleAspectFit
     photoView.clipsToBounds = true
 
     photoView.snp.makeConstraints { make in

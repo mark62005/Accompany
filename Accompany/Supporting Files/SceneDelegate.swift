@@ -31,7 +31,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     window?.makeKeyAndVisible()
     
     try? Auth.auth().signOut()
-    
+
     if let user = Auth.auth().currentUser {
       Task {
         do {
@@ -47,7 +47,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           print("Error: \(error.localizedDescription)")
         }
       }
-      
+
     } else {
       handleNotAuthenticated()
     }

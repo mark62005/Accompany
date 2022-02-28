@@ -7,23 +7,34 @@
 import Foundation
 import FirebaseDatabase
 
-struct Info {
+struct Info: CustomStringConvertible {
   
   var username: String
   var email: String
   var babyName: String
-  var dateOfPregnancy: Date?
-  var dueDate: Date?
+  var dateOfPregnancy: Date
+  var dueDate: Date
   var statusMessage: String = ""
   var bio: String = ""
+  
+  var description: String {
+    return """
+      username: \(username),
+      email: \(email),
+      babyName: \(babyName),
+      dateOfPregnancy: \(dateOfPregnancy.formattedDate),
+      statusMessage: \(statusMessage),
+      bio: \(bio)
+    """
+  }
   
   static func loadSampleInfo() -> Info {
     return Info(
       username: "Accompany",
       email: "accompany@email.com",
       babyName: "Not decided yet",
-      dateOfPregnancy: nil,
-      dueDate: nil,
+      dateOfPregnancy: Date(),
+      dueDate: Date(),
       statusMessage: "Happy Mom, Happy Baby!",
       bio: " Accompany is a pregnant app..."
     )
@@ -49,8 +60,8 @@ struct AccompanyUser: CustomStringConvertible {
       "username": info.username,
       "email": info.email,
       "baby_name": info.babyName,
-      "date_of_pregnancy": info.dateOfPregnancy!.formattedDate,
-      "due_date": info.dueDate!.formattedDate,
+      "date_of_pregnancy": info.dateOfPregnancy.formattedDate,
+      "due_date": info.dueDate.formattedDate,
       "status_message": info.statusMessage,
       "bio": info.bio,
       "notes": note,
@@ -64,9 +75,11 @@ struct AccompanyUser: CustomStringConvertible {
       username: \(info.username),
       email: \(info.email),
       babyName: \(info.babyName),
-      dateOfPregnancy: \(info.dateOfPregnancy?.formattedDate ?? "NONE"),
-      dueDate: \(info.dueDate?.formattedDate ?? "NONE"),
-      todoLists: \(todoLists.description)
+      dateOfPregnancy: \(info.dateOfPregnancy.formattedDate),
+      dueDate: \(info.dueDate.formattedDate),
+      todoLists: \(todoLists.description),
+      statusMessage: \(info.statusMessage),
+      bio: \(info.bio)
     """
   }
   

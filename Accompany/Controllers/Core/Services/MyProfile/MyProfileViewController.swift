@@ -35,7 +35,9 @@ class MyProfileViewController: CustomTextViewController {
   
   let datePickerCell = DatePickerTableViewCell()
   
-  var userInfo: Info?
+  var userInfo: Info {
+    return DatabaseManager.shared.currentUser.info
+  }
   var selectedIndexPath: IndexPath?
   
   let datePickerIndexPath = IndexPath(row: 3, section: 0)
@@ -43,8 +45,6 @@ class MyProfileViewController: CustomTextViewController {
  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    fetchUserInfo()
     
     titleLabel.text = Services.myProfile.description
     
@@ -57,9 +57,17 @@ class MyProfileViewController: CustomTextViewController {
         title: "My Profile", style: .plain, target: nil, action: nil)
   }
   
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    profileTableView.reloadData()
+    
+    fetchUserInfo()
+  }
+  
   // TODO: fetch user info from db
   private func fetchUserInfo() {
-    userInfo = Info.loadSampleInfo()
+//    userInfo = DatabaseManager.shared.currentUser.info
   }
   
   func addTapToImage() {
@@ -187,18 +195,18 @@ extension MyProfileViewController: UITableViewDataSource {
       
       switch indexPath.row {
       case 0:
-        cell.update(with: userInfo!.username, for: InfoField.username)
+        cell.update(with: userInfo.username, for: InfoField.username)
       case 1:
-        cell.update(with: userInfo!.email, for: InfoField.email)
+        cell.update(with: userInfo.email, for: InfoField.email)
       case 2:
-        cell.update(with: userInfo!.babyName, for: InfoField.babyName)
+        cell.update(with: userInfo.babyName, for: InfoField.babyName)
       case 3:
         // TODO:                                    date formatter
-        cell.update(with: userInfo?.dateOfPregnancy?.description ?? "", for: InfoField.dateOfPregnancy)
+        cell.update(with: userInfo.dateOfPregnancy.description, for: InfoField.dateOfPregnancy)
       case 4:
-        cell.update(with: userInfo?.statusMessage ?? "", for: InfoField.statusMessage)
+        cell.update(with: userInfo.statusMessage, for: InfoField.statusMessage)
       default:
-        cell.update(with: userInfo?.bio ?? "", for: InfoField.bio)
+        cell.update(with: userInfo.bio, for: InfoField.bio)
       }
       
       return cell
@@ -217,17 +225,19 @@ extension MyProfileViewController: UITableViewDataSource {
       let profileDetailVC = ProfileDetailViewController()
       profileDetailVC.delegate = self
       
+//      guard let userInfo = userInfo else { return }
+      
       switch indexPath.row {
       case 0:
-        profileDetailVC.fieldValue = userInfo?.username
+        profileDetailVC.fieldValue = userInfo.username
       case 1:
-        profileDetailVC.fieldValue = userInfo?.email
+        profileDetailVC.fieldValue = userInfo.email
       case 2:
-        profileDetailVC.fieldValue = userInfo?.babyName
+        profileDetailVC.fieldValue = userInfo.babyName
       case 4:
-        profileDetailVC.fieldValue = userInfo?.statusMessage
+        profileDetailVC.fieldValue = userInfo.statusMessage
       case 5:
-        profileDetailVC.fieldValue = userInfo?.bio
+        profileDetailVC.fieldValue = userInfo.bio
       default:
         profileDetailVC.fieldValue = ""
       }
@@ -244,16 +254,17 @@ extension MyProfileViewController: UITableViewDataSource {
   }
   
   @objc func datePickerValueChanged(_ datePicker: UIDatePicker) {
-    // TODO: update database
+    DatabaseManager.shared.currentUser.info.dateOfPregnancy = datePicker.date
+  }
+  
+  override func viewWillDisappear(_ animated: Bool) {
+    super.viewWillDisappear(animated)
     
-    let dateFormatter: DateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy"
-    dateFormatter.timeStyle = .none
-    dateFormatter.dateStyle = .long
-
-    let selectedDate: String = dateFormatter.string(from: datePicker.date)
+//    guard let userInfo = userInfo else { return }
     
-    userInfo?.dateOfPregnancy = datePicker.date
+    // TODO: update db
+//    DatabaseManager.shared.currentUser.info = userInfo
+    print("Current user: \(DatabaseManager.shared.currentUser.description)")
   }
 
 }
@@ -272,20 +283,30 @@ extension MyProfileViewController: UIImagePickerControllerDelegate, UINavigation
 extension MyProfileViewController: ProfileDetailViewControllerDelegate {
   
   func edit(_ value: String, for field: InfoField) {
+    guard var currentUser = DatabaseManager.shared.currentUser else { return }
+    
     switch field {
     case .username:
-      userInfo?.username = value
+//      userInfo.username = value
+      currentUser.info.username = value
     case .email:
-      userInfo?.email = value
+//      userInfo.email = value
+      currentUser.info.email = value
     case .babyName:
-      userInfo?.babyName = value.isEmpty ? "Not decided yet" : value
+//      userInfo.babyName = value
+      currentUser.info.babyName = value
     case .statusMessage:
-      userInfo?.statusMessage = value
+//      userInfo.statusMessage = value
+      currentUser.info.statusMessage = value
     case .bio:
-      userInfo?.bio = value
+//      userInfo.bio = value
+      currentUser.info.bio = value
     default:
       return
     }
+    
+    print(currentUser.info.description)
+    DatabaseManager.shared.currentUser = currentUser
     
     profileTableView.reloadRows(at: [selectedIndexPath!], with: .automatic)
   }

@@ -64,19 +64,19 @@ class ProfileDetailViewController: CustomTextViewController {
     // update title and placeholder
     title = "Edit \(field.rawValue)"
     
-    switch field {
-    case .username:
-      textView.text = fieldValue!
-    case .email:
-      textView.text = fieldValue!
-    case .babyName:
-      textView.text = fieldValue!
-    case .statusMessage:
-      textView.text = fieldValue!
-    case .bio:
-      textView.text = fieldValue!
-    default:
+    guard let fieldValue = fieldValue else {
       return
+    }
+    
+    switch field {
+    case .username, .email, .dateOfPregnancy:
+      textView.text = fieldValue
+    case .babyName:
+      textView.text = fieldValue.isEmpty ? "Not decided yet" : fieldValue
+    case .statusMessage:
+      textView.text = fieldValue.isEmpty ? "Tell us your status today!" : fieldValue
+    case .bio:
+      textView.text = fieldValue.isEmpty ? "Tell us more about your..." : fieldValue
     }
     
   }

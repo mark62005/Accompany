@@ -86,10 +86,10 @@ class HomeViewController: UIViewController {
   
   private func getCurrentTrimester(of currentUser: AccompanyUser) -> Trimester {
     // calculate which trimester
-    guard let dueDate = currentUser.info.dueDate,
-       let dateOfPregnancy = currentUser.info.dateOfPregnancy else {
-         return .firstTrimester
-    }
+    guard let currentUser = DatabaseManager.shared.currentUser else { return .firstTrimester }
+    
+    let dueDate = currentUser.info.dueDate
+    let dateOfPregnancy = currentUser.info.dateOfPregnancy
     
     let dateDifference = (dueDate - dateOfPregnancy).asDays()
     switch Double(dateDifference) / 7.0 {

@@ -87,9 +87,9 @@ struct DatabaseManager {
       }
       
       currentUser.todoLists = todoLists
-      currentUser.todoLists.forEach { (key, value) in
-        print("Key: \(key), value: \(value)")
-      }
+//      currentUser.todoLists.forEach { (key, value) in
+//        print("Key: \(key), value: \(value)")
+//      }
       
     } catch let error as NSError {
       throw error

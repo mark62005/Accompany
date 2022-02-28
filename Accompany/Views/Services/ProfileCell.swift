@@ -50,7 +50,17 @@ class ProfileCell: UITableViewCell {
   
   func update(with value: String, for field: InfoField) {
     self.titleLabel.text = "\(field.rawValue): "
-    self.contentLabel.text = value
+    
+    switch field {
+    case .username, .email, .dateOfPregnancy:
+      self.contentLabel.text = value
+    case .babyName:
+      self.contentLabel.text = value.isEmpty ? "Not decided yet" : value
+    case .statusMessage:
+      self.contentLabel.text = value.isEmpty ? "Tell us your status today!" : value
+    case .bio:
+      self.contentLabel.text = value.isEmpty ? "Tell us more about you..." : value
+    }
   }
 
 }

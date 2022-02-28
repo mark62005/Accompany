@@ -193,7 +193,8 @@ extension MyProfileViewController: UITableViewDataSource {
       case 2:
         cell.update(with: userInfo!.babyName, for: InfoField.babyName)
       case 3:
-        cell.update(with: userInfo?.dateOfPregnancy ?? "", for: InfoField.dateOfPregnancy)
+        // TODO:                                    date formatter
+        cell.update(with: userInfo?.dateOfPregnancy?.description ?? "", for: InfoField.dateOfPregnancy)
       case 4:
         cell.update(with: userInfo?.statusMessage ?? "", for: InfoField.statusMessage)
       default:
@@ -252,7 +253,7 @@ extension MyProfileViewController: UITableViewDataSource {
 
     let selectedDate: String = dateFormatter.string(from: datePicker.date)
     
-    userInfo?.dateOfPregnancy = selectedDate
+    userInfo?.dateOfPregnancy = datePicker.date
   }
 
 }

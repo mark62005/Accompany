@@ -7,15 +7,33 @@
 
 import Foundation
 
-struct Todo: Codable {
+struct Todo {
   
-  static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-  static let archiveURL = documentsDirectory.appendingPathComponent("toDos").appendingPathExtension("plist")
-  
-  var id: String
+  var id: String = ""
   var title: String
   var isCompleted: Bool = false
   var note: String?
-
+  
+  var dictionary: [String: Any] {
+    return [
+      "id": id,
+      "title": title,
+      "is_completed": isCompleted,
+      "note": note ?? ""
+    ]
+  }
+  
 }
   
+extension Todo: Codable {
+  
+  init?(dictionary: [String: Any]) {
+    guard let id = dictionary["id"] as? String,
+          let title = dictionary["title"] as? String,
+          let isCompleted = dictionary["is_completed"] as? Bool,
+          let note = dictionary["note"] as? String else { return nil }
+    
+    self.init(id: id, title: title, isCompleted: isCompleted, note: note)
+  }
+  
+}

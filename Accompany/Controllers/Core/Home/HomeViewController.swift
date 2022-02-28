@@ -34,35 +34,14 @@ class HomeViewController: UIViewController {
   
   let bgCircleView = ImageView()
   
-  var todoLists = [TodoList]()
+  var todoLists = [Trimester:TodoList]()
   var currentTodos = [Todo]()
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
- 
-    bgCircleView.image = UIImage(named: "grey-bg")
     
     // sign user out - for debugging
     try? Auth.auth().signOut()
-    
-    // TODO: fetch todos
-    Task {
-      do {
-        currentTodos = try await DatabaseManager.shared.fetchTodos()
-        
-        configureTableView()
-        setupLayout()
-      } catch {
-        print("Error: \(error)")
-      }
-    }
-    
-//    // TODO: fetch todoLists
-//    fetchTodoLists()
-
-    configureTableView()
-    setupLayout()
     
     UILabel.appearance(whenContainedInInstancesOf: [UITableViewHeaderFooterView.self])
            .textColor = UIColor.black
@@ -71,31 +50,49 @@ class HomeViewController: UIViewController {
     
     self.navigationItem.backBarButtonItem = UIBarButtonItem(
         title: "Home Page", style: .plain, target: nil, action: nil)
+    
+    bgCircleView.image = UIImage(named: "grey-bg")
+    
+    configureTableView()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    
+    print(#function)
+    
+    // TODO: fetch todoLists
+    fetchTodoLists()
+    print("\(currentTodos.description)")
+    
+    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    
+    setupLayout()
+    notifyTableView.reloadData()
   }
   
   private func fetchTodoLists() {
+    guard let currentUser = DatabaseManager.shared.currentUser else { return }
+    
     // fetch todolists
-    todoLists = TodoList.loadSampleTodoLists()
+    todoLists = currentUser.todoLists
     
     // decide current trimester
-    let currentTrimester = getCurrentTrimester()
+    let currentTrimester = getCurrentTrimester(of: currentUser)
+    print(currentTrimester.description)
     
     // assign current todos
-    currentTodos = TodoList.getTodos(of: currentTrimester, from: todoLists) ?? [Todo]()
+    currentTodos = currentUser.todoLists[currentTrimester]!.todos
   }
   
-  private func getCurrentTrimester() -> Trimester {
-    // due date
-    // TODO: fetch due date from DB
-    let dueDate = Date.init("2022-12-31")
-    
-    print(Date().description(with: .current))
-    // TODO: get date of pregnancy
-    
+  private func getCurrentTrimester(of currentUser: AccompanyUser) -> Trimester {
     // calculate which trimester
-    // TODO: change Date() to date of pregnancy
-    let dateDifference = (dueDate - Date()).asDays()
+    guard let dueDate = currentUser.info.dueDate,
+       let dateOfPregnancy = currentUser.info.dateOfPregnancy else {
+         return .firstTrimester
+    }
     
+    let dateDifference = (dueDate - dateOfPregnancy).asDays()
     switch Double(dateDifference) / 7.0 {
     case Double(Int.min)..<14:
       return .after
@@ -172,21 +169,22 @@ class HomeViewController: UIViewController {
   }
    
   @objc func goToTodoList(_ button: UIButton) {
-    let todoListVC = TodoListViewController()
+    guard let currentUser = DatabaseManager.shared.currentUser else { return }
     
+    let todoListVC = TodoListViewController()
     switch button {
     case firstTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.firstTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .firstTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.todos = currentUser.todoLists[.firstTrimester]!.todos
     case secondTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.secondTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .secondTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.todos = currentUser.todoLists[.secondTrimester]!.todos
     case thirdTrimesterButton:
       todoListVC.todoListTitleLabel.text = Trimester.thirdTrimester.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .thirdTrimester, from: todoLists) ?? [Todo]()
+      todoListVC.todos = currentUser.todoLists[.thirdTrimester]!.todos
     case afterButton:
       todoListVC.todoListTitleLabel.text = Trimester.after.rawValue
-      todoListVC.todos = TodoList.getTodos(of: .after, from: todoLists) ?? [Todo]()
+      todoListVC.todos = currentUser.todoLists[.after]!.todos
     default:
       return
     }
@@ -225,7 +223,9 @@ extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: TodoCell.identifier, for: indexPath) as! TodoCell
+    
     let toDo = currentTodos[indexPath.row]
+    
     cell.delegate = self
     cell.update(with: toDo)
     cell.backgroundColor = .white
@@ -236,6 +236,7 @@ extension HomeViewController: UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     let addNoteTVC = ToDoFormTableViewController()
+    
     addNoteTVC.todo = currentTodos[indexPath.row]
     addNoteTVC.delegate = self
     navigationController?.pushViewController(addNoteTVC, animated: true)
@@ -264,12 +265,11 @@ extension HomeViewController: TodoCellDelegate {
       // update model
       currentTodos[indexPath.row].isCompleted.toggle()
 
-
       notifyTableView.reloadRows(at: [indexPath], with: .automatic)
-      notifyTableView.reloadData()
       // TODO: save changes to database
     }
   }
+  
 }
 
 
@@ -282,7 +282,6 @@ extension HomeViewController: ToDoFormTableViewControllerDelegate {
       currentTodos[selectedIndexPath.row] = todo
       notifyTableView.reloadRows(at: [selectedIndexPath], with: .automatic)
     }
-
   }
 
 }

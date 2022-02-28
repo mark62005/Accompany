@@ -33,3 +33,16 @@ extension UILabel {
   }
 
 }
+
+extension Date {
+  
+  var formattedDate: String {
+    let dateFormatter: DateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy"
+    dateFormatter.timeStyle = .none
+    dateFormatter.dateStyle = .long
+
+    return dateFormatter.string(from: self)
+  }
+  
+}

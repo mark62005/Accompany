@@ -372,7 +372,7 @@ class ContractionTimerViewController: UIViewController {
   
   func recordData(){
     if timerCounting {
-      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       currentRecordList.reloadData()
     } else {
       newRecord = nil
@@ -389,7 +389,7 @@ class ContractionTimerViewController: UIViewController {
   
   @objc func stopTimer(){
     if newRecord != nil {
-      newRecord?.contractionRecord?.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
+      newRecord?.contractionRecord.append(Detail(state: currentRecordingTitle! == "Start" ? "Contracting" : currentRecordingTitle!, length: timerValue))
       currentRecordList.reloadData()
       if userConstractionRecords != nil {
         userConstractionRecords?.append(newRecord!)
@@ -450,12 +450,12 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     switch tableView {
     case recordList:
-      if let rows = userConstractionRecords?[section].contractionRecord?.count {
+      if let rows = userConstractionRecords?[section].contractionRecord.count {
         return rows + 2
       }
       fallthrough
     case currentRecordList:
-      return newRecord?.contractionRecord?.count ?? 0
+      return newRecord?.contractionRecord.count ?? 0
     default:
       return 0
     }
@@ -465,7 +465,7 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
     switch tableView {
     case recordList:
       let cell =  UITableViewCell(style: .value1, reuseIdentifier: "savedRecordCell")
-      let numberOfContraction = userConstractionRecords?[indexPath.section].contractionRecord?.count ?? 0
+      let numberOfContraction = userConstractionRecords?[indexPath.section].contractionRecord.count ?? 0
       print("\(indexPath.row) and \(numberOfContraction)")
       if indexPath.row == 0 {
           let dateformatter = DateFormatter()
@@ -476,16 +476,16 @@ extension ContractionTimerViewController: UITableViewDelegate, UITableViewDataSo
         cell.textLabel?.font = .boldSystemFont(ofSize: 16.0)
       } else {
           let detailrows = indexPath.row - 1
-          cell.textLabel?.text = userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].state
-          cell.detailTextLabel?.text = String((userConstractionRecords?[indexPath.section].contractionRecord?[detailrows].length)!)
+        cell.textLabel?.text = userConstractionRecords?[indexPath.section].contractionRecord[detailrows].state
+        cell.detailTextLabel?.text = String((userConstractionRecords?[indexPath.section].contractionRecord[detailrows].length)!)
           cell.backgroundColor = (indexPath.row % 2) == 0 ? .white : #colorLiteral(red: 0.9490194917, green: 0.9490197301, blue: 0.9533253312, alpha: 1)
         }
       cell.clipsToBounds = true
       return cell
     default:
       let cell =  UITableViewCell(style: .value1, reuseIdentifier: "currentRecordCell")
-      cell.textLabel?.text = newRecord?.contractionRecord?[indexPath.row].state
-      cell.detailTextLabel?.text = String((newRecord?.contractionRecord?[indexPath.row].length)!)
+      cell.textLabel?.text = newRecord?.contractionRecord[indexPath.row].state
+      cell.detailTextLabel?.text = String((newRecord?.contractionRecord[indexPath.row].length)!)
       cell.clipsToBounds = false
       return cell
     }

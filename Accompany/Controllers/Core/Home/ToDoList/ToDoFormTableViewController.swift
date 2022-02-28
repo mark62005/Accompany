@@ -108,12 +108,12 @@ class ToDoFormTableViewController: UITableViewController {
     if indexPath.section == 0 {
       toDoBasicInfoCell.isCompleteButton.addTarget(self, action: #selector(isCompleteButtonTapped), for: .touchUpInside)
       toDoBasicInfoCell.isCompleteButton.isSelected = todo?.isCompleted == nil ? false : todo!.isCompleted
-      //toDoBasicInfoCell.toDoTextField.addTarget(self, action: #selector(toDoTitleTextFieldEditingChanged), for: .editingChanged)
       toDoBasicInfoCell.toDoTextView.text = todo?.title
+      
       return toDoBasicInfoCell
     } else {
       toDoNotesCell.contentView.isUserInteractionEnabled = false
-      toDoNotesCell.noteTextView.text = todo?.note
+      toDoNotesCell.noteTextView.text = todo?.note ?? "Type notes..."
       
       return toDoNotesCell
     }

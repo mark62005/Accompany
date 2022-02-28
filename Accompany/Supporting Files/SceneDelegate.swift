@@ -14,12 +14,12 @@ import FirebaseOAuthUI
 import GoogleSignIn
 import FirebaseGoogleAuthUI
 import FirebaseFacebookAuthUI
+import FirebaseDatabase
 
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -56,7 +56,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     authUI?.providers = providers
     
     let authVC = authUI!.authViewController()
-    authVC.view.backgroundColor = .white
+    authVC.view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
     self.window?.rootViewController = authVC
   }
@@ -95,14 +95,39 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate: FUIAuthDelegate {
   
   func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
-    if let error = error {
-      print("Error: \(error.localizedDescription)")
-    } else if let user = authDataResult?.user {
-      print("Successfully signed in with id: \(user.uid), email: \(user.email ?? "")")
+    if let user = authDataResult?.user {
+    
+      Task {
+        do {
+          
+          self.window?.rootViewController = TabBarViewController()
+          if try await DatabaseManager.shared.isNewUser(id: user.uid) {
+            try await createNewUser(with: user)
+          }
+          
+        } catch let error as NSError {
+          print("Error: \(error.localizedDescription)")
+        }
+      }
       
-      self.window?.rootViewController = TabBarViewController()
+    } else if let error = error {
+      print("Error: \(error.localizedDescription)")
     }
   }
   
+  private func signIn(with user: FirebaseAuth.User) async throws {
+    // sign in
+    print("Successfully signed in with id: \(user.uid), email: \(user.email ?? "")")
+  }
+  
+  private func createNewUser(with user: FirebaseAuth.User) async throws {
+    // set baby name, date of pregnancy, due date
+    let newUserLandingVC = NewUserLandingViewController()
+    newUserLandingVC.titleLabel.text = "Welcome to Accompany, \(user.displayName ?? "")!"
+    newUserLandingVC.user = user
+    
+    newUserLandingVC.modalPresentationStyle = .fullScreen
+    self.window?.rootViewController?.present(newUserLandingVC, animated: true)
+  }
+  
 }
-

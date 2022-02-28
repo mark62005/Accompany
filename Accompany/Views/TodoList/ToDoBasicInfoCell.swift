@@ -26,7 +26,7 @@ class ToDoBasicInfoCell : UITableViewCell {
     let textView = UITextView()
     textView.textAlignment = .left
     textView.font = .boldSystemFont(ofSize: 18)
-    textView.contentInset = UIEdgeInsets(top: 5, left: 5, bottom: -5, right: -5)
+    textView.contentInset = UIEdgeInsets(top: 10, left: 5, bottom: 0, right: -5)
     textView.translatesAutoresizingMaskIntoConstraints = false
     
     return textView
@@ -48,10 +48,8 @@ class ToDoBasicInfoCell : UITableViewCell {
       make.edges.equalTo(self.contentView).inset(UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 10))
     }
     
-    for subview in toDoTextView.subviews {
-      if let toDoTextFieldLabel = subview as? UILabel {
-        toDoTextFieldLabel.numberOfLines = 0
-      }
+    if let label = toDoTextView.subviews.first! as? UILabel {
+      label.numberOfLines = 0
     }
   }
   

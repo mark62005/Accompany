@@ -55,12 +55,10 @@ class QAController: UIViewController, UIScrollViewDelegate {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
-    view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
-    
+      
     addSubview()
     keyboardHasShown()
-    DrNoteTextView.text = noteContent
+    DrNoteTextView.text = (noteContent != nil) ? noteContent : "Tap edit to add notes here"
       
     navigationItem.rightBarButtonItem = editButtonItem
       

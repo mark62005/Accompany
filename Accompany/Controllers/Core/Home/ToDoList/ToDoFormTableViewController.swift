@@ -131,4 +131,13 @@ class ToDoFormTableViewController: UITableViewController {
     }
   }
   
+  override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+    guard let header = view as? UITableViewHeaderFooterView else { return }
+     header.textLabel?.frame = header.bounds
+    header.textLabel?.snp.makeConstraints{ make in
+      make.left.equalTo(15)
+    }
+     header.textLabel?.textAlignment = .left
+  }
+  
 }

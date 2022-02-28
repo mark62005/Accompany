@@ -79,7 +79,6 @@ class HomeViewController: UIViewController {
     
     // decide current trimester
     let currentTrimester = getCurrentTrimester(of: currentUser)
-    print(currentTrimester.description)
     
     // assign current todos
     currentTodos = currentUser.todoLists[currentTrimester]!.todos

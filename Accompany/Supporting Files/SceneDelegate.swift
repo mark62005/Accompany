@@ -112,6 +112,7 @@ extension SceneDelegate: FUIAuthDelegate {
       Task {
         do {
           
+          // TODO: better flow?
           self.window?.rootViewController = TabBarViewController()
           if try await DatabaseManager.shared.isNewUser(id: user.uid) {
             // create new user
@@ -132,23 +133,20 @@ extension SceneDelegate: FUIAuthDelegate {
   }
   
   private func signIn(with user: FirebaseAuth.User) async throws {
-    // sign in
-    
-      do {
+    do {
+      
+      // fetch user data?
+      let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
+      
+      DispatchQueue.main.async {
+        print("Successfully signed in with \(currentUser.description)")
         
-        // fetch user data?
-        let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
-        
-        DispatchQueue.main.async {
-          print("Successfully signed in with \(currentUser.description)")
-          
-          self.window?.rootViewController = TabBarViewController()
-        }
-        
-      } catch {
-        throw error
+        self.window?.rootViewController = TabBarViewController()
       }
-    
+      
+    } catch {
+      throw error
+    }
   }
   
   private func createNewUser(with user: FirebaseAuth.User) async throws {

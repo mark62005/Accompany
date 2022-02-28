@@ -114,15 +114,10 @@ extension TodoList {
     for value in dict.values {
       if let todoDict = value as? [String: Any],
          let todo = Todo(dictionary: todoDict) {
-//        print("TodoDict: ")
-//        print(todoDict)
-//        
         todos.append(todo)
       }
     }
         
-    print(todos.description)
-    
     self.init(trimester: trimester, todos: todos)
     
   }

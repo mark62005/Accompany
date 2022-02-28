@@ -11,7 +11,7 @@ import Firebase
 
 class NewUserLandingViewController: UIViewController {
   
-  let titleLabel = TitleLabel(title: nil, size: .large)
+  let titleLabel = TitleLabel(title: nil, size: .small)
   
   let babyNameFormControl = FormControlHStack(field: .babyName)
   let statusMessageFormControl = FormControlHStack(field: .statusMessage)

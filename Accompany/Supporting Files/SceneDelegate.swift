@@ -33,9 +33,21 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     try? Auth.auth().signOut()
     
     if let user = Auth.auth().currentUser {
-      // fetch user data?
+      Task {
+        do {
+
+          // fetch user data?
+          let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
+
+          DispatchQueue.main.async {
+            self.window?.rootViewController = TabBarViewController()
+          }
+
+        } catch {
+          print("Error: \(error.localizedDescription)")
+        }
+      }
       
-      window?.rootViewController = TabBarViewController()
     } else {
       handleNotAuthenticated()
     }
@@ -102,7 +114,11 @@ extension SceneDelegate: FUIAuthDelegate {
           
           self.window?.rootViewController = TabBarViewController()
           if try await DatabaseManager.shared.isNewUser(id: user.uid) {
+            // create new user
             try await createNewUser(with: user)
+          } else {
+            // sign in
+            try await signIn(with: user)
           }
           
         } catch let error as NSError {
@@ -117,7 +133,22 @@ extension SceneDelegate: FUIAuthDelegate {
   
   private func signIn(with user: FirebaseAuth.User) async throws {
     // sign in
-    print("Successfully signed in with id: \(user.uid), email: \(user.email ?? "")")
+    
+      do {
+        
+        // fetch user data?
+        let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
+        
+        DispatchQueue.main.async {
+          print("Successfully signed in with \(currentUser.description)")
+          
+          self.window?.rootViewController = TabBarViewController()
+        }
+        
+      } catch {
+        throw error
+      }
+    
   }
   
   private func createNewUser(with user: FirebaseAuth.User) async throws {

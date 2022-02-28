@@ -17,13 +17,28 @@ struct DatabaseManager {
   
   private init() { }
   
+  public mutating func fetchCurrentUser(of id: String) async throws -> AccompanyUser {
+    do {
+      
+      let userSnapshot = try await ref.child("users/\(id)").getData()
+      let user = AccompanyUser(userSnapshot)
+      currentUser = user
+      
+      return currentUser
+      
+    } catch let error as NSError {
+      throw error
+    }
+    
+  }
+  
   public func isNewUser(id: String) async throws -> Bool {
     do {
       
       let usersSnapshot = try await ref.child("users").getData()
       return !usersSnapshot.hasChild(id)
       
-    } catch {
+    } catch let error as NSError {
       throw error
     }
   }

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 struct Todo {
   
@@ -30,10 +31,12 @@ extension Todo: Codable {
   init?(dictionary: [String: Any]) {
     guard let id = dictionary["id"] as? String,
           let title = dictionary["title"] as? String,
-          let isCompleted = dictionary["is_completed"] as? Bool,
-          let note = dictionary["note"] as? String else { return nil }
+          let isCompleted = dictionary["is_completed"] as? Bool else { return nil }
+    
+    let note = dictionary["note"] as? String ?? ""
     
     self.init(id: id, title: title, isCompleted: isCompleted, note: note)
   }
   
 }
+

@@ -63,7 +63,7 @@ class HomeViewController: UIViewController {
     
     // TODO: fetch todoLists
     fetchTodoLists()
-    print("\(currentTodos.description)")
+    print("Current Todos: \(currentTodos.description)")
     
     view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
     
@@ -286,15 +286,3 @@ extension HomeViewController: ToDoFormTableViewControllerDelegate {
 
 }
 
-extension Date {
-  
-  init(_ dateString: String) {
-    let dateStringFormatter = DateFormatter()
-    dateStringFormatter.dateFormat = "yyyy-MM-dd"
-    dateStringFormatter.locale = NSLocale(localeIdentifier: "en_US_POSIX") as Locale
-    
-    let date = dateStringFormatter.date(from: dateString)!
-    self.init(timeInterval:0, since:date)
-  }
-  
-}

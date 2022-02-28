@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
 enum Trimester: String, CaseIterable, CustomStringConvertible {
   
@@ -100,6 +101,30 @@ struct TodoList {
   
   mutating func add(_ todo: Todo) {
     todos.append(todo)
+  }
+  
+}
+
+extension TodoList {
+  
+  init?(_ snapshot: DataSnapshot, of trimester: Trimester) {
+    
+    var todos = [Todo]()
+    let dict = snapshot.value as! [String: Any]
+    for value in dict.values {
+      if let todoDict = value as? [String: Any],
+         let todo = Todo(dictionary: todoDict) {
+//        print("TodoDict: ")
+//        print(todoDict)
+//        
+        todos.append(todo)
+      }
+    }
+        
+    print(todos.description)
+    
+    self.init(trimester: trimester, todos: todos)
+    
   }
   
 }

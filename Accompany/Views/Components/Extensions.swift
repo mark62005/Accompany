@@ -37,12 +37,22 @@ extension UILabel {
 extension Date {
   
   var formattedDate: String {
-    let dateFormatter: DateFormatter = DateFormatter()
+    let dateFormatter = DateFormatter()
     dateFormatter.dateFormat = "dd/MM/yyyy"
-    dateFormatter.timeStyle = .none
-    dateFormatter.dateStyle = .long
+//    dateFormatter.timeStyle = .none
+//    dateFormatter.dateStyle = .short
+    
+    let formattedDate = dateFormatter.string(from: self)
+    print("Formatted Date: \(formattedDate)")
 
-    return dateFormatter.string(from: self)
+    return formattedDate
+  }
+  
+  static func getDateFrom(string str: String) -> Date? {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "dd/MM/yyyy"
+    
+    return dateFormatter.date(from: str)
   }
   
 }

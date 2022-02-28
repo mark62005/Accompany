@@ -6,11 +6,20 @@
 //
 
 import UIKit
+import FirebaseCore
+import FirebaseAuth
+import FirebaseAuthUI
+import FirebaseEmailAuthUI
+import FirebaseOAuthUI
+import GoogleSignIn
+import FirebaseGoogleAuthUI
+import FirebaseFacebookAuthUI
+import FirebaseDatabase
+
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
   var window: UIWindow?
-
 
   func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     // Use this method to optionally configure and attach the UIWindow `window` to the provided UIWindowScene `scene`.
@@ -18,11 +27,50 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     // This delegate does not imply the connecting scene or session are new (see `application:configurationForConnectingSceneSession` instead).
     guard let windowScene = (scene as? UIWindowScene) else { return }
     
-    let window = UIWindow(windowScene: windowScene)
-    window.makeKeyAndVisible()
-    window.rootViewController = TabBarViewController()
+    window = UIWindow(windowScene: windowScene)
+    window?.makeKeyAndVisible()
+    
+    try? Auth.auth().signOut()
+    
+    if let user = Auth.auth().currentUser {
+      Task {
+        do {
+
+          // fetch user data?
+          let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
+
+          DispatchQueue.main.async {
+            self.window?.rootViewController = TabBarViewController()
+          }
+
+        } catch {
+          print("Error: \(error.localizedDescription)")
+        }
+      }
+      
+    } else {
+      handleNotAuthenticated()
+    }
         
-    self.window = window
+  }
+  
+  private func handleNotAuthenticated() {
+    let authUI = FUIAuth.defaultAuthUI()
+    authUI?.shouldHideCancelButton = true
+    authUI?.delegate = self
+    
+    let providers: [FUIAuthProvider] = [
+      FUIEmailAuth(),
+      FUIGoogleAuth.init(authUI: authUI!),
+      FUIFacebookAuth.init(authUI: authUI!),
+      FUIOAuth.appleAuthProvider()
+    ]
+    authUI?.providers = providers
+    
+    let authVC = authUI!.authViewController()
+    authVC.view.backgroundColor = #colorLiteral(red: 1, green: 0.9411764706, blue: 0.9568627451, alpha: 1)
+    
+    self.window?.rootViewController = authVC
   }
 
   func sceneDidDisconnect(_ scene: UIScene) {
@@ -56,3 +104,59 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
 }
 
+extension SceneDelegate: FUIAuthDelegate {
+  
+  func authUI(_ authUI: FUIAuth, didSignInWith authDataResult: AuthDataResult?, error: Error?) {
+    if let user = authDataResult?.user {
+    
+      Task {
+        do {
+          
+          // TODO: better flow?
+          self.window?.rootViewController = TabBarViewController()
+          if try await DatabaseManager.shared.isNewUser(id: user.uid) {
+            // create new user
+            try await createNewUser(with: user)
+          } else {
+            // sign in
+            try await signIn(with: user)
+          }
+          
+        } catch let error as NSError {
+          print("Error: \(error.localizedDescription)")
+        }
+      }
+      
+    } else if let error = error {
+      print("Error: \(error.localizedDescription)")
+    }
+  }
+  
+  private func signIn(with user: FirebaseAuth.User) async throws {
+    do {
+      
+      // fetch user data?
+      let currentUser = try await DatabaseManager.shared.fetchCurrentUser(of: user.uid)
+      
+      DispatchQueue.main.async {
+        print("Successfully signed in with \(currentUser.description)")
+        
+        self.window?.rootViewController = TabBarViewController()
+      }
+      
+    } catch {
+      throw error
+    }
+  }
+  
+  private func createNewUser(with user: FirebaseAuth.User) async throws {
+    // set baby name, date of pregnancy, due date
+    let newUserLandingVC = NewUserLandingViewController()
+    newUserLandingVC.titleLabel.text = "Welcome to Accompany, \(user.displayName ?? "")!"
+    newUserLandingVC.user = user
+    
+    newUserLandingVC.modalPresentationStyle = .fullScreen
+    self.window?.rootViewController?.present(newUserLandingVC, animated: true)
+  }
+  
+}

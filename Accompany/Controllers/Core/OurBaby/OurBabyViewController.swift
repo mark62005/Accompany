@@ -26,7 +26,6 @@ class OurBabyViewController: UIViewController {
   
   //TODO: Fetch due date from DB
   var dueDateTitle = TitleLabel(title: "Due Date", size: .mini, color: .grey)
-  
 
   let contentView: UIView = {
     let contentView = UIView()
@@ -73,6 +72,8 @@ class OurBabyViewController: UIViewController {
     
     return datePicker
   }()
+  
+  var dateOfPregnancy: Date!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -191,25 +192,36 @@ class OurBabyViewController: UIViewController {
   }
    
   @objc func datePickerValueChanged(_ sender: UIDatePicker) {
+    DatabaseManager.shared.currentUser.info.dueDate = datePicker.date
+    displayNumOfDaysLeft(dueDate: datePicker.date)
+  }
+  
+  @objc func btnTapped(_ sender: UIButton) {
+    let alert = UIAlertController(title: "Congratulations!", message: "Your baby is coming today!", preferredStyle: .alert)
+    alert.addAction(UIAlertAction(title: "I'm ready!", style: .default, handler: nil))
+    self.present(alert, animated: true, completion: nil)
 
-    let dateFormatter: DateFormatter = DateFormatter()
-    dateFormatter.dateFormat = "dd/MM/yyyy"
+  }
 
-    let selectedDate: String = dateFormatter.string(from: sender.date)
-
-    let currentDateTime = Date()
-
-    let formatter = DateFormatter()
-    formatter.timeStyle = .none
-    formatter.dateStyle = .medium
-    formatter.dateFormat = "dd/MM/yyyy"
-    let todayDate: String = formatter.string(from: currentDateTime)
-
-    let dueDate = formatter.date(from: selectedDate)
-    let currentDate = formatter.date(from: todayDate)
-    let difference = (dueDate! - currentDate!)
+  override func didReceiveMemoryWarning() {
+    super.didReceiveMemoryWarning()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    guard let currentUser = DatabaseManager.shared.currentUser else { return }
+    
+    nameTitle.text = currentUser.info.babyName
+    datePicker.date = currentUser.info.dueDate
+    
+    dateOfPregnancy = currentUser.info.dateOfPregnancy
+    
+    displayNumOfDaysLeft(dueDate: currentUser.info.dueDate)
+  }
+  
+  private func displayNumOfDaysLeft(dueDate: Date) {
+    let difference = (dueDate - dateOfPregnancy)
     let differenceDays = difference.asDays()
-
+    
     if differenceDays == 0 {
       datePicker.isHidden = true
       dueDateTitle.text = ""
@@ -230,18 +242,6 @@ class OurBabyViewController: UIViewController {
     } else {
       leftNumberTitle.text = "\(differenceDays) Days"
     }
-    
-  }
-  
-  @objc func btnTapped(_ sender: UIButton) {
-    let alert = UIAlertController(title: "Congratulations!", message: "Your baby is coming today!", preferredStyle: .alert)
-    alert.addAction(UIAlertAction(title: "I'm ready!", style: .default, handler: nil))
-    self.present(alert, animated: true, completion: nil)
-
-  }
-
-  override func didReceiveMemoryWarning() {
-    super.didReceiveMemoryWarning()
   }
 
 }

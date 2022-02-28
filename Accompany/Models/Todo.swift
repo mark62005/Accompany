@@ -6,16 +6,37 @@
 //
 
 import Foundation
+import FirebaseDatabase
 
-struct Todo: Codable {
+struct Todo {
   
-  static let documentsDirectory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first!
-  static let archiveURL = documentsDirectory.appendingPathComponent("toDos").appendingPathExtension("plist")
-  
-  var id = UUID()
+  var id: String = ""
   var title: String
   var isCompleted: Bool = false
   var note: String?
   
+  var dictionary: [String: Any] {
+    return [
+      "id": id,
+      "title": title,
+      "is_completed": isCompleted,
+      "note": note ?? ""
+    ]
+  }
+  
 }
   
+extension Todo: Codable {
+  
+  init?(dictionary: [String: Any]) {
+    guard let id = dictionary["id"] as? String,
+          let title = dictionary["title"] as? String,
+          let isCompleted = dictionary["is_completed"] as? Bool else { return nil }
+    
+    let note = dictionary["note"] as? String ?? ""
+    
+    self.init(id: id, title: title, isCompleted: isCompleted, note: note)
+  }
+  
+}
+

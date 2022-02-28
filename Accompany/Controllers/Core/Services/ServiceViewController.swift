@@ -89,7 +89,6 @@ class ServiceViewController: UIViewController {
         return
       }
 
-//      buttons[i].addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside)
     }
     
     buttons.forEach { $0.addTarget(self, action: #selector(goTo(_:)), for: .touchUpInside) }
@@ -127,6 +126,7 @@ class ServiceViewController: UIViewController {
       alert.addAction(UIAlertAction(title: "Log Out", style: .default, handler: { _ in
         // TODO: Log out with database
         print("Log out")
+        
         
         // back to log in page (scene delegate?)
       }))

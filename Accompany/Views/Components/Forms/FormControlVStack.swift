@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class FormControlHStack: UIStackView {
+class FormControlVStack: UIStackView {
   
   enum Field: CustomStringConvertible {
     
@@ -43,7 +43,8 @@ class FormControlHStack: UIStackView {
     let label = UILabel()
     label.translatesAutoresizingMaskIntoConstraints = false
     label.font = .systemFont(ofSize: 17, weight: .regular)
-    label.setContentHuggingPriority(UILayoutPriority(252), for: .horizontal)
+    label.numberOfLines = 0
+    label.setContentHuggingPriority(UILayoutPriority(252), for: .vertical)
     
     return label
   }()
@@ -52,7 +53,8 @@ class FormControlHStack: UIStackView {
     let textField = UITextField()
     textField.translatesAutoresizingMaskIntoConstraints = false
     textField.leftViewMode = .always
-    textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 10, height: 0))
+    textField.textAlignment = .left
+    textField.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 0))
     textField.layer.masksToBounds = true
     textField.autocorrectionType = .no
     textField.autocapitalizationType = .none
@@ -75,10 +77,14 @@ class FormControlHStack: UIStackView {
     self.init(frame: .zero)
      
     self.translatesAutoresizingMaskIntoConstraints = false
-    self.axis = .horizontal
+    self.axis = .vertical
     self.distribution = .fill
-    self.alignment = .fill
-    self.spacing = 20
+    self.alignment = .leading
+    self.spacing = 5
+    self.snp.makeConstraints { make in
+      make.width.equalTo(100)
+      make.height.equalTo(20)
+    }
     
     configureLabel(with: field)
     self.addArrangedSubview(label)
@@ -105,6 +111,11 @@ class FormControlHStack: UIStackView {
   private func addDatePicker(with field: Field) {
     // TODO: configuration for max and min date?
     configureDatePicker()
+    if field == .dateOfPregnancy {
+      datePicker.maximumDate = NSCalendar.current.date(byAdding: .day, value: -1, to: Date())
+    } else if field == .dueDate {
+      datePicker.minimumDate = NSCalendar.current.date(byAdding: .day, value: +1, to: Date())
+    }
     self.addArrangedSubview(datePicker)
   }
   

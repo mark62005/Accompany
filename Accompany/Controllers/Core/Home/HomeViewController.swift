@@ -115,14 +115,14 @@ class HomeViewController: UIViewController {
     view.addSubview(accompanyTitleLabel)
     
     accompanyTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(view.safeAreaLayoutGuide)
+      make.top.equalTo(view)
       make.centerX.equalTo(view)
     }
     
     view.addSubview(welcomeTitleLabel)
     
     welcomeTitleLabel.snp.makeConstraints { make in
-      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(3)
+      make.top.equalTo(accompanyTitleLabel.snp.bottom).offset(2)
       make.centerX.equalTo(view)
     }
 
